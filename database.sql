@@ -1,19 +1,20 @@
 -- Create a new database called 'InstaDog'
-CREATE DATABASE InstaDog
+CREATE DATABASE InstaDog;
 DEFAULT CHARACTER SET utf8
 DEFAULT COLLATE utf8_general_ci
 
-CREATE USER root IDENTIFIED BY "root1234" 
-IDENTIFIED WITH auth_plugin
+CREATE USER 'phpmyadmin' IDENTIFIED BY "digital2018" 
+GRANT SELECT, INSERT, UPDATE, DELETE ON InstaDog.* TO 'phpmyadmin'
+         WITH GRANT OPTION;
 
 -- Create a new table called 'Utilisateur'
 CREATE TABLE Utilisateur
 (
-    id INT AUTO_INCREMENT NOT NULL  PRIMARY KEY, -- primary key column
-    pseudo [NVARCHAR](50) NOT NULL,
-    motPasse [NVARCHAR](50) NOT NULL,
+    id INT(100) AUTO_INCREMENT NOT NULL  PRIMARY KEY, -- primary key column
+    pseudo [NVARCHAR](255) NOT NULL,
+    motPasse [NVARCHAR](255) NOT NULL,
     derniereConnexion DATETIME NOT NULL,
-    email [NVARCHAR](50) NOT NULL
+    email [NVARCHAR](255) NOT NULL
 );
 
 -- Create a new table called 'Animal'
@@ -49,5 +50,3 @@ CREATE TABLE Commentaire
     texte TINYTEXT NOT NULL,
     datePublication DATETIME NOT NULL
 );
-
-GO
