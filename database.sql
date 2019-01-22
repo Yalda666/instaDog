@@ -2,14 +2,13 @@
 CREATE DATABASE InstaDog;
 
 
-CREATE USER 'root' IDENTIFIED BY "digital2018"; 
-GRANT SELECT, INSERT, UPDATE, DELETE ON InstaDog.* TO 'root'
-         WITH GRANT OPTION;
+CREATE USER 'adminInstaDog' IDENTIFIED BY "Inst@D0g"; 
+GRANT ALL PRIVILEGES ON InstaDog.* TO 'adminInstaDog';
 
 -- Create a new table called 'Utilisateur'
 CREATE TABLE Utilisateur
 (
-    id INT(100) AUTO_INCREMENT NOT NULL  PRIMARY KEY, -- primary key column
+    id INT(100) AUTO_INCREMENT PRIMARY KEY, -- primary key column
     pseudo VARCHAR(255) NOT NULL,
     motPasse VARCHAR(255) NOT NULL,
     derniereConnexion DATETIME NOT NULL,
@@ -19,8 +18,8 @@ CREATE TABLE Utilisateur
 -- Create a new table called 'Animal'
 CREATE TABLE Animal
 (
-    id INT NOT NULL, -- primary key column
-    idUtilisateur INT NOT NULL,
+    id INT(100) AUTO_INCREMENT, -- primary key column
+    idUtilisateur INT (100)NOT NULL,
     nom VARCHAR(50) NOT NULL,
     surnom VARCHAR(50) NOT NULL,
     cheminPhoto VARCHAR(250) NOT NULL,
@@ -35,8 +34,8 @@ CREATE TABLE Animal
 -- Create a new table called 'Article' 
 CREATE TABLE Article
 (
-    id INT NOT NULL, -- primary key column
-    idAnimal INT NOT NULL, -- foreign key
+     id INT(100) AUTO_INCREMENT, -- primary key column
+    idAnimal INT (100)NOT NULL, -- foreign key
     texte TEXT NOT NULL,
     cheminPhoto VARCHAR(50) NOT NULL,
     datePublication DATETIME NOT NULL,
@@ -47,9 +46,9 @@ CREATE TABLE Article
 -- Create a new table called 'Commentaire' 
 CREATE TABLE Commentaire
 (
-    id INT NOT NULL, -- primary key column
-    idUtilisateur INT NOT NULL, -- foreign key
-    idAnimal INT NOT NULL, -- foreign key
+     id INT(100) AUTO_INCREMENT, -- primary key column
+    idUtilisateur INT(100) NOT NULL, -- foreign key
+    idAnimal INT(100) NOT NULL, -- foreign key
     texte TINYTEXT NOT NULL,
     datePublication DATETIME NOT NULL,
     PRIMARY KEY(id),
