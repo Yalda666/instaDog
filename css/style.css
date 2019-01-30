@@ -90,7 +90,7 @@
   
 } 
 
-/* PAGE PROFIL_UTILISATEUR
+/* PAGE PROFIL_UTILISATEUR*/
 /* ////////////////////  MAIN //////////////////*/
 
 
@@ -100,7 +100,20 @@
 
 
 
+/* PAGE ACCUEIL */
+.image_centre{
+    display: flex;
+    margin:5% auto;
+    width:50%;
+    height: 20em;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 
+#titre_centre{
+    font-size: 2em;
+}
 
 
 
