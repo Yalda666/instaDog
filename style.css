@@ -1,0 +1,107 @@
+/* PAGE PRINCIPAL */
+
+* {
+    top: 0;
+    left: 0;
+}
+
+
+/* PAGE SQUELETTE */
+.container{
+    margin-top: 10px;
+}
+.border {
+    border: solid 5px #000;
+    text-align: center;
+    height: 50px;
+   
+}
+
+.navbar.navbar-expand-lg.navbar-light.bg-light{
+    width: 500px;
+  
+}
+
+.collapse.navbar-collapse.menu-nav{
+    width: 1000px;
+}
+
+#boutonRecherche{
+    margin:none;
+    padding:none;
+}
+
+/* ////////////  LA DIV NAV    /////////////////////*/
+
+/*backgroud container nav*/
+.bg-color {
+    background-color: #e76838;
+    height: 80px;
+    padding: 40px;
+  
+} 
+
+
+/* ////////////  LA DIV RECHERCHE    /////////////////////*/
+
+/*La div qui entoure le inpunt et le btn search*/
+.form-inline .container-search{
+    margin-left: 100px;
+    background-color: #e76838;
+    width: 660px;
+}
+
+/*la largeur du inpunt recherche*/
+.form-control.mr-sm-2.input-search{
+    width: 270px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+/*button search*/
+.form-inline .btn{
+   margin-right: 10px;
+   margin-bottom: 10px;
+   background-color: aliceblue;
+   width: 100px;
+  
+
+}
+
+.form-inline .btn:hover{
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background-color: rgb(2, 20, 36);
+    width: 100px;
+   
+ 
+ }
+
+/* DIV LOGIN */
+.deja_loup{
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+ .hulule{
+    margin-bottom: 10px;
+    width: 270px;
+  
+} 
+
+/* PAGE PROFIL_UTILISATEUR
+/* ////////////////////  MAIN //////////////////*/
+
+
+
+
+
+
+
+
+
+
+
+
+
