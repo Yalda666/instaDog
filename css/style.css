@@ -111,6 +111,14 @@
     flex-direction: column;
 }
 
+.texte_centre{
+    margin:auto;
+    text-align: center;
+    align-self: center;
+    align-content: center;
+    align-items: center;
+}
+
 #image_ligne{
     display: inline-block;
     margin:none;

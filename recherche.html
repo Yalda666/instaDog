@@ -13,13 +13,13 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="css/style.css">
 
-  <title>Accueil</title>
+  <title>Recherche de loup</title>
 </head>
 
 <body>
   <!-- ////////////  MENU DE NAVUGATION RESPONSIVE  /////////-->
   <nav class="navbar navbar-expand-lg navbar-light bg-warning col-sm-6 col-md-4 col-lg-6 col-xl-12">
-    <a class="navbar-brand container-logo" href="Accueil.html"></a>
+    <a class="navbar-brand container-logo" href="accueil.html"></a>
     <img class="logo" src="images/logo_final.png" alt="Tete de loup" width="10%"></img></a>
     <a class="navbar-brand" href="#">InstaWolf</a>
 
@@ -35,7 +35,7 @@
           <a class="nav-link" href="#">ACCUEIL <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="profil_utilisateur.html">PROFIL</a>
+          <a class="nav-link" href="#">PROFIL</a>
         </li>
         <li class="nav-item deja_loup">
           <a class="nav-link btn btn-primary text-white" type="button" href="#" data-toggle="modal" data-target="#myModal">Déjà
@@ -104,45 +104,30 @@
       </form>
       <!--// FIN SEARCH-->
 
-    </div>8
+    </div>
   </nav><!-- ////////////  FIN  MENU DE NAVUGATION RESPONSIVE  /////////-->
+
+
 
   <!-- ////////////   SECTION DE NOTRE CONTENT MAIN  /////////-->
   <main>
-    <div class="container image_centre">
-      <img src="images/logo_final.png" alt="Tete de loup"></img>
-      <a href="inscription.html" id="titre_centre">Rejoins la meute et hulule avec nous!</a>
+
+    <div class="container-search texte_centre">
+        <h1>Recherche de loups</h1>
+        <form action="home.php" method="post">
+        <input type=text id=recherche name=recherche placeholder="Veuillez taper votre recherche de profils ici" autofocus>
+        <br>
+        <input id="submit_chrch" type="submit" value="Rechercher" style=font-size:150%;border-radius:45%;height:3em;>
+        </form>
     </div>
-    <div class="container w-25 d-inline-block">
-      <img  src="images/logo_final.png" alt="Tete de loup" width="25%"></img>
-      <img  src="images/logo_final.png" alt="Tete de loup" width="25%"></img>
-      <img  src="images/logo_final.png" alt="Tete de loup" width="25%"></img>
-      <img  src="images/logo_final.png" alt="Tete de loup" width="25%"></img>
-    </div>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
+
   </main><!-- ////////////  FIN  SECTION DE NOTRE CONTENT MAIN  /////////-->
+
+
 
   <!-- ////////////   SECTION DE NOTRE MENU FOOTER MENU  /////////-->
   <nav class="navbar navbar-expand-lg navbar-light bg-warning col-sm-6 col-md-4 col-lg-6 col-xl-12">
-    <a class="navbar-brand container-logo" href="Accueil.html"></a>
+    <a class="navbar-brand container-logo" href="accueil.html"></a>
     <img class="logo" src="images/logo_final.png" alt="Tete de loup" width="10%"></img></a>
     <a class="navbar-brand" href="#">InstaWolf</a>
 
@@ -158,7 +143,7 @@
           <a class="nav-link" href="#">ACCUEIL <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="profil_utilisateur.html">PROFIL</a>
+          <a class="nav-link" href="#">PROFIL</a>
         </li>
 
         <li class="nav-item">
@@ -170,7 +155,7 @@
       </ul>
       <!--INPUT SEARCH -->
       <form class="form-inline container-search">
-        <input class="form-control mr-sm-2  input-search" type="search" placeholder="Recherche" aria-label="Recherche">
+        <input class="form-control mr-sm-2  input-search" type="search" placeholder="Recherche" value="Rechercher" aria-label="Recherche">
         <button class="btn btn-outline-success my-2 my-sm-0 " type="submit">Recherche</button>
       </form>
       <!--// FIN SEARCH-->
