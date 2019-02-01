@@ -119,12 +119,19 @@
     align-items: center;
 }
 
-#image_ligne{
-    display: inline-block;
-    margin:none;
-    width:20%;
-    height: 20em;
-}
+.btn:focus, .btn:active, button:focus, button:active {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+  
+  #image-gallery .modal-footer{
+    display: block;
+  }
+  
+  .thumb{
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
 
 #titre_centre{
     font-size: 2em;
