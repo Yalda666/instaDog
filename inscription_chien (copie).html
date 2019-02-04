@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+    crossorigin="anonymous">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/inscription-chien.css">
+  <link rel="stylesheet" href="js/javascript.js">
+
+
+  <title>Agrandir la meute</title>
+</head>
+
+<body>
+  <!-- ////////////  MENU DE NAVUGATION RESPONSIVE  /////////-->
+  <nav class="navbar navbar-expand-lg navbar-light bg-warning col-sm-6 col-md-4 col-lg-6 col-xl-12">
+    <a class="navbar-brand container-logo" href="accueil.html"></a>
+    <img class="logo" src="images/logo_final.png" alt="Tete de loup" width="10%"></img></a>
+    <a class="navbar-brand" href="#">InstaWolf</a>
+
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse menu-nav" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">ACCUEIL <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">PROFIL</a>
+        </li>
+        <li class="nav-item deja_loup">
+          <a class="nav-link btn btn-primary text-white" type="button" href="#" data-toggle="modal" data-target="#myModal">Déjà
+            loup?</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn btn-danger text-white hulule" type="button" href="#" data-toggle="modal" data-target="#myModal">Hulule
+            avec nous!</a>
+        </li>
+
+        <div class="modal" id="myModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <!-- Modal Header -->
+              <div class="modal-header deja_loup">
+                <h4 class="modal-title">Déjà loup?</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+              </div>
+
+              <!-- Modal body -->
+              <div class="modal-body">
+                <form>
+                  <label class="sr-only" for="usrname">Pseudo</label>
+                  <p>Pseudo:</p>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Votre surnom" aria-label="Username"
+                      aria-describedby="basic-addon1">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Adresse email</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                      placeholder="Entrez votre adresse email">
+                    <small id="emailHelp" class="form-text text-muted">Nous ne la partagerons avec personne...</small>
+                  </div>
+
+
+                  <label class="sr-only" for="Password">Mot de passe:</label>
+                  <p>Mot de passe:</p>
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon2"><i class="fa fa-key"></i></span>
+                    </div>
+                    <input id="Password" type="password" class="form-control" placeholder="Déposez votre empreinte de loup"
+                      aria-label="Mot de passe" aria-describedby="basic-addon2">
+                  </div>
+                </form>
+              </div>
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Rejoindre la meute</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Pas maintenant</button>
+              </div>
+
+            </div>
+          </div>
+      </ul>
+      <!--INPUT SEARCH -->
+      <form class="form-inline container-search">
+        <input class="form-control mr-sm-2  input-search" type="search" placeholder="Recherche" aria-label="Recherche">
+        <button class="btn btn-outline-success my-2 my-sm-0 " type="submit">Recherche</button>
+      </form>
+      <!--// FIN SEARCH-->
+
+    </div>
+  </nav><!-- ////////////  FIN  MENU DE NAVUGATION RESPONSIVE  /////////-->
+
+  <!-- ////////////   SECTION DE NOTRE CONTENT MAIN  /////////-->
+  <main>
+
+
+
+
+    <div class="container register">
+      <div class="row">
+        <div class="col-md-3 register-left">
+          <img src="images/logo_final.png" alt="logo instawolf" />
+          <h3>Bienvenue</h3>
+          <p>Partage la vie de ta meute avec notre meute mondiale </p>
+          <input type="submit" name="" value="Déjà loup?" /><br />
+        </div>
+        <div class="col-md-9 register-right">
+          <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+            <!--   <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                aria-selected="true">Employee</a>
+            </li> -->
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+                aria-selected="false">Instawolf</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+              <h3 class="register-heading">Agrandir la meute</h3>
+              <div class="row register-form">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Votre surnom *" value="" />
+                  </div>
+                  <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Votre e-mail *" value="" />
+                  </div>
+                  <!--    <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Last N *" value="" />
+                            </div> -->
+                  <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Mot de passe *" value="" />
+                  </div>
+
+                  <div class="form-group">
+                    <div class="maxl">
+                      <label class="radio inline">
+                        <input type="radio" name="gender" value="male" checked>
+                        <span> Male </span>
+                      </label>
+                      <label class="radio inline">
+                        <input type="radio" name="gender" value="female">
+                        <span>Femelle </span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <div class="form-group">
+                      <input type="password" class="form-control" placeholder="Mot de passe *" value="" />
+                    </div>
+                    <div class="form-group">
+                      <input type="password" class="form-control" placeholder="Confirme votre mot de passe *" value="" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="maxl">
+                      <label class="checkbox inline">
+                        <input type="checkbox" name="gender" value="male" checked>
+                        <span>J'accepte les conditions InstaWolf </span>
+                      </label>
+                    </div>
+                  </div>
+                  <div id="container">
+                    <p><input type="file" name="file" onchange="change(this)" id="file"></p>
+                    <p><img id="image" src="" alt="image en train de charger"></p>
+                  </div>
+                  <script>
+                    function $(param) {
+                        return document.querySelector(param);
+                    }
+            
+                    function change(e) {
+                        console.log(e.files[0].name);
+                        $('#image').setAttribute('src', "images/" + e.files[0].name);
+            
+                    }
+            
+                </script>
+                  <input type="submit" class="btnRegister" value="Register" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h1>Lorem Ipsum</h1>
+        <h5>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab
+          ea porro vero magnam tempora vel earum atque? Voluptas,
+          ducimus soluta! Dolores quaerarepellendus totam repellat
+          autem qui alias, recusandae reiciendis.</h5>
+      </div>
+    </div>
+
+  </main><!-- ////////////  FIN  SECTION DE NOTRE CONTENT MAIN  /////////-->
+
+  <!-- ////////////   SECTION DE NOTRE MENU FOOTER MENU  /////////-->
+  <nav class="navbar navbar-expand-lg navbar-light bg-warning col-sm-6 col-md-4 col-lg-6 col-xl-12">
+    <a class="navbar-brand container-logo" href="accueil.html"></a>
+    <img class="logo" src="images/logo_final.png" alt="Tete de loup" width="10%"></img></a>
+    <a class="navbar-brand" href="#">InstaWolf</a>
+
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse menu-nav" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">ACCUEIL <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">PROFIL</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#">AGRANDIR LA MEUTE</a>
+        </li>
+
+
+
+      </ul>
+      <!--INPUT SEARCH -->
+      <form class="form-inline container-search">
+        <input class="form-control mr-sm-2  input-search" type="search" placeholder="Recherche" aria-label="Recherche">
+        <button class="btn btn-outline-success my-2 my-sm-0 " type="submit">Recherche</button>
+      </form>
+      <!--// FIN SEARCH-->
+
+    </div>
+  </nav>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
+
+  <script src="js/bootstrap.js"></script>
+</body>
+
+</html>

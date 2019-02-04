@@ -137,6 +137,31 @@
     font-size: 2em;
 }
 
+/* PAGE INSCRIPTION CHIEN */
+
+#container {
+    width: 600px;
+    height: 400px;
+    padding:20px;
+    margin: 100px auto;
+    border: 2px dashed gray;
+}
+
+#file{
+    color: rgb(165, 46, 31);
+    width: 200px;
+    height: 50px;
+}
+
+#image{
+    border: solid 5px rgb(198, 198, 204);
+    width: 100px;
+    height: 100px;
+    padding: 10px;
+    box-shadow: 5px 10px #888888;
+    
+}
+
 
 
 
