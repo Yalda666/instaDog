@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #container {
+            width: 600px;
+            height: 400px;
+            padding:20px;
+            margin: 100px auto;
+            border: 2px dashed gray;
+        }
+
+        #file{
+            color: rgb(165, 46, 31);
+            width: 200px;
+            height: 50px;
+        }
+
+        #image{
+            border: solid 5px rgb(198, 198, 204);
+            width: 100px;
+            height: 100px;
+            padding: 10px;
+            box-shadow: 5px 10px #888888;
+            
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <p><input type="file" name="file" onchange="change(this)" id="file"></p>
+        <p><img id="image" src="" alt="image en train de charger"></p>
+    </div>
+
+    <script>
+        function $(param) {
+            return document.querySelector(param);
+        }
+
+        function change(e) {
+            console.log(e.files[0].name);
+            $('#image').setAttribute('src', "images/" + e.files[0].name);
+
+        }
+
+    </script>
+</body>
+
+</html>
