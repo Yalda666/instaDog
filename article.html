@@ -12,10 +12,9 @@
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/inscription-chien.css">
-  
+  <link rel="stylesheet" href="css/article.css">
 
-  <title>Agrandir la meute</title>
+  <title>Squelette</title>
 </head>
 
 <body>
@@ -75,7 +74,7 @@
                     <label for="exampleInputEmail1">Adresse email</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                       placeholder="Entrez votre adresse email">
-                    <small id="emailHelp" class="form-text text-muted">Nous ne la partagerons avec personne...</small>
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                   </div>
 
 
@@ -112,124 +111,50 @@
   <!-- ////////////   SECTION DE NOTRE CONTENT MAIN  /////////-->
   <main>
 
-
-
-
-    <div class="container register">
-      <div class="row">
-        <div class="col-md-3 register-left">
-          <img src="images/logo_final.png" alt="logo instawolf" />
-          <h3>Rejoint la meute</h3>
-          <p>Partage la vie de ta meute avec notre meute mondiale </p>
-          <input type="submit" name="" value="Huuuuuu?" /><br />
-        </div>
-        <div class="col-md-9 register-right">
-          <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-            <!--   <li class="nav-item">
-              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-                aria-selected="true">Employee</a>
-            </li> -->
-            <li class="nav-item">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-                aria-selected="false">Instawolf</a>
-            </li>
-          </ul>
-          <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-              <h3 class="register-heading">Agrandir la meute</h3>
-              <div class="row register-form">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Votre nom *" value="" />
-                  </div>
-                  <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Votre surnom *" value="" />
-                    </div>
-                  <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Votre race *" value="" />
-                  </div>
-                  <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Votre elevage *" value="" />
-                    </div>
-                  <!--    <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Last N *" value="" />
-                            </div> -->
-                           <!--  <form>
-                                <div class="form-group">
-                                  <label for="exampleFormControlFile1">Charge une photo</label>
-                                  <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                                </div>
-                              </form> -->
-
-                           <!--    //chager un photo -->
-                      
-                  <div class="form-group">
-                    <div class="maxl">
-                      <label class="radio inline">
-                        <input type="radio" name="gender" value="male" checked>
-                        <span> Male </span>
-                      </label>
-                      <label class="radio inline">
-                        <input type="radio" name="gender" value="female">
-                        <span>Femelle </span>
-                      </label>
-
-                      <div id="container">
-                          <p><input type="file" name="file" onchange="change(this)" id="file"></p>
-                          <p><img id="image" src="" alt="image en train de charger"></p>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-
-
-                <div class="col-md-6">
-                   
-               
-                    <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Votre e-mail *" value="" />
-                      </div>
-                  <div class="form-group">
-                    <div class="form-group">
-                      <input type="password" class="form-control" placeholder="Mot de passe *" value="" />
-                    </div>
-                    <div class="form-group">
-                      <input type="password" class="form-control" placeholder="Confirme votre mot de passe *" value="" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                      <label for="input-StartDate-1">Date de annivesaire</label>
-                      <input type="date" class="form-control" id="input-StartDate-1" placeholder="시작일">
-                  </div>
-                
-                  <div class="form-group">
-                    <div class="maxl">
-                      <label class="checkbox inline">
-                        <input type="checkbox" name="gender" value="male" checked>
-                        <span>J'accepte les conditions InstaWolf </span>
-                      </label>
-                    </div>
-                  </div>
-                  <input type="submit" class="btnRegister" value="Valider" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <h1>Rejoin la Mouete</h1>
-        <h5>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab
-          ea porro vero magnam tempora vel earum atque? Voluptas,
-          ducimus soluta! Dolores quaerarepellendus totam repellat
-          autem qui alias, recusandae reiciendis.</h5>
+    <div class="card bg-dark text-white">
+      <img class="card-img" src="images/profil_user.png" alt="Card image">
+      <div class="card-img-overlay">
+        <h5 class="card-title">Nom</h5>
+        <h5 class="card-title">sexe :</h5>
+        <h5 class="card-title">race</h5>
+        <h5 class="card-title">elevage</h5>
+        <h5 class="card-title">Née le :</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+          content. This content is a little bit longer.</p>
+        <p class="card-text">Last updated 3 mins ago</p>
       </div>
     </div>
+    <button type="button" class="btn btn-primary btn-lg btn-block">
+      <h1>ECRIVEZ VOTRE ARTICLE</h1>
+    </button>
 
+    <div class="text-article">
+      <div class="row">
+        <div class="span4 well" style="padding-bottom:0">
+        
+        </div>
+        <form class="textarea" accept-charset="UTF-8" action="" method="POST">
+
+          <textarea class="span4" id="new_message" name="new_message" placeholder="Type in your message" rows="5"></textarea>
+          <div id="container-upload-article">
+              <p><input type="file" name="file" onchange="change(this)" id="file"></p>
+              <p><img id="image" src="" alt="image en train de charger"></p>
+            </div>
+          </div>
+
+          <h6 class="pull-right">Maximum 320 caractères</h6>
+          <button class="btn btn-info registre-article" type="submit">Engegistre Message</button>
+        </form>
+      </div>
+    </div>
+    </div>
   </main><!-- ////////////  FIN  SECTION DE NOTRE CONTENT MAIN  /////////-->
+
+  <!-- ////////////   SECTION DE NOTRE MENU FOOTER MENU  /////////-->
   <footer class="container">
       <p class="float-right"><a href="#">Back to top</a></p>
-      <p>© 2017-2018 Company, Inc. ·<!--  <a href="#">Privacy</a> · <a href="#">Terms</a> --></p>
+      <p>© 2017-2018 Company, Inc.<!--  <a href="#">Privacy</a> · <a href="#">Terms</a></p> -->
     </footer>
-  <!-- ////////////   SECTION DE NOTRE MENU FOOTER MENU  /////////-->
   <nav class="navbar navbar-expand-lg navbar-light bg-warning col-sm-6 col-md-4 col-lg-6 col-xl-12">
     <a class="navbar-brand container-logo" href="accueil.html"></a>
     <img class="logo" src="images/logo_final.png" alt="Tete de loup" width="10%"></img></a>
@@ -249,8 +174,8 @@
         <li class="nav-item">
           <a class="nav-link" href="#">PROFIL</a>
         </li>
-
-     <!--    <li class="nav-item">
+        <!-- 
+        <li class="nav-item">
           <a class="nav-link" href="#">AGRANDIR LA MEUTE</a>
         </li> -->
 

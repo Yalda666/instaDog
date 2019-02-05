@@ -1,0 +1,45 @@
+/* PAGE PRINCIPAL */
+
+* {
+    top: 0;
+    left: 0;
+ 
+/*  background-color: #e76838;  */
+}
+
+.text-article{
+    margin-top: 50px;
+    margin: auto;  
+    width: 50%;
+    height: 800px;;
+    border: 2px solid firebrick;
+}
+
+form textarea{
+    margin-top: 20px;
+    width: 500px;
+    height: 400px;
+   
+    margin-left: 100px;
+}
+
+button .registre-article{
+    margin-left: 100px;
+}
+
+.registre-article{
+    margin-left: 100PX;
+  
+}
+
+.pull-right{/*ecrire 320 caracteres*/
+    margin-left: 100px;
+    margin-top: 50px;
+    
+  
+}
+
+#container-upload-article{
+    margin-left: 100PX;
+    margin-top:10px;
+}

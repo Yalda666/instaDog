@@ -140,16 +140,15 @@
 /* PAGE INSCRIPTION CHIEN */
 
 #container {
-    width: 600px;
-    height: 400px;
+    width: 300px;
+    height: 180px;
     padding:20px;
-    margin: 100px auto;
-    border: 2px dashed gray;
+
 }
 
 #file{
     color: rgb(165, 46, 31);
-    width: 200px;
+    width: 300px;
     height: 50px;
 }
 
