@@ -7,3 +7,5 @@ function change(e) {
     $('#image').setAttribute('src', "images/" + e.files[0].name);
 
 }
+
+
