@@ -83,14 +83,14 @@ require('Utilisateur.php');
             return $res;
         }
 
-// Fonction insertHobby qui insère un hobby dans la base de données
-        function insertHobby($hobby){
+// Fonction insertUtilisateur qui insère un utilisateur dans la base de données
+        function insertUtilisateur($pseudo,$motPasse,$email){
             try{
                 $requete_prepare=$this->connexion->prepare(
-                    "INSERT INTO Hobby (Type) values (:hobby)"
+                    "INSERT INTO Utilisateur (pseudo, motPasse, derniereConnexion, email) values (:pseudo,:motPasse,CURRENT_TIMESTAMP,:email)"
                 );
                 $requete_prepare->execute(
-                    array( 'hobby' => $hobby)
+                    array( 'pseudo' => $pseudo, 'motPasse' => $motPasse,'email' => $email)
                 );
                 echo "Inséré! <br />";
                 return true;

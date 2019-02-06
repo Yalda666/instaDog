@@ -2,6 +2,7 @@
 require('connexion.php');
 
 $appliBD=new Connexion;
+$appliBD->insertUtilisateur("bob","B03","b0b@boo.com");
 // if(insertHobby("Lire")){
 //     echo "Bien inséré!";
 // }
