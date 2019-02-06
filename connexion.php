@@ -84,7 +84,7 @@ require('Utilisateur.php');
         }
 
 // Fonction insertHobby qui insère un hobby dans la base de données
-        function insertHobby($hobby){
+       /*  function insertHobby($hobby){
             try{
                 $requete_prepare=$this->connexion->prepare(
                     "INSERT INTO Hobby (Type) values (:hobby)"
@@ -489,9 +489,9 @@ require('Utilisateur.php');
         /**
          * Get the value of connexion
          */ 
-        public function getConnexion()
+       /* public function getConnexion()
         {
                 return $this->connexion;
-        }
+        } */
     }
 ?>
