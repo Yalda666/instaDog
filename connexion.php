@@ -1,4 +1,8 @@
 <?php
+require('Animal.php');
+require('Article.php');
+require('Profil.php');
+require('Utilisateur.php');
 // Début de la classe Connexion
     class Connexion {
 // Déclaration de la variable privée connexion qui fait la relation avec la base de données
