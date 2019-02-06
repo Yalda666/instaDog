@@ -87,7 +87,7 @@ require('Utilisateur.php');
         function insertUtilisateur($pseudo,$motPasse,$email){
             try{
                 $requete_prepare=$this->connexion->prepare(
-                    "INSERT INTO Utilisateur (pseudo, motPasse, derniereConnexion, email) values (:pseudo,:motPasse,CURRENT_TIMESTAMP,:email)"
+                    "INSERT INTO Utilisateur (pseudo, motPasse, derniereConnexion, email) values (:pseudo, :motPasse, CURRENT_TIMESTAMP, :email)"
                 );
                 $requete_prepare->execute(
                     array( 'pseudo' => $pseudo, 'motPasse' => $motPasse,'email' => $email)
@@ -103,14 +103,14 @@ require('Utilisateur.php');
             }
         }
 
-// Fonction insertMusique qui insère un style de musique dans la base de données
-        function insertMusique($music){
+// Fonction insertAnimal qui insère un loup dans la base de données
+        function insertAnimal($idUtilisateur, $nom, $surnom, $cheminPhoto, $nomElevage, $dateNaissance, $sexe, $race){
             try{
                 $requete_prepare=$this->connexion->prepare(
-                    "INSERT INTO Musique (Type) values (:music)"
+                    "INSERT INTO Animal (idUtilisateur, nom, surnom, cheminPhoto, nomElevage, dateNaissance, sexe, race) values (:idUtilisateur, :nom, :surnom, :cheminPhoto, :nomElevage, :dateNaissance, :sexe, :race)"
                 );
                 $requete_prepare->execute(
-                    array( 'music' => $music)
+                    array( 'idUtilisateur' => $idUtilisateur, 'nom' => $nom, 'surnom' => $surnom, 'cheminPhoto' => $cheminPhoto, 'nomElevage' => $nomElevage, 'dateNaissance' => $dateNaissance, 'sexe' => $sexe, 'race' => $race)
                 );
                 echo "Inséré! <br />";
                 return true;
@@ -123,14 +123,14 @@ require('Utilisateur.php');
             }
         }
 
-// Fonction insertPersonne qui insère une personne dans la base de données
-        function insertPersonne($nom,$prenom,$url,$date,$statut){
+// Fonction insertArticle qui insère un article dans la base de données
+        function insertArticle($idAnimal, $texte, $cheminPhoto, $datePublication){
             try{
                 $requete_prepare=$this->connexion->prepare(
-                    'INSERT INTO Personne(Nom,Prenom,URL_Photo,Date_Naissance,Statut_Couple) values (:nom,:prenom,:lien,:naissance,:statut)'
+                    'INSERT INTO Article (idAnimal, texte, cheminPhoto, datePublication) values (:idAnimal,:texte,:cheminPhoto,:datePublication)'
                 );
                 $requete_prepare->execute(
-                    array( 'nom' => $nom,'prenom' => $prenom,'lien' => $url,'naissance' => $date,'statut' => $statut)
+                    array( 'idAnimal' => $idAnimal,'texte' => $texte,'cheminPhoto' => $cheminPhoto,'datePublication' => $datePublication)
                 );
                 echo "Inséré! <br />";
                 return true;
