@@ -9,7 +9,7 @@
         private $race;
         private $listeArticleId;
         
-        public function __construct($cheminPhoto,$nom,$surnom,$listCom,$dateNaissance,$sexe,$race,$listeArticleId){
+        public function __construct($cheminPhoto,$nom,$surnom,$dateNaissance,$sexe,$race,$listeArticleId){
             $this->cheminPhoto=$cheminPhoto;
             $this->nom=$nom;
             $this->surnom=$surnom;

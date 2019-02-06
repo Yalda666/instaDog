@@ -489,9 +489,9 @@ require('Utilisateur.php');
         /**
          * Get the value of connexion
          */ 
-        public function getConnexion()
+       /* public function getConnexion()
         {
                 return $this->connexion;
-        }
+        } */
     }
 ?>
