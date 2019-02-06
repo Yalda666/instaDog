@@ -481,5 +481,13 @@
 
         }
 
+
+        /**
+         * Get the value of connexion
+         */ 
+        public function getConnexion()
+        {
+                return $this->connexion;
+        }
     }
 ?>
