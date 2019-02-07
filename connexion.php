@@ -143,14 +143,34 @@ require('Utilisateur.php');
             }
         }
 
-// Fonction selectAllHobbies qui sélectionne la liste des hobbies dans la base de données
-        function selectAllHobbies(){
+// Fonction insertCommentaire qui insère un commentaire dans la base de données
+function insertCommentaire($idArticle, $pseudo, $texte, $datePublication){
+    try{
+        $requete_prepare=$this->connexion->prepare(
+            'INSERT INTO Commentaire (idArticle, pseudo, texte, datePublication) values (:idArticle, :pseudo, :texte, :datePublication)'
+        );
+        $requete_prepare->execute(
+            array( 'idArticle' => $idArticle, 'pseudo' => $pseudo, 'texte' => $texte,'datePublication' => $datePublication)
+        );
+        echo "Inséré! <br />";
+        return true;
+    }
+    catch(Exception $e){
+        echo 'Erreur : '.$e->getMessage().'<br />';
+        echo 'N° : '.$e->getCode();
+        echo "Pas inséré! <br />";
+        return false;
+    }
+}
+
+// Fonction selectAllLoups qui sélectionne la liste des loups dans la base de données
+        function selectAllLoups(){
             try{
                 $requete_prepare=$this->connexion->prepare(
-                    'SELECT Type FROM Hobby'
+                    'SELECT * FROM Animal'
                 );
                 $requete_prepare->execute();
-                $resultat=$requete_prepare->fetchAll(PDO::FETCH_ASSOC);
+                $resultat=$requete_prepare->fetchAll(PDO::FETCH_CLASS, 'Animal');
                 return $resultat;
             }
             catch(Exception $e){
@@ -160,14 +180,14 @@ require('Utilisateur.php');
             }
         }
 
-// Fonction selectAllMusics qui sélectionne la liste des types de musique dans la base de données
-        function selectAllMusics(){
+// Fonction selectAllUtilisateurs qui sélectionne la liste des utilisateurs dans la base de données
+        function selectAllUtilisateurs(){
             try{
                 $requete_prepare=$this->connexion->prepare(
-                    'SELECT Type FROM Musique'
+                    'SELECT * FROM Utilisateur'
                 );
                 $requete_prepare->execute();
-                $resultat=$requete_prepare->fetchAll(PDO::FETCH_ASSOC);
+                $resultat=$requete_prepare->fetchAll(PDO::FETCH_CLASS, 'Utilisateur');
                 return $resultat;
             }
             catch(Exception $e){
@@ -177,14 +197,48 @@ require('Utilisateur.php');
             }
         }
 
-// Fonction selectPersonneById qui sélectionne la personne dans la base de données qui a l'identifiant passée en paramètre et retourne tous ses attributs
-        function selectPersonneById($id){
+// Fonction selectUtilisateurById qui sélectionne l'utilisateur dans la base de données qui a l'identifiant passé en paramètre et retourne l'utilisateur
+function selectUtilisateurById($id){
+    try{
+        $requete_prepare=$this->connexion->prepare(
+            'SELECT * FROM Utilisateur WHERE id = :id'
+        );
+        $requete_prepare->execute(array("id" => $id));
+        $resultat=$requete_prepare->fetchAll(PDO::FETCH_CLASS, 'Utilisateur');
+        return $resultat;
+    }
+    catch(Exception $e){
+        echo 'Erreur : '.$e->getMessage().'<br />';
+        echo 'N° : '.$e->getCode();
+        return false;
+    }
+}
+
+// Fonction selectArticlesById qui sélectionne les articles dans la base de données qui ont l'identifiant du loup passé en paramètre et retourne tous ses articles
+        function selectArticlesById($id){
             try{
                 $requete_prepare=$this->connexion->prepare(
-                    'SELECT * FROM Personne WHERE Id = :id'
+                    'SELECT * FROM Article WHERE idChien = :id'
                 );
                 $requete_prepare->execute(array("id" => $id));
-                $resultat=$requete_prepare->fetch(PDO::FETCH_OBJ);
+                $resultat=$requete_prepare->fetchAll(PDO::FETCH_CLASS, 'Article');
+                return $resultat;
+            }
+            catch(Exception $e){
+                echo 'Erreur : '.$e->getMessage().'<br />';
+                echo 'N° : '.$e->getCode();
+                return false;
+            }
+        }
+
+// Fonction selectCommentairesById qui sélectionne les commentaires dans la base de données qui ont l'identifiant de l'article passé en paramètre et retourne tous ses commentaires
+        function selectCommentairesById($id){
+            try{
+                $requete_prepare=$this->connexion->prepare(
+                    'SELECT * FROM Commentaire WHERE idArticle = :id'
+                );
+                $requete_prepare->execute(array("id" => $id));
+                $resultat=$requete_prepare->fetchAll(PDO::FETCH_CLASS, 'Commentaire');
                 return $resultat;
             }
             catch(Exception $e){
