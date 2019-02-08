@@ -144,24 +144,24 @@ require('Utilisateur.php');
         }
 
 // Fonction insertCommentaire qui insère un commentaire dans la base de données
-function insertCommentaire($idArticle, $pseudo, $texte, $datePublication){
-    try{
-        $requete_prepare=$this->connexion->prepare(
-            'INSERT INTO Commentaire (idArticle, pseudo, texte, datePublication) values (:idArticle, :pseudo, :texte, :datePublication)'
-        );
-        $requete_prepare->execute(
-            array( 'idArticle' => $idArticle, 'pseudo' => $pseudo, 'texte' => $texte,'datePublication' => $datePublication)
-        );
-        echo "Inséré! <br />";
-        return true;
-    }
-    catch(Exception $e){
-        echo 'Erreur : '.$e->getMessage().'<br />';
-        echo 'N° : '.$e->getCode();
-        echo "Pas inséré! <br />";
-        return false;
-    }
-}
+        function insertCommentaire($idArticle, $pseudo, $texte, $datePublication){
+            try{
+                $requete_prepare=$this->connexion->prepare(
+                    'INSERT INTO Commentaire (idArticle, pseudo, texte, datePublication) values (:idArticle, :pseudo, :texte, :datePublication)'
+                );
+                $requete_prepare->execute(
+                    array( 'idArticle' => $idArticle, 'pseudo' => $pseudo, 'texte' => $texte,'datePublication' => $datePublication)
+                );
+                echo "Inséré! <br />";
+                return true;
+            }
+            catch(Exception $e){
+                echo 'Erreur : '.$e->getMessage().'<br />';
+                echo 'N° : '.$e->getCode();
+                echo "Pas inséré! <br />";
+                return false;
+            }
+        }
 
 // Fonction selectAllLoups qui sélectionne la liste des loups dans la base de données
         function selectAllLoups(){
@@ -197,22 +197,39 @@ function insertCommentaire($idArticle, $pseudo, $texte, $datePublication){
             }
         }
 
+        // Fonction selectLoupsById qui sélectionne l'utilisateur dans la base de données qui a l'identifiant passé en paramètre et retourne l'utilisateur
+        function selectLoupsById($id){
+            try{
+                $requete_prepare=$this->connexion->prepare(
+                    'SELECT * FROM Animal WHERE id = :id'
+                );
+                $requete_prepare->execute(array("id" => $id));
+                $resultat=$requete_prepare->fetch(PDO::FETCH_CLASS, 'Animal');
+                return $resultat;
+            }
+            catch(Exception $e){
+                echo 'Erreur : '.$e->getMessage().'<br />';
+                echo 'N° : '.$e->getCode();
+                return false;
+            }
+        }
+
 // Fonction selectUtilisateurById qui sélectionne l'utilisateur dans la base de données qui a l'identifiant passé en paramètre et retourne l'utilisateur
-function selectUtilisateurById($id){
-    try{
-        $requete_prepare=$this->connexion->prepare(
-            'SELECT * FROM Utilisateur WHERE id = :id'
-        );
-        $requete_prepare->execute(array("id" => $id));
-        $resultat=$requete_prepare->fetchAll(PDO::FETCH_CLASS, 'Utilisateur');
-        return $resultat;
-    }
-    catch(Exception $e){
-        echo 'Erreur : '.$e->getMessage().'<br />';
-        echo 'N° : '.$e->getCode();
-        return false;
-    }
-}
+        function selectUtilisateurById($id){
+            try{
+                $requete_prepare=$this->connexion->prepare(
+                    'SELECT * FROM Utilisateur WHERE id = :id'
+                );
+                $requete_prepare->execute(array("id" => $id));
+                $resultat=$requete_prepare->fetch(PDO::FETCH_CLASS, 'Utilisateur');
+                return $resultat;
+            }
+            catch(Exception $e){
+                echo 'Erreur : '.$e->getMessage().'<br />';
+                echo 'N° : '.$e->getCode();
+                return false;
+            }
+        }
 
 // Fonction selectArticlesById qui sélectionne les articles dans la base de données qui ont l'identifiant du loup passé en paramètre et retourne tous ses articles
         function selectArticlesById($id){
@@ -248,36 +265,33 @@ function selectUtilisateurById($id){
             }
         }
 
-// Fonction searchId qui sélectionne l'identifiant dans la base de données qu'a la personne qui a le nom ou le prénom qui contient les lettres passées en paramètres
-        function searchId($Nom) { 
-            $query = "SELECT Id FROM Personne WHERE Prenom like :Nom or Nom like :Nom";
+// Fonction searchPersonneId qui sélectionne l'identifiant dans la base de données qu'a la personne qui a le nom ou le prénom qui contient les lettres passées en paramètres
+        function searchPersonneId($nom, $email) { 
+            $query = "SELECT * FROM Utilisateur WHERE Pseudo like :nom AND email like :email";
             $stmt = $this->connexion->prepare($query); 
-            $result = $stmt->execute(array("Nom"=> "%".$Nom."%")); 
-            $row = $stmt->fetchAll(PDO::FETCH_ASSOC); 
-            return $row[0]["Id"];
+            $result = $stmt->execute(array("nom"=> "%".$nom."%", "email"=> "%".$email."%")); 
+            $row = $stmt->fetch(PDO::FETCH_CLASS, 'Utilisateur'); 
+            return $row;
         } 
 
-// Fonction search_personne qui sélectionne toutes les données dans la base de données qu'a la personne qui a le nom ou le prénom qui contient les lettres passées en paramètres
-        function search_personne($Nom) { 
-            $query = "SELECT * FROM Personne WHERE Prenom like :Nom or Nom like :Nom";
+// Fonction searchAnimalId qui sélectionne l'identifiant dans la base de données qu'a le loup qui a le nom, le surnom, le nom d'élevage ou la race qui contient les lettres passées en paramètres
+        function searchAnimalId($nom) { 
+            $query = "SELECT * FROM Animal WHERE nom like :nom or surnom like :nom or nomElevage like :nom or race like :nom";
             $stmt = $this->connexion->prepare($query); 
-            //$stmt->bindValue(':Nom','%'.$Nom.'%'); 
-            $result = $stmt->execute(array("Nom"=> "%".$Nom."%")); 
-            $row = $stmt->fetchAll(PDO::FETCH_ASSOC); 
-            //var_dump($row); //var_dump($stmt->errorInfo()); echo "Matches pour ".$Nom." et ".$prenom." : ".$stmt->rowCount()."</br>"; foreach ($row as $key => $value) { # code... echo $value["Prenom"]."<br>"; 
+            $result = $stmt->execute(array("nom"=> "%".$nom."%")); 
+            $row = $stmt->fetchAll(PDO::FETCH_CLASS, 'Animal'); 
             return $row;
         } 
 
 // Fonction getPersonneHobby qui sélectionne les hobbies associés à une personne dont l'identifiant est passé en paramètre
-        function getPersonneHobby($personneId){
+        function getPersonneLoups($personneId){
             try{
                 $requete_prepare=$this->connexion->prepare(
-                    "SELECT Type FROM RelationHobby
-                    INNER JOIN Hobby ON Hobby_Id = Id
-                    WHERE Personne_Id = :id"
+                    "SELECT * FROM Animal
+                    INNER JOIN Utilisateur ON idUtilisateur = :id"
                 );
                 $requete_prepare->execute(array("id" => $personneId));
-                $hobbies=$requete_prepare->fetchAll(PDO::FETCH_ASSOC);
+                $hobbies=$requete_prepare->fetchAll(PDO::FETCH_CLASS, 'Animal');
                 return $hobbies;
             }
             catch(Exception $e){
@@ -288,264 +302,5 @@ function selectUtilisateurById($id){
 
         }
 
-// Fonction getPersonneMusique qui sélectionne les types de musique associés à une personne dont l'identifiant est passé en paramètre
-        function getPersonneMusique($personneId){
-            try{
-                $requete_prepare=$this->connexion->prepare(
-                    "SELECT Type FROM RelationMusique
-                    INNER JOIN Musique ON Musique_Id = Id
-                    WHERE Personne_Id = :id"
-                );
-                $requete_prepare->execute(array("id" => $personneId));
-                $musics=$requete_prepare->fetchAll(PDO::FETCH_ASSOC);
-                return $musics;
-            }
-            catch(Exception $e){
-                echo 'Erreur : '.$e->getMessage().'<br />';
-                echo 'N° : '.$e->getCode();
-                return false;
-            }
-
-        }
-
-// Fonction getRelationPersonne qui sélectionne les noms, prénoms et type de relation des personnes associées à une personne dont l'identifiant est passé en paramètre
-        function getRelationPersonne($personneId){
-            try{
-                $requete_prepare=$this->connexion->prepare(
-                    "SELECT P2.Nom, P2.Prenom, RP.Type FROM Personne P2, RelationPersonne RP
-                    INNER JOIN Personne P1 ON RP.Personne_Id = P1.Id
-                    WHERE P1.Id = :id AND Relation_Id=P2.Id"
-                );
-                $requete_prepare->execute(array("id" => $personneId));
-                $relations=$requete_prepare->fetchAll(PDO::FETCH_ASSOC);
-                return $relations;
-            }
-            catch(Exception $e){
-                echo 'Erreur : '.$e->getMessage().'<br />';
-                echo 'N° : '.$e->getCode();
-                return false;
-            }
-
-        }
-
-// Fonction getHobbyById qui sélectionne le hobby associé à l'identifiant passé en paramètre
-        function getHobbyById($id){
-            try{
-                $hobby_Id=$id;
-                $requete_prepare=$this->connexion->prepare(
-                    'SELECT Type FROM Hobby
-                    WHERE Id=:hobby'
-                );
-                $requete_prepare->execute(array("hobby" => $hobby_Id));
-                $hid=$requete_prepare->fetch(PDO::FETCH_ASSOC);
-                $hobby_Id=trim($hid["Type"]);
-                return $hobby_Id;
-            }
-            catch(Exception $e){
-                echo 'Erreur : '.$e->getMessage().'<br />';
-                echo 'N° : '.$e->getCode();
-                return false;
-            }
-        }
-
-// Fonction getMusiqueById qui sélectionne le type de musique associé à l'identifiant passé en paramètre
-        function getMusiquebyId($id){
-            try{
-                $musique_Id=0;
-                $requete_prepare=$this->connexion->prepare(
-                    'SELECT Type FROM Musique
-                    WHERE Id=:musique'
-                );
-                $requete_prepare->execute(array("musique" => $id));
-                $mid=$requete_prepare->fetch(PDO::FETCH_ASSOC);
-                $musique_Id=trim($mid["Type"]);
-                return $musique_Id;
-            }
-            catch(Exception $e){
-                echo 'Erreur : '.$e->getMessage().'<br />';
-                echo 'N° : '.$e->getCode();
-                return false;
-            }
-        }
-
-// Fonction getImage qui sélectionne l'url de l'image associée à l'identifiant passé en paramètre
-        function getImage($id){
-            try{
-                $requete_prepare=$this->connexion->prepare(
-                    'SELECT URL_Photo FROM Personne
-                    WHERE Id=:id'
-                );
-                $requete_prepare->execute(array("id" => $id));
-                $iid=$requete_prepare->fetch(PDO::FETCH_ASSOC);
-                $image_Id=trim($iid["URL_Photo"]);
-                return $image_Id;
-            }
-            catch(Exception $e){
-                echo 'Erreur : '.$e->getMessage().'<br />';
-                echo 'N° : '.$e->getCode();
-                return false;
-            }
-        }
-
-// Fonction getNom qui sélectionne le nom de la personne associée à l'identifiant passé en paramètre
-        function getNom($id){
-            try{
-                $requete_prepare=$this->connexion->prepare(
-                    'SELECT Nom FROM Personne
-                    WHERE Id=:id'
-                );
-                $requete_prepare->execute(array("id" => $id));
-                $nid=$requete_prepare->fetch(PDO::FETCH_ASSOC);
-                $nom_Id=trim($nid["Nom"]);
-                return $nom_Id;
-            }
-            catch(Exception $e){
-                echo 'Erreur : '.$e->getMessage().'<br />';
-                echo 'N° : '.$e->getCode();
-                return false;
-            }
-        }
-
-// Fonction getPrenom qui sélectionne le prénom de la personne associée à l'identifiant passé en paramètre
-        function getPrenom($id){
-            try{
-                $requete_prepare=$this->connexion->prepare(
-                    'SELECT Prenom FROM Personne
-                    WHERE Id=:id'
-                );
-                $requete_prepare->execute(array("id" => $id));
-                $pid=$requete_prepare->fetch(PDO::FETCH_ASSOC);
-                $prenom_Id=trim($pid["Prenom"]);
-                return $prenom_Id;
-            }
-            catch(Exception $e){
-                echo 'Erreur : '.$e->getMessage().'<br />';
-                echo 'N° : '.$e->getCode();
-                return false;
-            }
-        }
-
-// Fonction getDate qui sélectionne la date de naissance de la personne associée à l'identifiant passé en paramètre
-        function getDate($id){
-            try{
-                $requete_prepare=$this->connexion->prepare(
-                    'SELECT Date_Naissance FROM Personne
-                    WHERE Id=:id'
-                );
-                $requete_prepare->execute(array("id" => $id));
-                $did=$requete_prepare->fetch(PDO::FETCH_ASSOC);
-                $date=trim($did["Date_Naissance"]);
-                return $date;
-            }
-            catch(Exception $e){
-                echo 'Erreur : '.$e->getMessage().'<br />';
-                echo 'N° : '.$e->getCode();
-                return false;
-            }
-        }
-
-// Fonction getStatut qui sélectionne le statut d'état civil de la personne associée à l'identifiant passé en paramètre
-        function getStatut($id){
-            try{
-                $requete_prepare=$this->connexion->prepare(
-                    'SELECT Statut_Couple FROM Personne
-                    WHERE Id=:id'
-                );
-                $requete_prepare->execute(array("id" => $id));
-                $nid=$requete_prepare->fetch(PDO::FETCH_ASSOC);
-                $nom_Id=trim($nid["Statut_Couple"]);
-                return $nom_Id;
-            }
-            catch(Exception $e){
-                echo 'Erreur : '.$e->getMessage().'<br />';
-                echo 'N° : '.$e->getCode();
-                return false;
-            }
-        }
-
-// Fonction getCompteId qui retourne le nombre d'identifiants total dans la base de données
-        function getCompteId(){
-            try{
-                $requete_prepare1=$this->connexion->prepare(
-                    'SELECT COUNT(Id) FROM Personne'
-                );
-                $requete_prepare1->execute();
-                $cid=$requete_prepare1->fetch(PDO::FETCH_ASSOC);
-                return $cid["COUNT(Id)"];
-            }
-            catch(Exception $e){
-                echo 'Erreur : '.$e->getMessage().'<br />';
-                echo 'N° : '.$e->getCode();
-                return false;
-            }
-        }
-
-// Fonction insertPersonneHobbies qui fait la relation entre une personne et ses hobbies dans la base de données
-        function insertPersonneHobbies($personneId,$hobbies){
-            try{
-                foreach($hobbies as $hobby){
-                    $requete_prepare=$this->connexion->prepare(
-                        "INSERT INTO RelationHobby (Personne_Id,Hobby_Id) values (:id,:hobby)"
-                    );
-                    $requete_prepare->execute(array("id" => $personneId, "hobby" => $hobby));
-                    // echo "Bien inséré"  . $personneId . "avec" . $hobby_Id ."<br>";
-                }
-            }
-            catch(Exception $e){
-                echo 'Erreur : '.$e->getMessage().'<br />';
-                echo 'N° : '.$e->getCode();
-                return false;
-            }
-
-        }
-
-// Fonction insertPersonneMusique qui fait la relation entre une personne et ses types de musique préférés dans la base de données
-        function insertPersonneMusique($personneId,$musiques){
-            try{
-                foreach($musiques as $music){
-                    $requete_prepare=$this->connexion->prepare(
-                        "INSERT INTO RelationMusique (Personne_Id,Musique_Id) values (:id,:music)"
-                    );
-                    $requete_prepare->execute(array("id" => $personneId, "music" => $music));
-                    // echo "Bien inséré" . $personneId . "avec" . $music_Id . "<br>";
-                }
-            }
-            catch(Exception $e){
-                echo 'Erreur : '.$e->getMessage().'<br />';
-                echo 'N° : '.$e->getCode();
-                return false;
-            }
-
-        }
-
-// Fonction insertPersonneRelation qui fait la relation entre une personne et ses amis déjà existants dans la base de données
-        function insertPersonneRelation($personneId1,$personneId2,$type){
-            try{
-                $requete_prepare=$this->connexion->prepare(
-                    "INSERT INTO RelationPersonne (Personne_Id,Relation_Id,Type) values (:id,:rel,:typ)"
-                );
-                $requete_prepare->execute(array("id" => $personneId1, "rel" => $personneId2, "typ" => $type));
-                $requete_prepare=$this->connexion->prepare(
-                    "INSERT INTO RelationPersonne (Personne_Id,Relation_Id,Type) values (:id,:rel,:typ)"
-                );
-                $requete_prepare->execute(array("id" => $personneId2, "rel" => $personneId1, "typ" => $type));
-                // echo "Bien inséré <br>";
-            }
-            catch(Exception $e){
-                echo 'Erreur : '.$e->getMessage().'<br />';
-                echo 'N° : '.$e->getCode();
-                return false;
-            }
-
-        }
-
-
-        /**
-         * Get the value of connexion
-         */ 
-       /* public function getConnexion()
-        {
-                return $this->connexion;
-        } */
     }
 ?>
