@@ -12,11 +12,10 @@
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/inscription-chien.css">
-  <link rel="stylesheet" href="js/javascript.js">
+  <link rel="stylesheet" href="css/modifier_donness.css">
+  
 
-
-  <title>Agrandir la meute</title>
+  <title>modifier données</title>
 </head>
 
 <body>
@@ -24,7 +23,7 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-warning col-sm-6 col-md-4 col-lg-6 col-xl-12">
     <a class="navbar-brand container-logo" href="accueil.html"></a>
     <img class="logo" src="images/logo_final.png" alt="Tete de loup" width="10%"></img></a>
-    <a class="navbar-brand" href="#">InstaWolf</a>
+    <a class="navbar-brand" href="accueill.html">InstaWolf</a>
 
     </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -35,10 +34,10 @@
     <div class="collapse navbar-collapse menu-nav" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">ACCUEIL <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="accueil.html">ACCUEIL <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">PROFIL</a>
+          <a class="nav-link" href="profil_chien.html">PROFIL</a>
         </li>
         <li class="nav-item deja_loup">
           <a class="nav-link btn btn-primary text-white" type="button" href="#" data-toggle="modal" data-target="#myModal">Déjà
@@ -113,16 +112,13 @@
   <!-- ////////////   SECTION DE NOTRE CONTENT MAIN  /////////-->
   <main>
 
-
-
-
     <div class="container register">
       <div class="row">
         <div class="col-md-3 register-left">
           <img src="images/logo_final.png" alt="logo instawolf" />
-          <h3>Bienvenue</h3>
-          <p>Partage la vie de ta meute avec notre meute mondiale </p>
-          <input type="submit" name="" value="Déjà loup?" /><br />
+          <h3>Données personnelles</h3>
+          <p>changer vos données regulierment pour plus de sécurité </p>
+          <input type="submit" name="" value="huuuuu..." /><br />
         </div>
         <div class="col-md-9 register-right">
           <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
@@ -130,91 +126,42 @@
               <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
                 aria-selected="true">Employee</a>
             </li> -->
-            <li class="nav-item">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-                aria-selected="false">Instawolf</a>
-            </li>
+
           </ul>
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-              <h3 class="register-heading">Agrandir la meute</h3>
+              <h3 class="register-heading"><p>Information</p></h3>
               <div class="row register-form">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Votre surnom *" value="" />
-                  </div>
-                  <div class="form-group">
-                    <input type="email" class="form-control" placeholder="Votre e-mail *" value="" />
-                  </div>
-                  <!--    <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Last N *" value="" />
-                            </div> -->
-                  <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Mot de passe *" value="" />
+                    <input type="text" class="form-control" placeholder="Votre nouveaux nom *" value="" />
                   </div>
 
                   <div class="form-group">
-                    <div class="maxl">
-                      <label class="radio inline">
-                        <input type="radio" name="gender" value="male" checked>
-                        <span> Male </span>
-                      </label>
-                      <label class="radio inline">
-                        <input type="radio" name="gender" value="female">
-                        <span>Femelle </span>
-                      </label>
-                    </div>
+                    <input type="email" class="form-control" placeholder="Confirmation de votre e-mail déjà loup *" value="" />
                   </div>
+              <div class="form-group">
+                <div class="form-group">
+                  <input type="password" class="form-control" placeholder="Confirmation de votre passe déjà loup *" value="" />
                 </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <div class="form-group">
-                      <input type="password" class="form-control" placeholder="Mot de passe *" value="" />
-                    </div>
-                    <div class="form-group">
-                      <input type="password" class="form-control" placeholder="Confirme votre mot de passe *" value="" />
-                    </div>
+                
+                 
                   </div>
-                  <div class="form-group">
-                    <div class="maxl">
-                      <label class="checkbox inline">
-                        <input type="checkbox" name="gender" value="male" checked>
-                        <span>J'accepte les conditions InstaWolf </span>
-                      </label>
-                    </div>
-                  </div>
-                  <div id="container">
-                    <p><input type="file" name="file" onchange="change(this)" id="file"></p>
-                    <p><img id="image" src="" alt="image en train de charger"></p>
-                  </div>
-                  <script>
-                    function $(param) {
-                        return document.querySelector(param);
-                    }
-            
-                    function change(e) {
-                        console.log(e.files[0].name);
-                        $('#image').setAttribute('src', "images/" + e.files[0].name);
-            
-                    }
-            
-                </script>
-                  <input type="submit" class="btnRegister" value="Register" />
+                  <input type="submit" class="btnRegister" value="Valider" />
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <h1>Lorem Ipsum</h1>
-        <h5>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab
-          ea porro vero magnam tempora vel earum atque? Voluptas,
-          ducimus soluta! Dolores quaerarepellendus totam repellat
-          autem qui alias, recusandae reiciendis.</h5>
+       
       </div>
     </div>
 
   </main><!-- ////////////  FIN  SECTION DE NOTRE CONTENT MAIN  /////////-->
-
+  <footer class="container">
+      <p class="float-right"><a href="#">Back to top</a></p>
+      <p>© 2017-2018 Company, Inc. ·<!--  <a href="#">Privacy</a> · <a href="#">Terms</a> --></p>
+    </footer>
   <!-- ////////////   SECTION DE NOTRE MENU FOOTER MENU  /////////-->
   <nav class="navbar navbar-expand-lg navbar-light bg-warning col-sm-6 col-md-4 col-lg-6 col-xl-12">
     <a class="navbar-brand container-logo" href="accueil.html"></a>
@@ -230,15 +177,15 @@
     <div class="collapse navbar-collapse menu-nav" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">ACCUEIL <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="accueil.html">ACCUEIL <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">PROFIL</a>
+          <a class="nav-link" href="profil_chien.html">PROFIL</a>
         </li>
 
-        <li class="nav-item">
+     <!--    <li class="nav-item">
           <a class="nav-link" href="#">AGRANDIR LA MEUTE</a>
-        </li>
+        </li> -->
 
 
 
@@ -261,6 +208,7 @@
     crossorigin="anonymous"></script>
 
   <script src="js/bootstrap.js"></script>
+  <script src="js/javascript.js"></script>
 </body>
 
 </html>

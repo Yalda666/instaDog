@@ -12,14 +12,13 @@
     margin: auto;  
     width: 50%;
     height: 800px;;
-    border: 2px solid firebrick;
+    border: 2px solid rgb(71, 69, 69);
 }
 
 form textarea{
-    margin-top: 20px;
+    margin-top: 80px;
     width: 500px;
     height: 400px;
-   
     margin-left: 100px;
 }
 

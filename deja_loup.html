@@ -12,8 +12,10 @@
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/deja_loup.css">
+ 
 
-  <title>Squelette avec bannier</title>
+  <title>déjà loup</title>
 </head>
 
 <body>
@@ -32,15 +34,15 @@
     <div class="collapse navbar-collapse menu-nav" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">ACCUEIL <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="accueil.html">ACCUEIL <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">PROFIL</a>
+          <a class="nav-link" href="profil_utilisateur.html">PROFIL</a>
         </li>
-        <li class="nav-item deja_loup">
+       <!--  <li class="nav-item deja_loup">
           <a class="nav-link btn btn-primary text-white" type="button" href="#" data-toggle="modal" data-target="#myModal">Déjà
             loup?</a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link btn btn-danger text-white hulule" type="button" href="#" data-toggle="modal" data-target="#myModal">Hulule
             avec nous!</a>
@@ -106,59 +108,62 @@
 
     </div>
   </nav><!-- ////////////  FIN  MENU DE NAVUGATION RESPONSIVE  /////////-->
+
   <!-- ////////////   SECTION DE NOTRE CONTENT MAIN  /////////-->
   <main>
-
-
-    <!-- ////////////  BANNIER IMAGE   /////////-->
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-xs-12 col-md-6">
-          <div class="bg bg-left">
-            <!--  <h2>Create your snippet's HTML, CSS and Javascript in the editor tabs</h2> -->
-            <div class="card-img-overlay">
-              <div class="donnees-perso">
-                <h5 class="card-title">Nom :</h5>
-                <h5 class="card-title">Sexe :</h5>
-                <h5 class="card-title">Race :</h5>
-                <h5 class="card-title">Elevage :</h5>
-                <h5 class="card-title">Née le :</h5>
-                <p class="card-text">Les loups entrent dans notre vie pour nous enseigner l’amour,
-                  ils partentpour nous apprendre à perdre.Un nouveau loup ne remplace jamais
-                  un vieux loup,il ne fait qu’agrandirle coeur.</p>
-              </div>
+    <div class="container h-100">
+      <div class="d-flex justify-content-center h-100">
+        <div class="user_card">
+          <div class="d-flex justify-content-center">
+            <div class="brand_logo_container">
+              <img src="images/logo_final.png" class="brand_logo" alt="Logo">
             </div>
           </div>
-        </div>
-        <div class="col-xs-12 col-md-6">
-          <div class="bg bg-right">
-            <!-- 	<h2>Create your snippet's HTML, CSS and Javascript in the editor tabs</h2> -->
+          <div class="d-flex justify-content-center form_container">
+            <form class="container-input">
+                <h2>Hulule avec nous</h2>
+              <div class="input-group mb-3">
+                <div class="input-group-append">
+                  <span class="input-group-text"><i class="fas fa-user";></i></span>
+                </div>
+                <input type="text" name="" class="form-control input_user" value="" placeholder="username">
+              </div>
+
+              <div class="input-group mb-3">
+                <div class="input-group-append">
+                  <span class="input-group-text"><i class="fas fa-user";></i></span>
+                </div>
+                <input type="email" name="" class="form-control input_user" value="" placeholder="votre mail">
+              </div>
+              
+              <div class="input-group mb-2">
+                <div class="input-group-append">
+                  <span class="input-group-text"><i class="fas fa-key"></i></span>
+                </div>
+                <input type="password" name="" class="form-control input_pass" value="" placeholder="password">
+              </div>
+              <div class="form-group">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customControlInline">
+                  <label class="custom-control-label" for="customControlInline">Remember me</label>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="d-flex justify-content-center mt-3 login_container">
+            <button type="button" name="button" class="btn login_btn">Login</button>
+          </div>
+          <div class="mt-4">
+            <div class="d-flex justify-content-center links">
+              Don't have an account? <a href="#" class="ml-2">Sign Up</a>
+            </div>
+            <div class="d-flex justify-content-center links">
+              <a href="#">Forgot your password?</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- ////////////  FIN ANNIER IMAGE   /////////-->
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
-    <h1>Lorem Ipsum</h1>
   </main><!-- ////////////  FIN  SECTION DE NOTRE CONTENT MAIN  /////////-->
 
   <!-- ////////////   SECTION DE NOTRE MENU FOOTER MENU  /////////-->
@@ -176,24 +181,24 @@
     <div class="collapse navbar-collapse menu-nav" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">ACCUEIL <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="accueil.html">ACCUEIL <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">PROFIL</a>
+          <a class="nav-link" href="profil_utilisateur.html">PROFIL</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="#">AGRANDIR LA MEUTE</a>
+          <a class="nav-link" href="inscription_chien.html">AGRANDIR LA MEUTE</a>
         </li>
 
 
 
       </ul>
       <!--INPUT SEARCH -->
-      <form class="form-inline container-search">
+      <!-- <form class="form-inline container-search">
         <input class="form-control mr-sm-2  input-search" type="search" placeholder="Recherche" aria-label="Recherche">
         <button class="btn btn-outline-success my-2 my-sm-0 " type="submit">Recherche</button>
-      </form>
+      </form> -->
       <!--// FIN SEARCH-->
 
     </div>

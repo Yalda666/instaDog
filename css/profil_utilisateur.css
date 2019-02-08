@@ -41,3 +41,17 @@
     padding-left: 0px;
     padding-right: 0px;
 }
+
+.container.marketing p{
+    margin: 10px;
+    widows: 200px;
+ /*    background-color: rebeccapurple; */
+}
+
+.container.marketing h2{
+    margin-left: 75px;
+}
+
+.container.marketing .rounded-circle {
+    margin-left: 75px;
+}
