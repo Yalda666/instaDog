@@ -38,72 +38,26 @@
           <a class="nav-link" href="profil_utilisateur.html">PROFIL</a>
         </li>
         <li class="nav-item deja_loup">
-          <a class="nav-link btn btn-primary text-white" type="button" href="#" data-toggle="modal" data-target="#myModal">Déjà
+          <a class="nav-link btn btn-primary text-white" type="button" href="deja_loup.html" data-toggle="modal" data-target="#myModal">Déjà
             loup?</a>
         </li>
         <li class="nav-item">
           <a class="nav-link btn btn-danger text-white hulule" type="button" href="#" data-toggle="modal" data-target="#myModal">Hulule
             avec nous!</a>
         </li>
-
         <div class="modal" id="myModal">
           <div class="modal-dialog">
             <div class="modal-content">
-
-              <!-- Modal Header -->
-              <div class="modal-header deja_loup">
-                <h4 class="modal-title">Déjà loup?</h4>
-                <button type="button" class="close" data-dismiss="modal">×</button>
-              </div>
-
-              <!-- Modal body -->
-              <div class="modal-body">
-                <form>
-                  <label class="sr-only" for="usrname">Pseudo</label>
-                  <p>Pseudo:</p>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Votre surnom" aria-label="Username"
-                      aria-describedby="basic-addon1">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Adresse email</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                      placeholder="Entrer adresse email">
-                    <small id="emailHelp" class="form-text text-muted">Nous ne la partagerons avec personne...</small>
-                  </div>
-
-
-                  <label class="sr-only" for="Password">Mot de passe:</label>
-                  <p>Mot de passe:</p>
-                  <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon2"><i class="fa fa-key"></i></span>
-                    </div>
-                    <input id="Password" type="password" class="form-control" placeholder="Déposez votre empreinte de loup"
-                      aria-label="Mot de passe" aria-describedby="basic-addon2">
-                  </div>
                 </form>
-              </div>
-              <!-- Modal footer -->
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Rejoindre la meute</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Pas maintenant</button>
-              </div>
-
             </div>
           </div>
       </ul>
       <!--INPUT SEARCH -->
       <form class="form-inline container-search">
-        <input class="form-control mr-sm-2  input-search" type="search" placeholder="Recherche" aria-label="Recherche">
+        <input class="form-control mr-sm-2  input-search"  name="recherche" type="search" placeholder="Recherche" aria-label="Recherche">
         <button class="btn btn-outline-success my-2 my-sm-0 " type="submit">Recherche</button>
       </form>
       <!--// FIN SEARCH-->
-
     </div>
   </nav><!-- ////////////  FIN  MENU DE NAVUGATION RESPONSIVE  /////////-->
   <!-- ////////////   SECTION DE NOTRE CONTENT MAIN  /////////-->
@@ -151,9 +105,6 @@
                 alt="Another alt text">
             </a>
           </div>
-
-
-
           <div class="col-lg-3 col-md-4 col-xs-6 thumb">
             <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice" data-image="https://images.pexels.com/photos/305070/pexels-photo-305070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
               data-target="#image-gallery">
@@ -175,9 +126,6 @@
                 alt="Another alt text">
             </a>
           </div>
-
-
-
           <div class="col-lg-3 col-md-4 col-xs-6 thumb">
             <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice" data-image="https://images.pexels.com/photos/305070/pexels-photo-305070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
               data-target="#image-gallery">
@@ -200,8 +148,6 @@
             </a>
           </div>
         </div>
-
-
         <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
           aria-hidden="true">
           <div class="modal-dialog modal-lg">
@@ -217,7 +163,6 @@
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary float-left" id="show-previous-image"><i class="fa fa-arrow-left"></i>
                 </button>
-
                 <button type="button" id="show-next-image" class="btn btn-secondary float-right"><i class="fa fa-arrow-right"></i>
                 </button>
               </div>
@@ -252,31 +197,21 @@
         <li class="nav-item">
           <a class="nav-link" href="profil_utilisateur.html">PROFIL</a>
         </li>
-
-        <!--   <li class="nav-item">
-          <a class="nav-link" href="#">AGRANDIR LA MEUTE</a>
-        </li>
-        -->
-
-
       </ul>
       <!--INPUT SEARCH -->
       <form class="form-inline container-search">
-        <input class="form-control mr-sm-2  input-search" type="search" placeholder="Recherche" aria-label="Recherche">
+        <input class="form-control mr-sm-2  input-search"  name="recherche" type="search" placeholder="Recherche" aria-label="Recherche">
         <button class="btn btn-outline-success my-2 my-sm-0 " type="submit">Recherche</button>
       </form>
       <!--// FIN SEARCH-->
-
     </div>
   </nav>
-
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
     crossorigin="anonymous"></script>
-
   <script src="js/bootstrap.js"></script>
 </body>
 

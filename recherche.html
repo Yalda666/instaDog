@@ -17,6 +17,24 @@
 </head>
 
 <body>
+
+   <!-- <?php
+        // recupere coonnexion.php
+        require "connexion.php";
+
+        // Je cree ma connexion
+        $connexion = new Connexion();
+
+        $pattern = "";
+        if($_GET["recherche"] != null){
+            $pattern = $_GET["recherche"];
+        }
+        $listePersonne = $connexion->getSelectPersonneNomPrenomLike( $pattern);
+    ?>-->
+  
+
+
+  ?>
   <!-- ////////////  MENU DE NAVUGATION RESPONSIVE  /////////-->
   <nav class="navbar navbar-expand-lg navbar-light bg-warning col-sm-6 col-md-4 col-lg-6 col-xl-12">
     <a class="navbar-brand container-logo" href="accueil.html"></a>
@@ -99,7 +117,7 @@
       </ul>
       <!--INPUT SEARCH -->
       <form class="form-inline container-search">
-        <input class="form-control mr-sm-2  input-search" type="search" placeholder="Recherche" aria-label="Recherche">
+        <input class="form-control mr-sm-2  input-search" name="recherche" type="search" placeholder="Recherche" aria-label="Recherche">
         <button class="btn btn-outline-success my-2 my-sm-0 " type="submit">Recherche</button>
       </form>
       <!--// FIN SEARCH-->
