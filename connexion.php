@@ -301,6 +301,27 @@ require('Utilisateur.php');
             }
 
         }
+// Fonction comparePassword qui compare les deux mots de passe pour vérifier qu'ils sont bien pareils
 
+    public function comparePassword($pass1,$pass2)
+    {
+        $password1=str_split($pass1);
+        $password2=str_split($pass2);
+        $i=0;
+        $res=false;
+        foreach ($password1 as $p1){
+            if ($p1===$password2[$i]){
+                $res=true;
+            }
+            else{
+                $res=false;
+                break;
+            }
+            $i++;
+        }
+        return $res;
     }
+    }
+
+
 ?>
