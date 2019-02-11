@@ -270,9 +270,18 @@ require('Utilisateur.php');
             $query = "SELECT * FROM Utilisateur WHERE Pseudo like :nom AND email like :email";
             $stmt = $this->connexion->prepare($query); 
             $result = $stmt->execute(array("nom"=> "%".$nom."%", "email"=> "%".$email."%")); 
-            $row = $stmt->fetch(PDO::FETCH_CLASS, 'Utilisateur'); 
+            $row = $stmt->fetchAll(PDO::FETCH_CLASS, 'Utilisateur'); 
             return $row;
         } 
+
+// Fonction searchPseudo qui cherche si une personne a le pseudo passé en paramètre
+function searchPseudo($nom) { 
+    $query = "SELECT * FROM Utilisateur WHERE Pseudo = :nom";
+    $stmt = $this->connexion->prepare($query); 
+    $result = $stmt->execute(array("nom"=> "%".$nom."%")); 
+    $row = $stmt->fetch(PDO::FETCH_CLASS, 'Utilisateur'); 
+    return $row;
+} 
 
 // Fonction searchAnimalId qui sélectionne l'identifiant dans la base de données qu'a le loup qui a le nom, le surnom, le nom d'élevage ou la race qui contient les lettres passées en paramètres
         function searchAnimalId($nom) { 

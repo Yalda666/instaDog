@@ -5,31 +5,11 @@ $appliBD=new Connexion;
 // $appliBD->insertUtilisateur("bob","B03","b0b@boo.com");
 // $appliBD->insertAnimal("1", "Wolf", "Wolfie", "/home/cf/projets/instaWolf/images/loup_cours.jpeg", "Woulf", "2012-12-21", "male", "loup gris");
 
-$res=$appliBD->comparePassword("%Lfuck1234%","%Lfuck1234%");
-var_dump($res);
-// if(insertHobby("Lire")){
-//     echo "Bien inséré!";
-// }
-// else{
-//     echo "Problème d'insertion!";
-// }
-/*$appliBD->insertHobby("Jouer à WoW");
-$appliBD->insertHobby("Jouer à ESO");
-$appliBD->insertHobby("Jouer à LOL");
-$appliBD->insertHobby("Jouer à Warhammer");
-$appliBD->insertHobby("Jouer à Guild Wars");
-$appliBD->insertHobby("Jouer à Conan");
-$appliBD->insertHobby("Jouer à SWTOR");
-$appliBD->insertHobby("Jouer à Rift");
+var_dump(time());
+$appliBD->insertArticle("2","bobby coure dans les champs","/home/cf/projets/instaWolf/images/loup_calin.jpeg",time());
+// $res=$appliBD->comparePassword("%Lfuck1234%","%Lfuck1234%");
+// var_dump($res);
 
-$appliBD->insertMusique("Métal");
-$appliBD->insertMusique("Alternative Métal");
-$appliBD->insertMusique("Green Métal");
-$appliBD->insertMusique("Death Métal");
-$appliBD->insertMusique("Métal symphonique");
-$appliBD->insertMusique("Brutal Death Métal");
-$appliBD->insertMusique("Progressive métal");
-$appliBD->insertMusique("Heavy Métal");*/
 
 // insertPersonne("Lapraz","Bertrand","/url/masalegueule.jpg","1986.04.15","Loup solitaire");
 // insertPersonne("Lapraz","Hubert","/url/sasalegueule.jpg","1980.04.18","Concubinage");
