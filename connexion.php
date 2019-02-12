@@ -144,13 +144,13 @@ require('Utilisateur.php');
         }
 
 // Fonction insertCommentaire qui insère un commentaire dans la base de données
-        function insertCommentaire($idArticle, $pseudo, $texte, $datePublication){
+        function insertCommentaire($idUtilisateur, $idAnimal, $texte, $datePublication){
             try{
                 $requete_prepare=$this->connexion->prepare(
-                    'INSERT INTO Commentaire (idArticle, pseudo, texte, datePublication) values (:idArticle, :pseudo, :texte, :datePublication)'
+                    'INSERT INTO Commentaire (idUtilisateur, idAnimal, texte, datePublication) values (:idUtilisateur, :idAnimal, :texte, :datePublication)'
                 );
                 $requete_prepare->execute(
-                    array( 'idArticle' => $idArticle, 'pseudo' => $pseudo, 'texte' => $texte,'datePublication' => $datePublication)
+                    array( 'idUtilisateur' => $idUtilisateur, 'idAnimal' => $idAnimal, 'texte' => $texte,'datePublication' => $datePublication)
                 );
                 echo "Inséré! <br />";
                 return true;
@@ -265,11 +265,19 @@ require('Utilisateur.php');
             }
         }
 
-// Fonction searchPersonneId qui sélectionne l'identifiant dans la base de données qu'a la personne qui a le nom ou le prénom qui contient les lettres passées en paramètres
+// Fonction searchPersonneId qui sélectionne l'identifiant dans la base de données qu'a la personne qui a le nom ou l'email qui contient les lettres passées en paramètres
         function searchPersonneId($nom, $email) { 
             $query = "SELECT * FROM Utilisateur WHERE Pseudo like :nom AND email like :email";
             $stmt = $this->connexion->prepare($query); 
             $result = $stmt->execute(array("nom"=> "%".$nom."%", "email"=> "%".$email."%")); 
+            $row = $stmt->fetchAll(PDO::FETCH_CLASS, 'Utilisateur'); 
+            return $row;
+        } 
+// Fonction searchPersonneIdByNom qui sélectionne l'identifiant dans la base de données qu'a la personne qui a le nom qui contient les lettres passées en paramètres
+        function searchPersonneIdByNom($nom) { 
+            $query = "SELECT * FROM Utilisateur WHERE Pseudo like :nom";
+            $stmt = $this->connexion->prepare($query); 
+            $result = $stmt->execute(array("nom"=> "%".$nom."%")); 
             $row = $stmt->fetchAll(PDO::FETCH_CLASS, 'Utilisateur'); 
             return $row;
         } 
