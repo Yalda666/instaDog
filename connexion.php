@@ -231,6 +231,23 @@ require('Utilisateur.php');
             }
         }
 
+// Fonction selectUtilisateurByMail qui sélectionne l'utilisateur dans la base de données qui a l'email passé en paramètre et retourne l'utilisateur
+function selectUtilisateurByMail($mail){
+    try{
+        $requete_prepare=$this->connexion->prepare(
+            'SELECT * FROM Utilisateur WHERE email = :mail'
+        );
+        $requete_prepare->execute(array("mail" => $mail));
+        $resultat=$requete_prepare;
+        return $resultat;
+    }
+    catch(Exception $e){
+        echo 'Erreur : '.$e->getMessage().'<br />';
+        echo 'N° : '.$e->getCode();
+        return false;
+    }
+}
+
 // Fonction selectArticlesById qui sélectionne les articles dans la base de données qui ont l'identifiant du loup passé en paramètre et retourne tous ses articles
         function selectArticlesById($id){
             try{

@@ -25,20 +25,17 @@
     
     if(isset($_POST['forminscription'])) {
        $pseudo = htmlspecialchars($_POST['pseudo']);
-       $mail = htmlspecialchars($_POST['mail']);
-       $mail2 = htmlspecialchars($_POST['mail2']);
+       $mail = htmlspecialchars($_POST['email']);
        $mdp = sha1($_POST['mdp']);
        $mdp2 = sha1($_POST['mdp2']);
-       if(!empty($_POST['pseudo']) AND !empty($_POST['mail']) AND !empty($_POST['mdp']) AND !empty($_POST['mdp2'])) {
+       if(!empty($_POST['pseudo']) AND !empty($_POST['email']) AND !empty($_POST['mdp']) AND !empty($_POST['mdp2'])) {
           $pseudolength = strlen($pseudo);
           if($pseudolength <= 255) {
-             if(comparePassword($mail,$mail2)) {
                 if(filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-                   $reqmail = $bdd->prepare("SELECT * FROM Utilisateur WHERE email = ?");
-                   $reqmail->execute(array($mail));
+                   $reqmail = $bdd->selectUtilisateurByMail($mail);
                    $mailexist = $reqmail->rowCount();
                    if($mailexist == 0) {
-                      if(comparePassword($mdp,$mdp2)) {
+                      if($bdd->comparePassword($mdp,$mdp2)) {
                          $bdd->insertUtilisateur($pseudo, $mdp, $mail);
                          $erreur = "Votre compte a bien été créé ! <a href=\"connexion.php\">Me connecter</a>";
                       } else {
@@ -50,9 +47,6 @@
                 } else {
                    $erreur = "Votre adresse mail n'est pas valide !";
                 }
-             } else {
-                $erreur = "Vos adresses mail ne correspondent pas !";
-             }
           } else {
              $erreur = "Votre pseudo ne doit pas dépasser 255 caractères !";
           }
