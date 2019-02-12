@@ -31,13 +31,16 @@
        if(!empty($_POST['pseudo']) AND !empty($_POST['email']) AND !empty($_POST['mdp']) AND !empty($_POST['mdp2'])) {
           $pseudolength = strlen($pseudo);
           if($pseudolength <= 255) {
+              $testPseudo=$bdd->searchPersonneIdByNom($pseudo);
+              var_dump($testPseudo);
+              if($testPseudo==0){
                 if(filter_var($mail, FILTER_VALIDATE_EMAIL)) {
                    $reqmail = $bdd->selectUtilisateurByMail($mail);
                    $mailexist = $reqmail->rowCount();
                    if($mailexist == 0) {
                       if($bdd->comparePassword($mdp,$mdp2)) {
                          $bdd->insertUtilisateur($pseudo, $mdp, $mail);
-                         $erreur = "Votre compte a bien été créé ! <a href=\"connexion.php\">Me connecter</a>";
+                         $erreur = "Votre compte a bien été créé ! <a href=\"deja_loup.php\">Me connecter</a>";
                       } else {
                          $erreur = "Vos mots de passes ne correspondent pas !";
                       }
@@ -47,6 +50,10 @@
                 } else {
                    $erreur = "Votre adresse mail n'est pas valide !";
                 }
+            }
+            else{
+                $erreur = "Votre pseudo est déjà utilisé !";
+            }
           } else {
              $erreur = "Votre pseudo ne doit pas dépasser 255 caractères !";
           }
@@ -157,14 +164,14 @@
             echo '<font color="red">'.$erreur."</font>";
          }
          ?>
-          <div class="mt-4">
+          <!-- <div class="mt-4">
             <div class="d-flex justify-content-center links">
               Don't have an account? <a href="#" class="ml-2">Sign Up</a>
             </div>
             <div class="d-flex justify-content-center links">
               <a href="#">Forgot your password?</a>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

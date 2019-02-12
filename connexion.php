@@ -292,10 +292,11 @@ function selectUtilisateurByMail($mail){
         } 
 // Fonction searchPersonneIdByNom qui sélectionne l'identifiant dans la base de données qu'a la personne qui a le nom qui contient les lettres passées en paramètres
         function searchPersonneIdByNom($nom) { 
-            $query = "SELECT * FROM Utilisateur WHERE Pseudo like :nom";
+            $query = "SELECT * FROM Utilisateur WHERE Pseudo = :nom";
             $stmt = $this->connexion->prepare($query); 
-            $result = $stmt->execute(array("nom"=> "%".$nom."%")); 
-            $row = $stmt->fetchAll(PDO::FETCH_CLASS, 'Utilisateur'); 
+            $result = $stmt->execute(array("nom"=> $nom)); 
+            $row = $stmt->fetch(PDO::FETCH_ASSOC); 
+            var_dump($row);
             return $row;
         } 
 
