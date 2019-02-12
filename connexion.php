@@ -221,7 +221,7 @@ require('Utilisateur.php');
                     'SELECT * FROM Utilisateur WHERE id = :id'
                 );
                 $requete_prepare->execute(array("id" => $id));
-                $resultat=$requete_prepare->fetch(PDO::FETCH_CLASS, 'Utilisateur');
+                $resultat=$requete_prepare->fetch();
                 return $resultat;
             }
             catch(Exception $e){
