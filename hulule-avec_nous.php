@@ -39,7 +39,7 @@
                    $mailexist = $reqmail->rowCount();
                    if($mailexist == 0) {
                       if(comparePassword($mdp,$mdp2)) {
-                         $bdd->insertUtilisateur($pseudo, $mdp, $mail));
+                         $bdd->insertUtilisateur($pseudo, $mdp, $mail);
                          $erreur = "Votre compte a bien été créé ! <a href=\"connexion.php\">Me connecter</a>";
                       } else {
                          $erreur = "Vos mots de passes ne correspondent pas !";
@@ -59,6 +59,7 @@
        } else {
           $erreur = "Tous les champs doivent être complétés !";
        }
+    }
     ?>
   <!-- ////////////  MENU DE NAVUGATION RESPONSIVE  /////////-->
   <nav class="navbar navbar-expand-lg navbar-light bg-warning col-sm-6 col-md-4 col-lg-6 col-xl-12">
