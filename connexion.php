@@ -170,7 +170,7 @@ require('Utilisateur.php');
                     'SELECT * FROM Animal'
                 );
                 $requete_prepare->execute();
-                $resultat=$requete_prepare->fetchAll(PDO::FETCH_CLASS, 'Animal');
+                $resultat=$requete_prepare->fetchAll();
                 return $resultat;
             }
             catch(Exception $e){
@@ -187,7 +187,7 @@ require('Utilisateur.php');
                     'SELECT * FROM Utilisateur'
                 );
                 $requete_prepare->execute();
-                $resultat=$requete_prepare->fetchAll(PDO::FETCH_CLASS, 'Utilisateur');
+                $resultat=$requete_prepare->fetchAll();
                 return $resultat;
             }
             catch(Exception $e){
@@ -204,7 +204,7 @@ require('Utilisateur.php');
                     'SELECT * FROM Animal WHERE id = :id'
                 );
                 $requete_prepare->execute(array("id" => $id));
-                $resultat=$requete_prepare->fetch(PDO::FETCH_CLASS, 'Animal');
+                $resultat=$requete_prepare->fetch();
                 return $resultat;
             }
             catch(Exception $e){
@@ -255,7 +255,7 @@ function selectUtilisateurByMail($mail){
                     'SELECT * FROM Article WHERE idChien = :id'
                 );
                 $requete_prepare->execute(array("id" => $id));
-                $resultat=$requete_prepare->fetchAll(PDO::FETCH_CLASS, 'Article');
+                $resultat=$requete_prepare->fetchAll();
                 return $resultat;
             }
             catch(Exception $e){
@@ -272,7 +272,7 @@ function selectUtilisateurByMail($mail){
                     'SELECT * FROM Commentaire WHERE idArticle = :id'
                 );
                 $requete_prepare->execute(array("id" => $id));
-                $resultat=$requete_prepare->fetchAll(PDO::FETCH_CLASS, 'Commentaire');
+                $resultat=$requete_prepare->fetchAll();
                 return $resultat;
             }
             catch(Exception $e){
@@ -283,16 +283,16 @@ function selectUtilisateurByMail($mail){
         }
 
 // Fonction searchPersonneId qui sélectionne l'identifiant dans la base de données qu'a la personne qui a le nom ou l'email qui contient les lettres passées en paramètres
-        function searchPersonneId($nom, $email) { 
-            $query = "SELECT * FROM Utilisateur WHERE Pseudo like :nom AND email like :email";
+        function searchPersonneId($nom, $email, $mdp) { 
+            $query = "SELECT * FROM Utilisateur WHERE pseudo = :nom AND email = :email AND motPasse = :mdp";
             $stmt = $this->connexion->prepare($query); 
-            $result = $stmt->execute(array("nom"=> "%".$nom."%", "email"=> "%".$email."%")); 
-            $row = $stmt->fetchAll(PDO::FETCH_CLASS, 'Utilisateur'); 
+            $result = $stmt->execute(array("nom"=> $nom, "email"=> $email, "mdp" => $mdp)); 
+            $row = $stmt->fetch(); 
             return $row;
         } 
 // Fonction searchPersonneIdByNom qui sélectionne l'identifiant dans la base de données qu'a la personne qui a le nom qui contient les lettres passées en paramètres
         function searchPersonneIdByNom($nom) { 
-            $query = "SELECT * FROM Utilisateur WHERE Pseudo = :nom";
+            $query = "SELECT * FROM Utilisateur WHERE pseudo = :nom";
             $stmt = $this->connexion->prepare($query); 
             $result = $stmt->execute(array("nom"=> $nom)); 
             $row = $stmt->fetch(PDO::FETCH_ASSOC); 
@@ -302,10 +302,10 @@ function selectUtilisateurByMail($mail){
 
 // Fonction searchPseudo qui cherche si une personne a le pseudo passé en paramètre
 function searchPseudo($nom) { 
-    $query = "SELECT * FROM Utilisateur WHERE Pseudo = :nom";
+    $query = "SELECT * FROM Utilisateur WHERE pseudo = :nom";
     $stmt = $this->connexion->prepare($query); 
     $result = $stmt->execute(array("nom"=> "%".$nom."%")); 
-    $row = $stmt->fetch(PDO::FETCH_CLASS, 'Utilisateur'); 
+    $row = $stmt->fetch(); 
     return $row;
 } 
 
@@ -314,7 +314,7 @@ function searchPseudo($nom) {
             $query = "SELECT * FROM Animal WHERE nom like :nom or surnom like :nom or nomElevage like :nom or race like :nom";
             $stmt = $this->connexion->prepare($query); 
             $result = $stmt->execute(array("nom"=> "%".$nom."%")); 
-            $row = $stmt->fetchAll(PDO::FETCH_CLASS, 'Animal'); 
+            $row = $stmt->fetchAll(); 
             return $row;
         } 
 
@@ -326,7 +326,7 @@ function searchPseudo($nom) {
                     INNER JOIN Utilisateur ON idUtilisateur = :id"
                 );
                 $requete_prepare->execute(array("id" => $personneId));
-                $hobbies=$requete_prepare->fetchAll(PDO::FETCH_CLASS, 'Animal');
+                $hobbies=$requete_prepare->fetchAll();
                 return $hobbies;
             }
             catch(Exception $e){

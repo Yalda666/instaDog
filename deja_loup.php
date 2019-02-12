@@ -1,3 +1,29 @@
+<?php
+session_start();
+require('connexion.php');
+$bdd = new Connexion;
+
+if(isset($_POST['formconnexion'])) {
+    $pseudoconnect = $_POST['pseudoconnect'];
+   $mailconnect = htmlspecialchars($_POST['mailconnect']);
+   $mdpconnect = sha1($_POST['mdpconnect']);
+   if(!empty($mailconnect) AND !empty($mdpconnect) AND !empty($pseudoconnect)) {
+      $requser = $bdd->searchPersonneId($pseudoconnect, $mailconnect, $mdpconnect);
+      var_dump($requser);
+      if($requser["id"] != 0) {
+         $_SESSION['id'] = $requser['id'];
+         $_SESSION['pseudo'] = $requser['pseudo'];
+         $_SESSION['mail'] = $userinfo['email'];
+         header("Location: profil_utilisateur.php?id=".$_SESSION['id']);
+      } else {
+         $erreur = "Mauvais mail ou mot de passe !";
+      }
+   } else {
+      $erreur = "Tous les champs doivent être complétés !";
+   }
+}
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -7,66 +33,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+    crossorigin="anonymous">
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/hulule_avec_nous.css">
-
+  <link rel="stylesheet" href="css/deja_loup.css">
+ 
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-  <title>Hulule avec nous</title>
+  <title>Déjà loup?</title>
 </head>
 
 <body>
-  <?php
-    require('connexion.php');
-    $bdd = new Connexion;
-    
-    if(isset($_POST['forminscription'])) {
-       $pseudo = htmlspecialchars($_POST['pseudo']);
-       $mail = htmlspecialchars($_POST['email']);
-       $mdp = sha1($_POST['mdp']);
-       $mdp2 = sha1($_POST['mdp2']);
-       if(!empty($_POST['pseudo']) AND !empty($_POST['email']) AND !empty($_POST['mdp']) AND !empty($_POST['mdp2'])) {
-          $pseudolength = strlen($pseudo);
-          if($pseudolength <= 255) {
-              $testPseudo=$bdd->searchPersonneIdByNom($pseudo);
-              var_dump($testPseudo);
-              if($testPseudo==0){
-                if(filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-                   $reqmail = $bdd->selectUtilisateurByMail($mail);
-                   $mailexist = $reqmail->rowCount();
-                   if($mailexist == 0) {
-                      if($bdd->comparePassword($mdp,$mdp2)) {
-                         $bdd->insertUtilisateur($pseudo, $mdp, $mail);
-                         $erreur = "Votre compte a bien été créé ! <a href=\"deja_loup.php\">Me connecter</a>";
-                      } else {
-                         $erreur = "Vos mots de passes ne correspondent pas !";
-                      }
-                   } else {
-                      $erreur = "Adresse mail déjà utilisée !";
-                   }
-                } else {
-                   $erreur = "Votre adresse mail n'est pas valide !";
-                }
-            }
-            else{
-                $erreur = "Votre pseudo est déjà utilisé !";
-            }
-          } else {
-             $erreur = "Votre pseudo ne doit pas dépasser 255 caractères !";
-          }
-       } else {
-          $erreur = "Tous les champs doivent être complétés !";
-       }
-    }
-    ?>
   <!-- ////////////  MENU DE NAVUGATION RESPONSIVE  /////////-->
   <nav class="navbar navbar-expand-lg navbar-light bg-warning col-sm-6 col-md-4 col-lg-6 col-xl-12">
     <a class="navbar-brand container-logo" href="accueil.html"></a>
     <img class="logo" src="images/logo_final.png" alt="Tete de loup" width="10%"></img></a>
-    <a class="navbar-brand" href="#">InstaWolf</a>
+    <a class="navbar-brand" href="accueil.html">InstaWolf</a>
 
     </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -82,21 +65,20 @@
         <li class="nav-item">
           <a class="nav-link" href="profil_utilisateur.php">PROFIL</a>
         </li>
-        <li class="nav-item deja_loup">
-          <a class="nav-link btn btn-primary text-white" type="button" href="deja_loup.php">Déjà
+        <!-- <li class="nav-item deja_loup">
+          <a class="nav-link btn btn-primary text-white" type="button" href="deja_loup.html">Déjà
             loup?</a>
-        </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link btn btn-danger text-white hulule" type="button" href="hulule-avec_nous.html">Hulule
-            avec nous!</a>
         </li> -->
+        <li class="nav-item">
+          <a class="nav-link btn btn-danger text-white hulule" type="button" href="hulule-avec_nous.php">Hurle
+            avec nous!</a>
+        </li>
 
-
+         
       </ul>
       <!--INPUT SEARCH -->
       <form class="form-inline container-search" method="GET" action="recherche.html">
-        <input class="form-control mr-sm-2  input-search" name="recherche" type="search" placeholder="Recherche"
-          aria-label="Recherche">
+        <input class="form-control mr-sm-2  input-search"  name="recherche" type="search" placeholder="Recherche" aria-label="Recherche">
         <button class="btn btn-outline-success my-2 my-sm-0 " href="recherche.html" type="submit">Recherche</button>
       </form>
       <!--// FIN SEARCH-->
@@ -115,63 +97,52 @@
             </div>
           </div>
           <div class="d-flex justify-content-center form_container">
-            <form method="POST" action="">
-              <h2>Hurle avec nous!</h2>
+            <form class="container-input" method="POST" action="">
+                <h2>Déjà loup?</h2>
               <div class="input-group mb-3">
                 <div class="input-group-append">
-                  <span class="input-group-text"><i class="fas fa-user" ;></i></span>
+                  <span class="input-group-text"><i class="fas fa-user";></i></span>
                 </div>
-                <input type="text" name="pseudo" id="pseudo" class="form-control input_user" value="<?php if(isset($pseudo)) { echo $pseudo; } ?>" placeholder="Votre pseudo">
+                <input type="text" name="pseudoconnect" class="form-control input_user" value="" placeholder="username">
               </div>
 
               <div class="input-group mb-3">
                 <div class="input-group-append">
-                  <span class="input-group-text"><i class="fas fa-user" ;></i></span>
+                  <span class="input-group-text"><i class="fas fa-user";></i></span>
                 </div>
-                <input type="email" name="email" id="mail" class="form-control input_user" value="<?php if(isset($mail)) { echo $mail; } ?>" placeholder="Votre email">
+                <input type="email" name="mailconnect" class="form-control input_user" value="" placeholder="votre mail">
               </div>
-
+              
               <div class="input-group mb-2">
                 <div class="input-group-append">
                   <span class="input-group-text"><i class="fas fa-key"></i></span>
                 </div>
-                <input type="password" name="mdp" id=mdp class="form-control input_pass" value="" placeholder="Votre mot de passe">
+                <input type="password" name="mdpconnect" class="form-control input_pass" value="" placeholder="password">
               </div>
-
-              <div class="input-group mb-2">
-                <div class="input-group-append">
-                  <span class="input-group-text"><i class="fas fa-key"></i></span>
-                </div>
-                <input type="password" name="mdp2" id="mdp2" class="form-control input_pass" value=""
-                  placeholder="Confirmez votre mot de passe">
-              </div>
-
-              <!-- <div class="form-group">
+              <div class="form-group">
                 <div class="custom-control custom-checkbox">
                   <input type="checkbox" class="custom-control-input" id="customControlInline">
                   <label class="custom-control-label" for="customControlInline">Remember me</label>
                 </div>
-              </div> -->
-
+              </div>
           </div>
           <div class="d-flex justify-content-center mt-3 login_container">
-            <input id="submit_creer" name="forminscription" type="submit" value="Créer le compte!!!!"
-              style=font-size:150%;border-radius:45%;height:3em;>
+            <input type="submit" name="formconnexion" value="Se connecter !" />
           </div>
           </form>
-          <?php
+          <div class="mt-4">
+            <div class="d-flex justify-content-center links">
+              Don't have an account? <a href="hulule-avec_nous.php" class="ml-2">Sign Up</a>
+            </div>
+            <?php
          if(isset($erreur)) {
             echo '<font color="red">'.$erreur."</font>";
          }
          ?>
-          <!-- <div class="mt-4">
-            <div class="d-flex justify-content-center links">
-              Don't have an account? <a href="#" class="ml-2">Sign Up</a>
-            </div>
-            <div class="d-flex justify-content-center links">
+            <!-- <div class="d-flex justify-content-center links">
               <a href="#">Forgot your password?</a>
-            </div>
-          </div> -->
+            </div> -->
+          </div>
         </div>
       </div>
     </div>
@@ -207,8 +178,7 @@
       </ul>
       <!--INPUT SEARCH -->
       <form class="form-inline container-search" method="GET" action="recherche.html">
-        <input class="form-control mr-sm-2  input-search" name="recherche" type="search" placeholder="Recherche"
-          aria-label="Recherche">
+        <input class="form-control mr-sm-2  input-search"  name="recherche" type="search" placeholder="Recherche" aria-label="Recherche">
         <button class="btn btn-outline-success my-2 my-sm-0 " href="recherche.html" type="submit">Recherche</button>
       </form>
       <!--// FIN SEARCH-->
@@ -218,11 +188,9 @@
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
     crossorigin="anonymous"></script>
 
   <script src="js/bootstrap.js"></script>

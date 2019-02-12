@@ -47,10 +47,10 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
           <a class="nav-link" href="accueil.html">ACCUEIL <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="profil_utilisateur.html">PROFIL</a>
+          <a class="nav-link" href="profil_utilisateur.php">PROFIL</a>
         </li>
         <li class="nav-item deja_loup">
-          <a class="nav-link btn btn-primary text-white" type="button" href="deja_loup.html">Déjà
+          <a class="nav-link btn btn-primary text-white" type="button" href="deja_loup.php">Déjà
             loup?</a>
         </li>
         <li class="nav-item">
@@ -238,7 +238,7 @@ exit;
             <a class="nav-link" href="accueil.html">ACCUEIL <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="profil_utilisateur.html">PROFIL</a>
+            <a class="nav-link" href="profil_utilisateur.php">PROFIL</a>
           </li>
 
         <!--   <li class="nav-item">
