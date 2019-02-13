@@ -7,7 +7,8 @@ $appliBD=new Connexion;
 
 // $appliBD->insertArticle("2","bobby coure dans les champs","/home/cf/projets/instaWolf/images/loup_calin.jpeg",date('Y-m-d h-i-s'));
 
-$appliBD->insertCommentaire("2","1","bobby coure dans les champs",date('Y-m-d h-i-s'));
+// $appliBD->insertCommentaire("2","1","bobby coure dans les champs",date('Y-m-d h-i-s'));
+// $appliBD->updatePseudo("Mightwolfette","3");
 // $res=$appliBD->comparePassword("%Lfuck1234%","%Lfuck1234%");
 // var_dump($res);
 

@@ -3,12 +3,17 @@ require('Animal.php');
 require('Article.php');
 require('Profil.php');
 require('Utilisateur.php');
+
 // Début de la classe Connexion
+
     class Connexion {
+
 // Déclaration de la variable privée connexion qui fait la relation avec la base de données
+
         private $connexion;
 
 // Constructeur de la classe qui initialise la connexion avec la base de données avec les paramètres interne à notre serveur phpmyadmin
+
         public function __construct() {
             try{
             
@@ -38,6 +43,7 @@ require('Utilisateur.php');
         }
 
 // Fonction inverseDate qui formate la date de naissance sous un format plus intelligible et digérable pour nous Européens
+
         function inverseDate($naissance){
             $mot=str_split($naissance);
             $res=$mot[8].$mot[9];
@@ -84,6 +90,7 @@ require('Utilisateur.php');
         }
 
 // Fonction insertUtilisateur qui insère un utilisateur dans la base de données
+
         function insertUtilisateur($pseudo,$motPasse,$email){
             try{
                 $requete_prepare=$this->connexion->prepare(
@@ -104,6 +111,7 @@ require('Utilisateur.php');
         }
 
 // Fonction insertAnimal qui insère un loup dans la base de données
+
         function insertAnimal($idUtilisateur, $nom, $surnom, $cheminPhoto, $nomElevage, $dateNaissance, $sexe, $race){
             try{
                 $requete_prepare=$this->connexion->prepare(
@@ -124,6 +132,7 @@ require('Utilisateur.php');
         }
 
 // Fonction insertArticle qui insère un article dans la base de données
+
         function insertArticle($idAnimal, $texte, $cheminPhoto, $datePublication){
             try{
                 $requete_prepare=$this->connexion->prepare(
@@ -144,6 +153,7 @@ require('Utilisateur.php');
         }
 
 // Fonction insertCommentaire qui insère un commentaire dans la base de données
+
         function insertCommentaire($idUtilisateur, $idAnimal, $texte, $datePublication){
             try{
                 $requete_prepare=$this->connexion->prepare(
@@ -164,6 +174,7 @@ require('Utilisateur.php');
         }
 
 // Fonction selectAllLoups qui sélectionne la liste des loups dans la base de données
+
         function selectAllLoups(){
             try{
                 $requete_prepare=$this->connexion->prepare(
@@ -181,6 +192,7 @@ require('Utilisateur.php');
         }
 
 // Fonction selectAllUtilisateurs qui sélectionne la liste des utilisateurs dans la base de données
+
         function selectAllUtilisateurs(){
             try{
                 $requete_prepare=$this->connexion->prepare(
@@ -197,7 +209,8 @@ require('Utilisateur.php');
             }
         }
 
-        // Fonction selectLoupsById qui sélectionne l'utilisateur dans la base de données qui a l'identifiant passé en paramètre et retourne l'utilisateur
+// Fonction selectLoupsById qui sélectionne l'utilisateur dans la base de données qui a l'identifiant passé en paramètre et retourne l'utilisateur
+
         function selectLoupsById($id){
             try{
                 $requete_prepare=$this->connexion->prepare(
@@ -215,6 +228,7 @@ require('Utilisateur.php');
         }
 
 // Fonction selectUtilisateurById qui sélectionne l'utilisateur dans la base de données qui a l'identifiant passé en paramètre et retourne l'utilisateur
+        
         function selectUtilisateurById($id){
             try{
                 $requete_prepare=$this->connexion->prepare(
@@ -232,23 +246,26 @@ require('Utilisateur.php');
         }
 
 // Fonction selectUtilisateurByMail qui sélectionne l'utilisateur dans la base de données qui a l'email passé en paramètre et retourne l'utilisateur
-function selectUtilisateurByMail($mail){
-    try{
-        $requete_prepare=$this->connexion->prepare(
-            'SELECT * FROM Utilisateur WHERE email = :mail'
-        );
-        $requete_prepare->execute(array("mail" => $mail));
-        $resultat=$requete_prepare;
-        return $resultat;
-    }
-    catch(Exception $e){
-        echo 'Erreur : '.$e->getMessage().'<br />';
-        echo 'N° : '.$e->getCode();
-        return false;
-    }
-}
+
+        function selectUtilisateurByMail($mail){
+            try{
+                $requete_prepare=$this->connexion->prepare(
+                    'SELECT * FROM Utilisateur WHERE email = :mail'
+                );
+                $requete_prepare->execute(array("mail" => $mail));
+                $resultat=$requete_prepare;
+                return $resultat;
+            }
+            catch(Exception $e){
+                echo 'Erreur : '.$e->getMessage().'<br />';
+                echo 'N° : '.$e->getCode();
+                return false;
+            }
+        }
 
 // Fonction selectArticlesById qui sélectionne les articles dans la base de données qui ont l'identifiant du loup passé en paramètre et retourne tous ses articles
+            
+
         function selectArticlesById($id){
             try{
                 $requete_prepare=$this->connexion->prepare(
@@ -266,6 +283,7 @@ function selectUtilisateurByMail($mail){
         }
 
 // Fonction selectCommentairesById qui sélectionne les commentaires dans la base de données qui ont l'identifiant de l'article passé en paramètre et retourne tous ses commentaires
+        
         function selectCommentairesById($id){
             try{
                 $requete_prepare=$this->connexion->prepare(
@@ -283,6 +301,7 @@ function selectUtilisateurByMail($mail){
         }
 
 // Fonction searchPersonneId qui sélectionne l'identifiant dans la base de données qu'a la personne qui a le nom ou l'email qui contient les lettres passées en paramètres
+        
         function searchPersonneId($nom, $email, $mdp) { 
             $query = "SELECT * FROM Utilisateur WHERE pseudo = :nom AND email = :email AND motPasse = :mdp";
             $stmt = $this->connexion->prepare($query); 
@@ -291,25 +310,37 @@ function selectUtilisateurByMail($mail){
             return $row;
         } 
 // Fonction searchPersonneIdByNom qui sélectionne l'identifiant dans la base de données qu'a la personne qui a le nom qui contient les lettres passées en paramètres
+            
         function searchPersonneIdByNom($nom) { 
             $query = "SELECT * FROM Utilisateur WHERE pseudo = :nom";
             $stmt = $this->connexion->prepare($query); 
             $result = $stmt->execute(array("nom"=> $nom)); 
             $row = $stmt->fetch(PDO::FETCH_ASSOC); 
-            var_dump($row);
             return $row;
         } 
 
+// Fonction searchPersonneIdByNom qui sélectionne l'identifiant dans la base de données qu'a la personne qui a le nom qui contient les lettres passées en paramètres
+        
+        function searchPersonneById($id) { 
+            $query = "SELECT * FROM Utilisateur WHERE id = :id";
+            $stmt = $this->connexion->prepare($query); 
+            $result = $stmt->execute(array("id"=> $id)); 
+            $row = $stmt->fetch(); 
+            return $row;
+        }
+
 // Fonction searchPseudo qui cherche si une personne a le pseudo passé en paramètre
-function searchPseudo($nom) { 
-    $query = "SELECT * FROM Utilisateur WHERE pseudo = :nom";
-    $stmt = $this->connexion->prepare($query); 
-    $result = $stmt->execute(array("nom"=> "%".$nom."%")); 
-    $row = $stmt->fetch(); 
-    return $row;
-} 
+
+        function searchPseudo($nom) { 
+            $query = "SELECT * FROM Utilisateur WHERE pseudo = :nom";
+            $stmt = $this->connexion->prepare($query); 
+            $result = $stmt->execute(array("nom"=> "%".$nom."%")); 
+            $row = $stmt->fetch(); 
+            return $row;
+        } 
 
 // Fonction searchAnimalId qui sélectionne l'identifiant dans la base de données qu'a le loup qui a le nom, le surnom, le nom d'élevage ou la race qui contient les lettres passées en paramètres
+
         function searchAnimalId($nom) { 
             $query = "SELECT * FROM Animal WHERE nom like :nom or surnom like :nom or nomElevage like :nom or race like :nom";
             $stmt = $this->connexion->prepare($query); 
@@ -319,6 +350,7 @@ function searchPseudo($nom) {
         } 
 
 // Fonction getPersonneHobby qui sélectionne les hobbies associés à une personne dont l'identifiant est passé en paramètre
+
         function getPersonneLoups($personneId){
             try{
                 $requete_prepare=$this->connexion->prepare(
@@ -336,6 +368,31 @@ function searchPseudo($nom) {
             }
 
         }
+
+// Fonction updatePseudo qui met à jour le pseudo passé en paramètre par rapport à l'id passée en paramètre
+
+function updatePseudo($nom, $id) { 
+    $query = "UPDATE Utilisateur SET pseudo = :nom WHERE id = :id";
+    $stmt = $this->connexion->prepare($query); 
+    $result = $stmt->execute(array("nom" => $nom, "id" => $id)); 
+} 
+
+// Fonction updateEmail qui met à jour l'email passé en paramètre par rapport à l'id passée en paramètre
+
+function updateEmail($email, $id) { 
+    $query = "UPDATE Utilisateur SET email = :email WHERE id = :id";
+    $stmt = $this->connexion->prepare($query); 
+    $result = $stmt->execute(array("email" => $email, "id" => $id)); 
+} 
+
+// Fonction updateMdp qui met à jour le mot de passe passé en paramètre par rapport à l'id passée en paramètre
+
+function updateMdp($mdp, $id) { 
+    $query = "UPDATE Utilisateur SET motPasse = :mdp WHERE id = :id";
+    $stmt = $this->connexion->prepare($query); 
+    $result = $stmt->execute(array("mdp" => $mdp, "id" => $id)); 
+} 
+
 // Fonction comparePassword qui compare les deux mots de passe pour vérifier qu'ils sont bien pareils
 
     public function comparePassword($pass1,$pass2)
