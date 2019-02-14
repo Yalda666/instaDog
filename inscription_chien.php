@@ -24,9 +24,9 @@ session_start();
 <body>
   <!-- ////////////  MENU DE NAVUGATION RESPONSIVE  /////////-->
   <nav class="navbar navbar-expand-lg navbar-light bg-warning col-sm-6 col-md-4 col-lg-6 col-xl-12">
-    <a class="navbar-brand container-logo" href="accueil.html"></a>
+    <a class="navbar-brand container-logo" href="accueil.php"></a>
     <img class="logo" src="images/logo_final.png" alt="Tete de loup" width="10%"></a>
-    <a class="navbar-brand" href="accueil.html">InstaWolf</a>
+    <a class="navbar-brand" href="accueil.php">InstaWolf</a>
 
     </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -37,7 +37,7 @@ session_start();
     <div class="collapse navbar-collapse menu-nav" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="accueil.html">ACCUEIL <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="accueil.php">ACCUEIL <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="profil_utilisateur.php<?php if (isset($_SESSION['id']){ echo '?id='.$_SESSION['id']})?>">PROFIL</a>
@@ -143,7 +143,7 @@ if (isset($_POST['forminscription'])) {
     if (!empty($_POST['nom']) and !empty($_FILES['photo-promenade']) and !empty($_POST['surnom']) and !empty($_POST['race']) and !empty($_POST['elevage']) and !empty($_POST['sexe']) and !empty($_POST['dateNaissance'])) {
 
         $bdd->insertAnimal($idUtilisateur, $nom, $surnom, $destinationFolder . $destinationName, $elevage, $date, $sexe, $race);
-        $erreur = "Votre loup a bien été ajouté ! <a href=\"profil_utilisateur.php?id=" . $_SESSION['id'] . "\">Me connecter</a>";
+        $erreur = "Votre loup a bien été ajouté ! <a href=\"profil_chien.php?id=" . $_SESSION['id'] . "\">Me connecter</a>";
 
     } else {
         $erreur = "Tous les champs doivent être complétés !";
@@ -239,9 +239,9 @@ if (isset($erreur)) {
     </footer>
   <!-- ////////////   SECTION DE NOTRE MENU FOOTER MENU  /////////-->
   <nav class="navbar navbar-expand-lg navbar-light bg-warning col-sm-6 col-md-4 col-lg-6 col-xl-12">
-    <a class="navbar-brand container-logo" href="accueil.html"></a>
+    <a class="navbar-brand container-logo" href="accueil.php"></a>
     <img class="logo" src="images/logo_final.png" alt="Tete de loup" width="10%"></img></a>
-    <a class="navbar-brand" href="accueil.html">InstaWolf</a>
+    <a class="navbar-brand" href="accueil.php">InstaWolf</a>
 
     </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -252,7 +252,7 @@ if (isset($erreur)) {
     <div class="collapse navbar-collapse menu-nav" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="accueil.html">ACCUEIL <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="accueil.php">ACCUEIL <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="profil_utilisateur.php<?php if (isset($_SESSION['id']){ echo '?id='.$_SESSION['id']})?>">PROFIL</a>
