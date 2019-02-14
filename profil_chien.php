@@ -1,3 +1,7 @@
+<?php
+session_start();
+require 'connexion.php';
+?>
 <!doctype html>
 <html lang="en">
 
@@ -36,7 +40,7 @@
           <a class="nav-link" href="accueil.php">ACCUEIL <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="profil_utilisateur.php<?php if (isset($_SESSION['id']){ echo '?id='.$_SESSION['id']})?>">PROFIL</a>
+          <a class="nav-link" href="profil_utilisateur.php<?php if(isset($_SESSION['id'])) { echo '?id='.$_SESSION['id'];} ?>">PROFIL</a>
         </li>
         <li class="nav-item deja_loup">
           <a class="nav-link btn btn-primary text-white" type="button" href="deja_loup.php">Déjà
@@ -104,7 +108,12 @@
         <button class="btn btn-outline-success my-2 my-sm-0 " href="recherche.html" type="submit">Recherche</button>
       </form>
       <!--// FIN SEARCH-->
-
+      <?php if(isset($_SESSION['id'])) { echo '
+      <p>Bonjour '.$bdd->searchPseudoById($_SESSION["id"]).'<p>
+    <li class="nav-item">
+          <a class="nav-link btn btn-danger text-white hulule" type="button" href="deconnexion.php">Déconnexion</a>
+    </li>
+  ';}?>
     </div>
   </nav><!-- ////////////  FIN  MENU DE NAVUGATION RESPONSIVE  /////////-->
 
@@ -240,7 +249,7 @@
             <a class="nav-link" href="accueil.php">ACCUEIL <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="profil_utilisateur.php<?php if (isset($_SESSION['id']){ echo '?id='.$_SESSION['id']})?>">PROFIL</a>
+            <a class="nav-link" href="profil_utilisateur.php<?php if(isset($_SESSION['id'])) { echo '?id='.$_SESSION['id'];} ?>">PROFIL</a>
           </li>
   
          <!--  <li class="nav-item">
@@ -254,7 +263,12 @@
           <button class="btn btn-outline-success my-2 my-sm-0 " href="recherche.html" type="submit">Recherche</button>
         </form>
         <!--// FIN SEARCH-->
-  
+        <?php if(isset($_SESSION['id'])) { echo '
+      <p>Bonjour '.$bdd->searchPseudoById($_SESSION["id"]).'<p>
+    <li class="nav-item">
+          <a class="nav-link btn btn-danger text-white hulule" type="button" href="deconnexion.php">Déconnexion</a>
+    </li>
+  ';}?>
       </div>
     </nav>
 

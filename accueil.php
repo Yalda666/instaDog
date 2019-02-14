@@ -1,3 +1,8 @@
+<?php
+session_start();
+require 'connexion.php';
+$bdd= new Connexion;
+?>
 <!doctype html>
 <html lang="en">
 
@@ -36,7 +41,7 @@
           <a class="nav-link" href="accueil.php">ACCUEIL <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="profil_utilisateur.php<?php if (isset($_SESSION['id']){ echo '?id='.$_SESSION['id']})?>">PROFIL</a>
+          <a class="nav-link" href="profil_utilisateur.php<?php if(isset($_SESSION['id'])) { echo '?id='.$_SESSION['id'];} ?>">PROFIL</a>
         </li>
         <li class="nav-item deja_loup">
           <a class="nav-link btn btn-primary text-white" type="button" href="deja_loup.php">Déjà
@@ -59,7 +64,14 @@
         <button class="btn btn-outline-success my-2 my-sm-0 " href="recherche.html" type="submit">Recherche</button>
       </form>
       <!--// FIN SEARCH-->
+      <?php if(isset($_SESSION['id'])) { echo '
+      <p>Bonjour '.$bdd->searchPseudoById($_SESSION["id"]).'<p>
+    <li class="nav-item">
+          <a class="nav-link btn btn-danger text-white hulule" type="button" href="deconnexion.php">Déconnexion</a>
+    </li>
+  ';}?>
     </div>
+    
   </nav><!-- ////////////  FIN  MENU DE NAVUGATION RESPONSIVE  /////////-->
   <!-- ////////////   SECTION DE NOTRE CONTENT MAIN  /////////-->
   <main>
@@ -177,11 +189,11 @@
   <!-- ////////////   SECTION DE NOTRE MENU FOOTER MENU  /////////-->
   <footer class="container">
     <p class="float-right"><a href="#">Back to top</a></p>
-    <p>© 2017-2018 Company, Inc. ·<!--  <a href="#">Privacy</a> · <a href="#">Terms</a></p> -->
+    <p>© 2019 InstaWolf, Inc. ·<!--  <a href="#">Privacy</a> · <a href="#">Terms</a></p> -->
   </footer>
   <nav class="navbar navbar-expand-lg navbar-light bg-warning col-sm-6 col-md-4 col-lg-6 col-xl-12">
     <a class="navbar-brand container-logo" href="accueil.php"></a>
-    <img class="logo" src="images/logo_final.png" alt="Tete de loup" width="10%"></img></a>
+    <img class="logo" src="images/logo_final.png" alt="Tete de loup" width="10%"></a>
     <a class="navbar-brand" href="accueil.php">InstaWolf</a>
 
     </div>
@@ -196,7 +208,7 @@
           <a class="nav-link" href="accueil.php">ACCUEIL <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="profil_utilisateur.php<?php if (isset($_SESSION['id']){ echo '?id='.$_SESSION['id']})?>">PROFIL</a>
+          <a class="nav-link" href="profil_utilisateur.php<?php if(isset($_SESSION['id'])) { echo '?id='.$_SESSION['id'];} ?>">PROFIL</a>
         </li>
       </ul>
       <!--INPUT SEARCH -->
@@ -205,6 +217,12 @@
         <button class="btn btn-outline-success my-2 my-sm-0 " href="recherche.html" type="submit">Recherche</button>
       </form>
       <!--// FIN SEARCH-->
+      <?php if(isset($_SESSION['id'])) { echo '
+      <p>Bonjour '.$bdd->searchPseudoById($_SESSION["id"]).'<p>
+    <li class="nav-item">
+          <a class="nav-link btn btn-danger text-white hulule" type="button" href="deconnexion.php">Déconnexion</a>
+    </li>
+  ';}?>
     </div>
   </nav>
   <!-- Optional JavaScript -->

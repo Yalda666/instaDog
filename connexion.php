@@ -344,6 +344,17 @@ class Connexion
         return $row;
     }
 
+// Fonction searchPseudoById qui cherche le pseudo de la personne qui a l'id passé en paramètre et le retourne
+
+public function searchPseudoById($id)
+{
+    $query = "SELECT pseudo FROM Utilisateur WHERE id = :id";
+    $stmt = $this->connexion->prepare($query);
+    $result = $stmt->execute(array("id" => $id));
+    $row = $stmt->fetch();
+    return $row["pseudo"];
+}
+
 // Fonction searchAnimalId qui sélectionne l'identifiant dans la base de données qu'a le loup qui a le nom, le surnom, le nom d'élevage ou la race qui contient les lettres passées en paramètres
 
     public function searchAnimalId($nom)
