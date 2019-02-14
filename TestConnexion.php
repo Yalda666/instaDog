@@ -1,7 +1,7 @@
 <?php
-require('connexion.php');
+require 'connexion.php';
 
-$appliBD=new Connexion;
+$appliBD = new Connexion;
 // $appliBD->insertUtilisateur("bob","B03","b0b@boo.com");
 // $appliBD->insertAnimal("1", "Wolf", "Wolfie", "/home/cf/projets/instaWolf/images/loup_cours.jpeg", "Woulf", "2012-12-21", "male", "loup gris");
 
@@ -11,7 +11,6 @@ $appliBD=new Connexion;
 // $appliBD->updatePseudo("Mightwolfette","3");
 // $res=$appliBD->comparePassword("%Lfuck1234%","%Lfuck1234%");
 // var_dump($res);
-
 
 // insertPersonne("Lapraz","Bertrand","/url/masalegueule.jpg","1986.04.15","Loup solitaire");
 // insertPersonne("Lapraz","Hubert","/url/sasalegueule.jpg","1980.04.18","Concubinage");
@@ -53,4 +52,3 @@ $appliBD=new Connexion;
 // $appliBD->insertPersonneRelation(1,2,"Frerot");
 
 //var_dump($appliBD->inverseDate("0001-12-25"));
-?>

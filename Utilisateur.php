@@ -1,43 +1,45 @@
 <?php
-    class Utilisateur{
-        private $pseudo;
-        private $motPasse;
-        private $derniereConnexion;
-        private $email;
-        
-        public function __construct($pseudo,$motPasse,$email){
-            $this->pseudo=$pseudo;
-            $this->motPasse=$motPasse;
-            $this->derniereConnexion=date();
-            $this->email=$email;
-        }
+class Utilisateur
+{
+    private $pseudo;
+    private $motPasse;
+    private $derniereConnexion;
+    private $email;
 
-        public function checkMotPasse(){
-            
-        }
+    public function __construct($pseudo, $motPasse, $email)
+    {
+        $this->pseudo = $pseudo;
+        $this->motPasse = $motPasse;
+        $this->derniereConnexion = date();
+        $this->email = $email;
+    }
 
-        /**
-         * Get the value of pseudo
-         */ 
-        public function getPseudo()
-        {
-                return $this->pseudo;
-        }
+    public function checkMotPasse()
+    {
 
-        /**
-         * Get the value of derniereConnexion
-         */ 
-        public function getDerniereConnexion()
-        {
-                return $this->derniereConnexion;
-        }
+    }
 
-        /**
-         * Get the value of email
-         */ 
-        public function getEmail()
-        {
-                return $this->email;
-        }
-    } 
-?>
+    /**
+     * Get the value of pseudo
+     */
+    public function getPseudo()
+    {
+        return $this->pseudo;
+    }
+
+    /**
+     * Get the value of derniereConnexion
+     */
+    public function getDerniereConnexion()
+    {
+        return $this->derniereConnexion;
+    }
+
+    /**
+     * Get the value of email
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+}

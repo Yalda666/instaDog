@@ -1,14 +1,3 @@
-<?php
-session_start();
-require 'connexion.php';
-$bdd = new Connexion;
-
-if (isset($_GET['id']) and $_GET['id'] > 0) {
-    $getid = intval($_GET['id']);
-    $requser = $bdd->selectUtilisateurById($getid);
-
-    ?>
-
 <!doctype html>
 <html lang="en">
 
@@ -23,9 +12,9 @@ if (isset($_GET['id']) and $_GET['id'] > 0) {
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/profil_utilisateur.css">
+  <link rel="stylesheet" href="css/profil_chien.css">
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-  <title>Profil Utilisateur</title>
+  <title>Profil du chien</title>
 </head>
 
 <body>
@@ -47,7 +36,7 @@ if (isset($_GET['id']) and $_GET['id'] > 0) {
           <a class="nav-link" href="accueil.html">ACCUEIL <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="profil_utilisateur.php">PROFIL</a>
+          <a class="nav-link" href="profil_utilisateur.php<?php if (isset($_SESSION['id']){ echo '?id='.$_SESSION['id']})?>">PROFIL</a>
         </li>
         <li class="nav-item deja_loup">
           <a class="nav-link btn btn-primary text-white" type="button" href="deja_loup.php">Déjà
@@ -117,136 +106,147 @@ if (isset($_GET['id']) and $_GET['id'] > 0) {
       <!--// FIN SEARCH-->
 
     </div>
-  </nav>
-  <!-- ////////////  FIN MENU DE NAVUGATION RESPONSIVE  /////////-->
+  </nav><!-- ////////////  FIN  MENU DE NAVUGATION RESPONSIVE  /////////-->
 
-
-
+  <!-- ////////////   SECTION DE NOTRE CONTENT MAIN  /////////-->
+  <main>
+    <!-- BANNIER PROFIL UTILISATEUR  -->
 
   <!-- ////////////  BANNIER IMAGE   /////////-->
-
-
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-xs-12 col-md-6">
-        <div class="bg bg-left">
-          <!--  <h2>Create your snippet's HTML, CSS and Javascript in the editor tabs</h2> -->
-          <div class="card-img-overlay">
-            <div class="donnees-perso">
-              <h3 class="card-title">Nom : <?php echo $requser['pseudo']; ?></h3>
-              <h5 class="card-title">Email : <?php echo $requser['email']; ?></h5>
-              <!-- <h5 class="card-title">Race :</h5>
-              <h5 class="card-title">Elevage :</h5>
-              <h5 class="card-title">Née le :</h5>
-              <h4 class="card-text">Les loups entrent dans notre vie pour nous enseigner l’amour,
-                ils partentpour nous apprendre à perdre.Un nouveau loup ne remplace jamais
-                un vieux loup,il ne fait qu’agrandirle coeur.</h4> -->
-                <br />
-                <?php
-if (isset($_SESSION['id']) and $requser['id'] == $_SESSION['id']) {
-        ?>
-                <br />
-                <a href="modifier_donnes.php">Editer mon profil</a>
-                <a href="deconnexion.php">Se déconnecter</a>
-                <?php
-}
-    ?>
+      <div class="row">
+        <div class="col-xs-12 col-md-6">
+          <div class="bg bg-left">
+            <!--  <h2>Create your snippet's HTML, CSS and Javascript in the editor tabs</h2> -->
+            <div class="card-img-overlay">
+              <div class="donnees-perso">
+                <h3 class="card-title">Nom :</h3>
+                <h5 class="card-title">Sexe :</h5>
+                <h5 class="card-title">Race :</h5>
+                <h5 class="card-title">Elevage :</h5>
+                <h5 class="card-title">Née le :</h5>
+                <h4 class="card-text">Un nouveau loup ne remplace jamais
+                  un vieux loup,il ne fait qu’agrandirle coeur.</h4>
+               
+               <!--    <span><a class="modif-donnees-utlisateur" href="modifier_donnes.html"><button>MODIFIER LES DONNES</button></a></span> -->
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+          <div class="bg bg-right">
+            
+            <!-- 	<h2>Create your snippet's HTML, CSS and Javascript in the editor tabs</h2> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ////////////  FIN ANNIER IMAGE   /////////-->
+      <!-- SECTION 1 ARTICLE > -->
+        
+      <a href="article.html"> <button type="button" class="btn btn-primary btn-lg btn-block">
+          <h1>ECRIRE UN ARTICLE</h1>
+        </button></a>
+  
+      <h3 class="mt-3 pb-3 mb-4 font-italic border-bottom">
+      
+      </h3>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <img class="card-img-top" src="//placeimg.com/280/180/tech" alt="Card image cap">
+
+            <div class="card-body">
+              <h5 class="card-title border-bottom pb-3"><!-- Card title <a href="#" class="float-right d-inline-flex share"><i
+                    class="fas fa-share-alt text-primary"></i> --></a></h5>
+              <p class="card-text">Soe quick example text to build on the card title and make up the bulk of the card's
+                content.e quick example text to build on the card title and make up the bulk of the card's content.me
+                quick example text to build on the card title and make up the bulk of the card's content.</p>
+
+              <a href="commentaire.html" class="btn btn-sm btn-info float-right">Voir article<i class="fas fa-angle-double-right"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <img class="card-img-top" src="//placeimg.com/280/180/tech" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title border-bottom pb-3"><!-- Card title <a href="#" class="float-right btn btn-sm btn-info d-inline-flex share"><i
+                    class="fas fa-share-alt"></i> --></a></h5>
+              <p class="card-text">Soe quick example text to build on the card title and make up the bulk of the card's
+                content.e quick example text to build on the card title and make up the bulk of the card's content.me
+                quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="commentaire.html" class="btn btn-sm btn-info float-right">Voir article<i class="fas fa-angle-double-right"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card bg-light">
+            <img class="card-img-top" src="//placeimg.com/280/180/tech" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title border-bottom pb-3"><!-- Card title <a href="#" class="float-right btn btn-sm btn-info d-inline-flex share"><i
+                    class="fas fa-share-alt"></i> --></a></h5>
+              <p class="card-text">Soe quick example text to build on the card title and make up the bulk of the card's
+                content.e quick example text to build on the card title and make up the bulk of the card's content.me
+                quick example text to build on the card title and make up the bulk of the card's content.</p>
+
+              <a href="commentaire.html" class="btn btn-sm btn-info float-right">Voir article<i class="fas fa-angle-double-right"></i></a>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-xs-12 col-md-6">
-        <div class="bg bg-right">
+      <hr>
+      <!-- ///////////////////////////////////////////////////////////// -->
+         <!-- PAGINATION OPTIONEL -->
+         <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-end">
+              <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1">Avant</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                  <a class="page-link" href="#">Suivant</a>
+              </li>
+          </ul>
+      </nav>
+      <!-- BUTTON RAJOUTE PLUS DE COMMENTAIRES DE LA LIST -->
+      <button type="button" class="btn btn-primary btn-lg btn-block">
+          <h1>VOIR PLUS DE LOUPS</h1>
+      </button>
+    </main><!-- ////////////  FIN  SECTION DE NOTRE CONTENT MAIN  /////////-->
 
-          <!-- 	<h2>Create your snippet's HTML, CSS and Javascript in the editor tabs</h2> -->
-        </div>
-      </div>
-    </div>
-  </div>
-  <?php
-} else {
-    header("Location: deja_loup.php");
-    exit;
-}
-?>
-  <!-- ////////////  FIN ANNIER IMAGE   /////////-->
-    <main role="main">
-
-        <a href="inscription_chien.php"> <button type="button" class="btn btn-primary btn-lg btn-block">
-            <h1>AGRANDIR LA MEUTE</h1>
-          </button></a>
-
-      <!-- Marketing messaging and featurettes
-              ================================================== -->
-      <!-- Wrap the rest of the page in another container to center all the content. -->
-      <div class="container marketing">
-        <!-- Three columns of text below the carousel -->
-        <div class="row">
-          <div class="col-lg-4">
-            <img class="rounded-circle" src="images/meute.jpeg"
-              alt="Generic placeholder image" width="140" height="140">
-            <h2>Lire Article</h2>
-            <p>Donec sed odio dui. sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies
-                vehicula ut id elitEtiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies
-                vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo
-              cursus magna.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">Voir article »</a></p>
-          </div><!-- /.col-lg-4 -->
-          <div class="col-lg-4">
-            <img class="rounded-circle" src="images/loup_dodo.jpeg"
-              alt="Generic placeholder image" width="140" height="140">
-            <h2>Lire Article</h2>
-            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras
-              mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-              condimentum nibh.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">Voir article »</a></p>
-          </div><!-- /.col-lg-4 -->
-          <div class="col-lg-4">
-            <img class="rounded-circle" src="images/meute.jpeg"
-              alt="Generic placeholder image" width="140" height="140">
-            <h2>Lire Article</h2>
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula
-              porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-              fermentum massa justo sit amet risus.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">Voir article »</a></p>
-          </div><!-- /.col-lg-4 -->
-        </div>
-      </div><!-- /.container -->
-
-    </main>
-
-    <!-- FOOTER -->
-    <!-- FOOTER -->
+    <!-- ////////////   SECTION DE NOTRE MENU FOOTER MENU  /////////-->
     <footer class="container">
-      <p class="float-right"><a href="#">Back to top</a></p>
-      <p>© 2017-2018 Company, Inc.<!--  · <a href="#">Privacy</a> · <a href="#">Terms</a> --></p>
-    </footer>
+        <p class="float-right"><a href="#">Back to top</a></p>
+        <p>© 2017-2018 Company, Inc.<!--  · <a href="#">Privacy</a> · <a href="#">Terms</a> --></p>
+      </footer>
     <nav class="navbar navbar-expand-lg navbar-light bg-warning col-sm-6 col-md-4 col-lg-6 col-xl-12">
       <a class="navbar-brand container-logo" href="accueil.html"></a>
       <img class="logo" src="images/logo_final.png" alt="Tete de loup" width="10%"></img></a>
       <a class="navbar-brand" href="accueil.html">InstaWolf</a>
-
+  
       </div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
+  
       <div class="collapse navbar-collapse menu-nav" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
             <a class="nav-link" href="accueil.html">ACCUEIL <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="profil_utilisateur.php">PROFIL</a>
+            <a class="nav-link" href="profil_utilisateur.php<?php if (isset($_SESSION['id']){ echo '?id='.$_SESSION['id']})?>">PROFIL</a>
           </li>
-
-        <!--   <li class="nav-item">
+  
+         <!--  <li class="nav-item">
             <a class="nav-link" href="#">AGRANDIR LA MEUTE</a>
           </li> -->
-
-
-
+  
         </ul>
         <!--INPUT SEARCH -->
         <form class="form-inline container-search" method="GET" action="recherche.html">
@@ -254,7 +254,7 @@ if (isset($_SESSION['id']) and $requser['id'] == $_SESSION['id']) {
           <button class="btn btn-outline-success my-2 my-sm-0 " href="recherche.html" type="submit">Recherche</button>
         </form>
         <!--// FIN SEARCH-->
-
+  
       </div>
     </nav>
 

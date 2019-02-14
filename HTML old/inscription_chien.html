@@ -1,31 +1,3 @@
-
-<?php
-session_start();
-require 'connexion.php';
-
-$bdd = new Connexion;
-
-if (isset($_SESSION['id'])) {
-    $user = $bdd->searchPersonneById($_SESSION['id']);
-    if (isset($_POST['newpseudo']) and !empty($_POST['newpseudo']) and $_POST['newpseudo'] != $user['pseudo']) {
-        $newpseudo = htmlspecialchars($_POST['newpseudo']);
-        $bdd->updatePseudo($newpseudo, $_SESSION['id']);
-    }
-    if (isset($_POST['newmail']) and !empty($_POST['newmail']) and $_POST['newmail'] != $user['email']) {
-        $newmail = htmlspecialchars($_POST['newmail']);
-        $bdd->updateEmail($newmail, $_SESSION['id']);
-    }
-    if (isset($_POST['newmdp1']) and !empty($_POST['newmdp1']) and isset($_POST['newmdp2']) and !empty($_POST['newmdp2'])) {
-        $mdp1 = sha1($_POST['newmdp1']);
-        $mdp2 = sha1($_POST['newmdp2']);
-        if ($mdp1 == $mdp2) {
-            $bdd->updateMdp($mdp1, $_SESSION['id']);
-        } else {
-            $msg = "Vos deux mdp ne correspondent pas !";
-        }
-        header('Location: profil_utilisateur.php?id=' . $_SESSION['id']);
-    }
-    ?>
 <!doctype html>
 <html lang="en">
 
@@ -40,10 +12,10 @@ if (isset($_SESSION['id'])) {
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/modifier_donness.css">
-
+  <link rel="stylesheet" href="css/inscription-chien.css">
+  
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-  <title>modifier données</title>
+  <title>Agrandir la meute</title>
 </head>
 
 <body>
@@ -51,7 +23,7 @@ if (isset($_SESSION['id'])) {
   <nav class="navbar navbar-expand-lg navbar-light bg-warning col-sm-6 col-md-4 col-lg-6 col-xl-12">
     <a class="navbar-brand container-logo" href="accueil.html"></a>
     <img class="logo" src="images/logo_final.png" alt="Tete de loup" width="10%"></img></a>
-    <a class="navbar-brand" href="accueil.html">InstaWolf</a>
+    <a class="navbar-brand" href="#">InstaWolf</a>
 
     </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -65,7 +37,7 @@ if (isset($_SESSION['id'])) {
           <a class="nav-link" href="accueil.html">ACCUEIL <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="profil_chien.php">PROFIL</a>
+          <a class="nav-link" href="profil_utilisateur.php">PROFIL</a>
         </li>
         <li class="nav-item deja_loup">
           <a class="nav-link btn btn-primary text-white" type="button" href="deja_loup.php">Déjà
@@ -88,37 +60,27 @@ if (isset($_SESSION['id'])) {
 
               <!-- Modal body -->
               <div class="modal-body">
-                <form enctype="multipart/form-data" method="POST" action="">
+                <form>
                   <label class="sr-only" for="usrname">Pseudo</label>
                   <p>Pseudo:</p>
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
                     </div>
-                    <input type="text" class="form-control" name="newpseudo" value="<?php echo $user['pseudo']; ?>" placeholder="Votre pseudo" aria-label="Username"
+                    <input type="text" class="form-control" placeholder="Votre surnom" aria-label="Username"
                       aria-describedby="basic-addon1">
                   </div>
 
                   <div class="form-group">
                     <label for="exampleInputEmail1">Adresse email</label>
-                    <input type="email" class="form-control" name="newmail" value="<?php echo $user['mail']; ?>" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                       placeholder="Entrez votre adresse email">
                     <small id="emailHelp" class="form-text text-muted">Nous ne la partagerons avec personne...</small>
                   </div>
 
 
                   <label class="sr-only" for="Password">Mot de passe:</label>
-                  <p>Nouveau mot de passe:</p>
-                  <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon2"><i class="fa fa-key"></i></span>
-                    </div>
-                    <input id="Password" type="password" name="newmdp1" class="form-control" placeholder="Déposez votre empreinte de loup"
-                      aria-label="Mot de passe" aria-describedby="basic-addon2">
-                  </div>
-
-                  <label class="sr-only" for="Password">Mot de passe:</label>
-                  <p>Retaper votre nouveau mot de passe:</p>
+                  <p>Mot de passe:</p>
                   <div class="input-group mb-2">
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="basic-addon2"><i class="fa fa-key"></i></span>
@@ -150,13 +112,16 @@ if (isset($_SESSION['id'])) {
   <!-- ////////////   SECTION DE NOTRE CONTENT MAIN  /////////-->
   <main>
 
+
+
+      <form action="recevoirInfo.php" method="post">
     <div class="container register">
       <div class="row">
         <div class="col-md-3 register-left">
           <img src="images/logo_final.png" alt="logo instawolf" />
-          <h3>Données personnelles</h3>
-          <p>Changer vos données regulièrement pour plus de sécurité </p>
-          <!-- <input type="submit" name="" value="huuuuu..." /><br /> -->
+          <h3>Rejoint la meute</h3>
+          <p>Partage la vie de ta meute avec notre meute mondiale </p>
+          <!-- <input type="submit" name="" value="Huuuuuu?" /><br /> -->
         </div>
         <div class="col-md-9 register-right">
           <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
@@ -164,52 +129,76 @@ if (isset($_SESSION['id'])) {
               <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
                 aria-selected="true">Employee</a>
             </li> -->
-
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+                aria-selected="false">Instawolf</a>
+            </li>
           </ul>
-
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-              <h3 class="register-heading"><p>Information</p></h3>
+              <h3 class="register-heading">Agrandir la meute</h3>
               <div class="row register-form">
                 <div class="col-md-6">
-                <form method="POST" action="modifier_donnes.php" enctype="multipart/form-data">
                   <div class="form-group">
-                    <input type="text" class="form-control" name="newpseudo" placeholder="Votre nouveaux nom *" value="<?php echo $user['pseudo']; ?>" required/>
+                    <input type="text" class="form-control" name="nom" placeholder="Votre nom *" value="" required/>
                   </div>
+                  <div class="form-group">
+                      <input type="text" class="form-control" name="surnom" placeholder="Votre surnom *" value="" required/>
+                    </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="race" placeholder="Votre race *" value="" required/>
+                  </div>
+                  <div class="form-group">
+                      <input type="text" class="form-control" name="elevage" placeholder="Votre nom d'élevage *" value="" required/>
+                    </div>
+                      
+                  <div class="form-group">
+                    <div class="maxl">
+                      <label class="radio inline">
+                        <input type="radio" name="sexe" value="male" checked>
+                        <span> Male </span>
+                      </label>
+                      <label class="radio inline">
+                        <input type="radio"  name="sexe" value="female">
+                        <span>Femelle </span>
+                      </label>
 
+                      <div id="container">
+                          <p><input type="file" name="photo" onchange="change(this)" id="file"></p>
+                          <p><img id="image" src="" alt="image en train de charger"></p>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
                   <div class="form-group">
-                    <input type="email" class="form-control" name="newmail" placeholder="Votre nouvel e-mail *" value="<?php echo $user['email']; ?>" required/>
+                      <label for="input-StartDate-1">Date d'anniversaire</label>
+                      <input type="date" class="form-control" name="dateNaissance" id="input-StartDate-1" placeholder="시작일">
+                    </div>
+                
+
                   </div>
-              <div class="form-group">
-                <div class="form-group">
-                  <input type="password" class="form-control" name="newmdp1" placeholder="Nouveau mot de passe *" value="" required/>
+                  <input type="submit" class="btnRegister" value="Valider" />
                 </div>
-                <div class="form-group">
-                  <input type="password" class="form-control" name="newmdp2" placeholder="Confirmation de votre nouveau mot de passe *" value="" required/>
-                </div>
-                  </div>
-                  <input type="submit" class="btnRegister" value="Mettre à jour mon profil !" action="modifier_donnes.php"/>
-                </div>
-                <?php if (isset($msg)) {echo $msg;}?>
-                </form>
               </div>
             </div>
           </div>
         </div>
-
+        <h1>Rejoint la Meute</h1>
+        <h5>Et rajoute ton loup dans notre meute internationale afin de célébrer la lune en hurlant avec nous.</h5>
       </div>
     </div>
-
+    </form>
   </main><!-- ////////////  FIN  SECTION DE NOTRE CONTENT MAIN  /////////-->
   <footer class="container">
       <p class="float-right"><a href="#">Back to top</a></p>
-      <p>© 2017-2018 Company, Inc. ·<!--  <a href="#">Privacy</a> · <a href="#">Terms</a> --></p>
+      <p>© 2019 InstaWolf, Inc. ·<!--  <a href="#">Privacy</a> · <a href="#">Terms</a> --></p>
     </footer>
   <!-- ////////////   SECTION DE NOTRE MENU FOOTER MENU  /////////-->
   <nav class="navbar navbar-expand-lg navbar-light bg-warning col-sm-6 col-md-4 col-lg-6 col-xl-12">
     <a class="navbar-brand container-logo" href="accueil.html"></a>
     <img class="logo" src="images/logo_final.png" alt="Tete de loup" width="10%"></img></a>
-    <a class="navbar-brand" href="#">InstaWolf</a>
+    <a class="navbar-brand" href="accueil.html">InstaWolf</a>
 
     </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -255,9 +244,3 @@ if (isset($_SESSION['id'])) {
 </body>
 
 </html>
-
-<?php
-} else {
-    header("Location: hulule-avec_nous.php");
-}
-?>

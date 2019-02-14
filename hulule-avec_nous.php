@@ -20,48 +20,47 @@
 
 <body>
   <?php
-    require('connexion.php');
-    $bdd = new Connexion;
-    
-    if(isset($_POST['forminscription'])) {
-       $pseudo = htmlspecialchars($_POST['pseudo']);
-       $mail = htmlspecialchars($_POST['email']);
-       $mdp = sha1($_POST['mdp']);
-       $mdp2 = sha1($_POST['mdp2']);
-       if(!empty($_POST['pseudo']) AND !empty($_POST['email']) AND !empty($_POST['mdp']) AND !empty($_POST['mdp2'])) {
-          $pseudolength = strlen($pseudo);
-          if($pseudolength <= 255) {
-              $testPseudo=$bdd->searchPersonneIdByNom($pseudo);
-              var_dump($testPseudo);
-              if($testPseudo==0){
-                if(filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-                   $reqmail = $bdd->selectUtilisateurByMail($mail);
-                   $mailexist = $reqmail->rowCount();
-                   if($mailexist == 0) {
-                      if($bdd->comparePassword($mdp,$mdp2)) {
-                         $bdd->insertUtilisateur($pseudo, $mdp, $mail);
-                         $erreur = "Votre compte a bien été créé ! <a href=\"deja_loup.php\">Me connecter</a>";
-                      } else {
-                         $erreur = "Vos mots de passes ne correspondent pas !";
-                      }
-                   } else {
-                      $erreur = "Adresse mail déjà utilisée !";
-                   }
+require 'connexion.php';
+$bdd = new Connexion;
+
+if (isset($_POST['forminscription'])) {
+    $pseudo = htmlspecialchars($_POST['pseudo']);
+    $mail = htmlspecialchars($_POST['email']);
+    $mdp = sha1($_POST['mdp']);
+    $mdp2 = sha1($_POST['mdp2']);
+    if (!empty($_POST['pseudo']) and !empty($_POST['email']) and !empty($_POST['mdp']) and !empty($_POST['mdp2'])) {
+        $pseudolength = strlen($pseudo);
+        if ($pseudolength <= 255) {
+            $testPseudo = $bdd->searchPersonneIdByNom($pseudo);
+            var_dump($testPseudo);
+            if ($testPseudo == 0) {
+                if (filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+                    $reqmail = $bdd->selectUtilisateurByMail($mail);
+                    $mailexist = $reqmail->rowCount();
+                    if ($mailexist == 0) {
+                        if ($bdd->comparePassword($mdp, $mdp2)) {
+                            $bdd->insertUtilisateur($pseudo, $mdp, $mail);
+                            $erreur = "Votre compte a bien été créé ! <a href=\"deja_loup.php\">Me connecter</a>";
+                        } else {
+                            $erreur = "Vos mots de passes ne correspondent pas !";
+                        }
+                    } else {
+                        $erreur = "Adresse mail déjà utilisée !";
+                    }
                 } else {
-                   $erreur = "Votre adresse mail n'est pas valide !";
+                    $erreur = "Votre adresse mail n'est pas valide !";
                 }
-            }
-            else{
+            } else {
                 $erreur = "Votre pseudo est déjà utilisé !";
             }
-          } else {
-             $erreur = "Votre pseudo ne doit pas dépasser 255 caractères !";
-          }
-       } else {
-          $erreur = "Tous les champs doivent être complétés !";
-       }
+        } else {
+            $erreur = "Votre pseudo ne doit pas dépasser 255 caractères !";
+        }
+    } else {
+        $erreur = "Tous les champs doivent être complétés !";
     }
-    ?>
+}
+?>
   <!-- ////////////  MENU DE NAVUGATION RESPONSIVE  /////////-->
   <nav class="navbar navbar-expand-lg navbar-light bg-warning col-sm-6 col-md-4 col-lg-6 col-xl-12">
     <a class="navbar-brand container-logo" href="accueil.html"></a>
@@ -121,14 +120,14 @@
                 <div class="input-group-append">
                   <span class="input-group-text"><i class="fas fa-user" ;></i></span>
                 </div>
-                <input type="text" name="pseudo" id="pseudo" class="form-control input_user" value="<?php if(isset($pseudo)) { echo $pseudo; } ?>" placeholder="Votre pseudo">
+                <input type="text" name="pseudo" id="pseudo" class="form-control input_user" value="<?php if (isset($pseudo)) {echo $pseudo;}?>" placeholder="Votre pseudo">
               </div>
 
               <div class="input-group mb-3">
                 <div class="input-group-append">
                   <span class="input-group-text"><i class="fas fa-user" ;></i></span>
                 </div>
-                <input type="email" name="email" id="mail" class="form-control input_user" value="<?php if(isset($mail)) { echo $mail; } ?>" placeholder="Votre email">
+                <input type="email" name="email" id="mail" class="form-control input_user" value="<?php if (isset($mail)) {echo $mail;}?>" placeholder="Votre email">
               </div>
 
               <div class="input-group mb-2">
@@ -160,10 +159,10 @@
           </div>
           </form>
           <?php
-         if(isset($erreur)) {
-            echo '<font color="red">'.$erreur."</font>";
-         }
-         ?>
+if (isset($erreur)) {
+    echo '<font color="red">' . $erreur . "</font>";
+}
+?>
           <!-- <div class="mt-4">
             <div class="d-flex justify-content-center links">
               Don't have an account? <a href="#" class="ml-2">Sign Up</a>

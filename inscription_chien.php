@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html lang="en">
 
@@ -13,7 +16,7 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/inscription-chien.css">
-  
+
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
   <title>Agrandir la meute</title>
 </head>
@@ -22,8 +25,8 @@
   <!-- ////////////  MENU DE NAVUGATION RESPONSIVE  /////////-->
   <nav class="navbar navbar-expand-lg navbar-light bg-warning col-sm-6 col-md-4 col-lg-6 col-xl-12">
     <a class="navbar-brand container-logo" href="accueil.html"></a>
-    <img class="logo" src="images/logo_final.png" alt="Tete de loup" width="10%"></img></a>
-    <a class="navbar-brand" href="#">InstaWolf</a>
+    <img class="logo" src="images/logo_final.png" alt="Tete de loup" width="10%"></a>
+    <a class="navbar-brand" href="accueil.html">InstaWolf</a>
 
     </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -37,7 +40,7 @@
           <a class="nav-link" href="accueil.html">ACCUEIL <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="profil_utilisateur.php">PROFIL</a>
+          <a class="nav-link" href="profil_utilisateur.php<?php if (isset($_SESSION['id']){ echo '?id='.$_SESSION['id']})?>">PROFIL</a>
         </li>
         <li class="nav-item deja_loup">
           <a class="nav-link btn btn-primary text-white" type="button" href="deja_loup.php">Déjà
@@ -112,9 +115,43 @@
   <!-- ////////////   SECTION DE NOTRE CONTENT MAIN  /////////-->
   <main>
 
+  <?php
+require 'connexion.php';
+$bdd = new Connexion;
 
+if (isset($_POST['forminscription'])) {
+    $idUtilisateur = $_SESSION['id'];
+    $nom = htmlspecialchars($_POST['nom']);
+    $surnom = htmlspecialchars($_POST['surnom']);
+    $race = htmlspecialchars($_POST['race']);
+    $elevage = htmlspecialchars($_POST['elevage']);
+    $sexe = htmlspecialchars($_POST['sexe']);
+    $date = $_POST['dateNaissance'];
+    $suffixe = date("YmdHis");
+    $uploadedFileName = $_FILES["photo-promenade"]["name"];
+    $uploadedFile = new SplFileInfo($uploadedFileName);
+    $fileExtension = $uploadedFile->getExtension();
+    $destinationFolder = $_SERVER['DOCUMENT_ROOT'] . "/instaWolf/Photos/";
+    $destinationName = "photo-" . $suffixe . "." . $fileExtension;
 
-      <form action="recevoirInfo.php" method="post">
+    echo $_FILES["photo-promenade"]["error"];
+
+    if (move_uploaded_file($_FILES["photo-promenade"]["tmp_name"], $destinationFolder . $destinationName)) {
+        echo "<br/> fichier enregistré avec succes";
+    }
+
+    if (!empty($_POST['nom']) and !empty($_FILES['photo-promenade']) and !empty($_POST['surnom']) and !empty($_POST['race']) and !empty($_POST['elevage']) and !empty($_POST['sexe']) and !empty($_POST['dateNaissance'])) {
+
+        $bdd->insertAnimal($idUtilisateur, $nom, $surnom, $destinationFolder . $destinationName, $elevage, $date, $sexe, $race);
+        $erreur = "Votre loup a bien été ajouté ! <a href=\"profil_utilisateur.php?id=" . $_SESSION['id'] . "\">Me connecter</a>";
+
+    } else {
+        $erreur = "Tous les champs doivent être complétés !";
+    }
+}
+?>
+
+      <form action="inscription_chien.php" method="post" enctype="multipart/form-data">
     <div class="container register">
       <div class="row">
         <div class="col-md-3 register-left">
@@ -151,7 +188,7 @@
                   <div class="form-group">
                       <input type="text" class="form-control" name="elevage" placeholder="Votre nom d'élevage *" value="" required/>
                     </div>
-                      
+
                   <div class="form-group">
                     <div class="maxl">
                       <label class="radio inline">
@@ -164,8 +201,9 @@
                       </label>
 
                       <div id="container">
-                          <p><input type="file" name="photo" onchange="change(this)" id="file"></p>
-                          <p><img id="image" src="" alt="image en train de charger"></p>
+                        <input type="hidden" name="MAX_FILE_SIZE" value="300000000" />
+                          <p><input type="file" name="photo-promenade" onchange="change(this)" id="form-file"></p>
+                          <p><img id="image" src="" alt="Votre image"></p>
                         </div>
                     </div>
                   </div>
@@ -175,10 +213,15 @@
                       <label for="input-StartDate-1">Date d'anniversaire</label>
                       <input type="date" class="form-control" name="dateNaissance" id="input-StartDate-1" placeholder="시작일">
                     </div>
-                
+
 
                   </div>
-                  <input type="submit" class="btnRegister" value="Valider" />
+                  <input type="submit" name="forminscription" class="btnRegister" value="Valider" />
+                  <?php
+if (isset($erreur)) {
+    echo '<font color="red">' . $erreur . "</font>";
+}
+?>
                 </div>
               </div>
             </div>
@@ -192,13 +235,13 @@
   </main><!-- ////////////  FIN  SECTION DE NOTRE CONTENT MAIN  /////////-->
   <footer class="container">
       <p class="float-right"><a href="#">Back to top</a></p>
-      <p>© 2017-2018 Company, Inc. ·<!--  <a href="#">Privacy</a> · <a href="#">Terms</a> --></p>
+      <p>© 2019 InstaWolf, Inc. <!--  <a href="#">Privacy</a> · <a href="#">Terms</a> --></p>
     </footer>
   <!-- ////////////   SECTION DE NOTRE MENU FOOTER MENU  /////////-->
   <nav class="navbar navbar-expand-lg navbar-light bg-warning col-sm-6 col-md-4 col-lg-6 col-xl-12">
     <a class="navbar-brand container-logo" href="accueil.html"></a>
     <img class="logo" src="images/logo_final.png" alt="Tete de loup" width="10%"></img></a>
-    <a class="navbar-brand" href="#">InstaWolf</a>
+    <a class="navbar-brand" href="accueil.html">InstaWolf</a>
 
     </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -212,7 +255,7 @@
           <a class="nav-link" href="accueil.html">ACCUEIL <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="profil_utilisateur.php">PROFIL</a>
+          <a class="nav-link" href="profil_utilisateur.php<?php if (isset($_SESSION['id']){ echo '?id='.$_SESSION['id']})?>">PROFIL</a>
         </li>
 
      <!--    <li class="nav-item">

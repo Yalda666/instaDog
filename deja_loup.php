@@ -1,26 +1,26 @@
 <?php
 session_start();
-require('connexion.php');
+require 'connexion.php';
 $bdd = new Connexion;
 
-if(isset($_POST['formconnexion'])) {
+if (isset($_POST['formconnexion'])) {
     $pseudoconnect = $_POST['pseudoconnect'];
-   $mailconnect = htmlspecialchars($_POST['mailconnect']);
-   $mdpconnect = sha1($_POST['mdpconnect']);
-   if(!empty($mailconnect) AND !empty($mdpconnect) AND !empty($pseudoconnect)) {
-      $requser = $bdd->searchPersonneId($pseudoconnect, $mailconnect, $mdpconnect);
-      var_dump($requser);
-      if($requser["id"] != 0) {
-         $_SESSION['id'] = $requser['id'];
-         $_SESSION['pseudo'] = $requser['pseudo'];
-         $_SESSION['mail'] = $userinfo['email'];
-         header("Location: profil_utilisateur.php?id=".$_SESSION['id']);
-      } else {
-         $erreur = "Mauvais mail ou mot de passe !";
-      }
-   } else {
-      $erreur = "Tous les champs doivent être complétés !";
-   }
+    $mailconnect = htmlspecialchars($_POST['mailconnect']);
+    $mdpconnect = sha1($_POST['mdpconnect']);
+    if (!empty($mailconnect) and !empty($mdpconnect) and !empty($pseudoconnect)) {
+        $requser = $bdd->searchPersonneId($pseudoconnect, $mailconnect, $mdpconnect);
+        var_dump($requser);
+        if ($requser["id"] != 0) {
+            $_SESSION['id'] = $requser['id'];
+            $_SESSION['pseudo'] = $requser['pseudo'];
+            $_SESSION['mail'] = $userinfo['email'];
+            header("Location: profil_utilisateur.php?id=" . $_SESSION['id']);
+        } else {
+            $erreur = "Mauvais mail ou mot de passe !";
+        }
+    } else {
+        $erreur = "Tous les champs doivent être complétés !";
+    }
 }
 ?>
 
@@ -39,7 +39,7 @@ if(isset($_POST['formconnexion'])) {
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/deja_loup.css">
- 
+
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
   <title>Déjà loup?</title>
 </head>
@@ -74,7 +74,7 @@ if(isset($_POST['formconnexion'])) {
             avec nous!</a>
         </li>
 
-         
+
       </ul>
       <!--INPUT SEARCH -->
       <form class="form-inline container-search" method="GET" action="recherche.html">
@@ -112,7 +112,7 @@ if(isset($_POST['formconnexion'])) {
                 </div>
                 <input type="email" name="mailconnect" class="form-control input_user" value="" placeholder="votre mail">
               </div>
-              
+
               <div class="input-group mb-2">
                 <div class="input-group-append">
                   <span class="input-group-text"><i class="fas fa-key"></i></span>
@@ -135,10 +135,10 @@ if(isset($_POST['formconnexion'])) {
               Don't have an account? <a href="hulule-avec_nous.php" class="ml-2">Sign Up</a>
             </div>
             <?php
-         if(isset($erreur)) {
-            echo '<font color="red">'.$erreur."</font>";
-         }
-         ?>
+if (isset($erreur)) {
+    echo '<font color="red">' . $erreur . "</font>";
+}
+?>
             <!-- <div class="d-flex justify-content-center links">
               <a href="#">Forgot your password?</a>
             </div> -->
