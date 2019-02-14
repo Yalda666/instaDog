@@ -10,22 +10,20 @@ if(isset($_SESSION['id'])) {
    if(isset($_POST['newpseudo']) AND !empty($_POST['newpseudo']) AND $_POST['newpseudo'] != $user['pseudo']) {
       $newpseudo = htmlspecialchars($_POST['newpseudo']);
       $bdd->updatePseudo($newpseudo, $_SESSION['id']);
-      header('Location: profil.php?id='.$_SESSION['id']);
    }
-   if(isset($_POST['newmail']) AND !empty($_POST['newmail']) AND $_POST['newmail'] != $user['mail']) {
+   if(isset($_POST['newmail']) AND !empty($_POST['newmail']) AND $_POST['newmail'] != $user['email']) {
       $newmail = htmlspecialchars($_POST['newmail']);
       $bdd->updateEmail($newmail, $_SESSION['id']);
-      header('Location: profil.php?id='.$_SESSION['id']);
    }
    if(isset($_POST['newmdp1']) AND !empty($_POST['newmdp1']) AND isset($_POST['newmdp2']) AND !empty($_POST['newmdp2'])) {
       $mdp1 = sha1($_POST['newmdp1']);
       $mdp2 = sha1($_POST['newmdp2']);
       if($mdp1 == $mdp2) {
-         $bdd->updateMdp(array($mdp1, $_SESSION['id']));
-         header('Location: profil.php?id='.$_SESSION['id']);
+         $bdd->updateMdp($mdp1, $_SESSION['id']);
       } else {
          $msg = "Vos deux mdp ne correspondent pas !";
       }
+      header('Location: profil_utilisateur.php?id='.$_SESSION['id']);
    }
 ?>
 <!doctype html>
@@ -168,11 +166,13 @@ if(isset($_SESSION['id'])) {
             </li> -->
 
           </ul>
+          
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
               <h3 class="register-heading"><p>Information</p></h3>
               <div class="row register-form">
                 <div class="col-md-6">
+                <form method="POST" action="modifier_donnes.php" enctype="multipart/form-data">
                   <div class="form-group">
                     <input type="text" class="form-control" name="newpseudo" placeholder="Votre nouveaux nom *" value="<?php echo $user['pseudo']; ?>" required/>
                   </div>
@@ -187,16 +187,16 @@ if(isset($_SESSION['id'])) {
                 <div class="form-group">
                   <input type="password" class="form-control" name="newmdp2" placeholder="Confirmation de votre nouveau mot de passe *" value="" required/>
                 </div>
-                 
                   </div>
-                  <input type="submit" class="btnRegister" value="Mettre à jour mon profil !" action=""/>
+                  <input type="submit" class="btnRegister" value="Mettre à jour mon profil !" action="modifier_donnes.php"/>
                 </div>
+                <?php if(isset($msg)) { echo $msg; } ?>
+                </form>
               </div>
             </div>
           </div>
         </div>
-        <?php if(isset($msg)) { echo $msg; } ?>
-       
+        
       </div>
     </div>
 

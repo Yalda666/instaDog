@@ -165,7 +165,7 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
   </div>
   <?php   
 } else {
-header("Location: hulule-avec_nous.php");
+header("Location: deja_loup.php");
 exit;
 }
 ?>
