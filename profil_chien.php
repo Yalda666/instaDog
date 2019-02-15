@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'connexion.php';
+$bdd = new Connexion;
 ?>
 <!doctype html>
 <html lang="en">
@@ -40,7 +41,7 @@ require 'connexion.php';
           <a class="nav-link" href="accueil.php">ACCUEIL <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="profil_utilisateur.php<?php if(isset($_SESSION['id'])) { echo '?id='.$_SESSION['id'];} ?>">PROFIL</a>
+          <a class="nav-link" href="profil_utilisateur.php<?php if (isset($_SESSION['id'])) {echo '?id=' . $_SESSION['id'];}?>">PROFIL</a>
         </li>
         <li class="nav-item deja_loup">
           <a class="nav-link btn btn-primary text-white" type="button" href="deja_loup.php">Déjà
@@ -51,7 +52,7 @@ require 'connexion.php';
             avec nous!</a>
         </li>
 
-        
+
       </ul>
       <!--INPUT SEARCH -->
       <form class="form-inline container-search" method="GET" action="recherche.html">
@@ -59,8 +60,8 @@ require 'connexion.php';
         <button class="btn btn-outline-success my-2 my-sm-0 " href="recherche.html" type="submit">Recherche</button>
       </form>
       <!--// FIN SEARCH-->
-      <?php if(isset($_SESSION['id'])) { echo '
-      <p>Bonjour '.$bdd->searchPseudoById($_SESSION["id"]).'<p>
+      <?php if (isset($_SESSION['id'])) {echo '
+      <p>Bonjour ' . $bdd->searchPseudoById($_SESSION["id"]) . '<p>
     <li class="nav-item">
           <a class="nav-link btn btn-danger text-white hulule" type="button" href="deconnexion.php">Déconnexion</a>
     </li>
@@ -71,7 +72,20 @@ require 'connexion.php';
   <!-- ////////////   SECTION DE NOTRE CONTENT MAIN  /////////-->
   <main>
     <!-- BANNIER PROFIL UTILISATEUR  -->
+<?php
+if (isset($_POST['idLoup'])) {
+    $loup = $bdd->selectLoupById($_POST['idLoup']);
+    $nom = $loup["nom"];
+    $surnom = $loup["surnom"];
+    $nomElevage = $loup["nomElevage"];
+    $cheminPhoto = $loup["cheminPhoto"];
+    $dateNaissance = $loup["dateNaissance"];
+    $sexe = $loup["sexe"];
+    $race = $loup["race"];
+    $cheminPhoto = substr($cheminPhoto, -32);
+}
 
+?>
   <!-- ////////////  BANNIER IMAGE   /////////-->
   <div class="container-fluid">
       <div class="row">
@@ -80,23 +94,24 @@ require 'connexion.php';
             <!--  <h2>Create your snippet's HTML, CSS and Javascript in the editor tabs</h2> -->
             <div class="card-img-overlay">
               <div class="donnees-perso">
-                <h3 class="card-title">Nom :</h3>
-                <h5 class="card-title">Sexe :</h5>
-                <h5 class="card-title">Race :</h5>
-                <h5 class="card-title">Elevage :</h5>
-                <h5 class="card-title">Née le :</h5>
+                <h3 class="card-title">Nom :<?php echo $nom; ?></h3>
+                <h5 class="card-title">Surnom :<?php echo $surnom; ?></h5>
+                <h5 class="card-title">Nom d'élevage :<?php echo $nomElevage; ?></h5>
+                <h5 class="card-title">Sexe :<?php echo $sexe; ?></h5>
+                <h5 class="card-title">Race :<?php echo $race; ?></h5>
+                <h5 class="card-title">Née le :<?php echo $bdd->inverseDate($dateNaissance); ?></h5>
                 <h4 class="card-text">Un nouveau loup ne remplace jamais
-                  un vieux loup,il ne fait qu’agrandirle coeur.</h4>
-               
+                  un vieux loup,il ne fait qu’agrandir le coeur.</h4>
+
                <!--    <span><a class="modif-donnees-utlisateur" href="modifier_donnes.html"><button>MODIFIER LES DONNES</button></a></span> -->
               </div>
-              
+
             </div>
           </div>
         </div>
         <div class="col-xs-12 col-md-6">
-          <div class="bg bg-right">
-            
+          <img src="<?php echo $cheminPhoto; ?>" width="75%">
+
             <!-- 	<h2>Create your snippet's HTML, CSS and Javascript in the editor tabs</h2> -->
           </div>
         </div>
@@ -104,13 +119,17 @@ require 'connexion.php';
     </div>
     <!-- ////////////  FIN ANNIER IMAGE   /////////-->
       <!-- SECTION 1 ARTICLE > -->
-        
-      <a href="article.php"> <button type="button" class="btn btn-primary btn-lg btn-block">
+      <form method="GET" action="article.php">
+      <div class="divInvisib">
+      <input name="idLoup" value="<?php echo $_POST['idLoup']; ?>" class="divInvisib">
+      <button type="submit" class="btn btn-primary btn-lg btn-block">
           <h1>ECRIRE UN ARTICLE</h1>
-        </button></a>
-  
+        </button>
+        </form>
+        </div>
+
       <h3 class="mt-3 pb-3 mb-4 font-italic border-bottom">
-      
+
       </h3>
       <div class="row">
         <div class="col-md-4">
@@ -187,26 +206,26 @@ require 'connexion.php';
       <a class="navbar-brand container-logo" href="accueil.php"></a>
       <img class="logo" src="images/logo_final.png" alt="Tete de loup" width="10%"></img></a>
       <a class="navbar-brand" href="accueil.php">InstaWolf</a>
-  
+
       </div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-  
+
       <div class="collapse navbar-collapse menu-nav" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
             <a class="nav-link" href="accueil.php">ACCUEIL <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="profil_utilisateur.php<?php if(isset($_SESSION['id'])) { echo '?id='.$_SESSION['id'];} ?>">PROFIL</a>
+            <a class="nav-link" href="profil_utilisateur.php<?php if (isset($_SESSION['id'])) {echo '?id=' . $_SESSION['id'];}?>">PROFIL</a>
           </li>
-  
+
          <!--  <li class="nav-item">
             <a class="nav-link" href="#">AGRANDIR LA MEUTE</a>
           </li> -->
-  
+
         </ul>
         <!--INPUT SEARCH -->
         <form class="form-inline container-search" method="GET" action="recherche.html">
@@ -214,8 +233,8 @@ require 'connexion.php';
           <button class="btn btn-outline-success my-2 my-sm-0 " href="recherche.html" type="submit">Recherche</button>
         </form>
         <!--// FIN SEARCH-->
-        <?php if(isset($_SESSION['id'])) { echo '
-      <p>Bonjour '.$bdd->searchPseudoById($_SESSION["id"]).'<p>
+        <?php if (isset($_SESSION['id'])) {echo '
+      <p>Bonjour ' . $bdd->searchPseudoById($_SESSION["id"]) . '<p>
     <li class="nav-item">
           <a class="nav-link btn btn-danger text-white hulule" type="button" href="deconnexion.php">Déconnexion</a>
     </li>
