@@ -60,8 +60,6 @@ class AnimalRecherche {
             return $this->dateNaissance;
     }
 
-    
-
     /**
      * Get the value of sexe
      */ 
