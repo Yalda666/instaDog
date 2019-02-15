@@ -1,13 +1,13 @@
 <?php
 session_start();
 require 'connexion.php';
-$bdd= new Connexion;
+$bdd = new Connexion;
 ?>
 <!doctype html>
 <html lang="en">
 
 <head>
-    
+
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -41,7 +41,7 @@ $bdd= new Connexion;
           <a class="nav-link" href="accueil.php">ACCUEIL <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="profil_utilisateur.php<?php if(isset($_SESSION['id'])) { echo '?id='.$_SESSION['id'];} ?>">PROFIL</a>
+          <a class="nav-link" href="profil_utilisateur.php<?php if (isset($_SESSION['id'])) {echo '?id=' . $_SESSION['id'];}?>">PROFIL</a>
         </li>
         <li class="nav-item deja_loup">
           <a class="nav-link btn btn-primary text-white" type="button" href="deja_loup.php">Déjà
@@ -64,123 +64,47 @@ $bdd= new Connexion;
         <button class="btn btn-outline-success my-2 my-sm-0 " href="recherche.php" type="submit">Recherche</button>
       </form>
       <!--// FIN SEARCH-->
-      <?php if(isset($_SESSION['id'])) { echo '
-      <p>Bonjour '.$bdd->searchPseudoById($_SESSION["id"]).'<p>
+      <?php if (isset($_SESSION['id'])) {echo '
+      <p>Bonjour ' . $bdd->searchPseudoById($_SESSION["id"]) . '<p>
     <li class="nav-item">
           <a class="nav-link btn btn-danger text-white hulule" type="button" href="deconnexion.php">Déconnexion</a>
     </li>
   ';}?>
     </div>
-    
+
   </nav><!-- ////////////  FIN  MENU DE NAVUGATION RESPONSIVE  /////////-->
   <!-- ////////////   SECTION DE NOTRE CONTENT MAIN  /////////-->
   <main>
-    <div class="container image_centre">
-      <img src="images/logo_final.png" alt="Tete de loup"></img>
+  <div class="container image_centre">
+  <img src="images/logo_final.png" alt="Tete de loup">
       <a href="hulule-avec_nous.php" id="titre_centre">Rejoins la meute et hurle avec nous!</a>
-    </div>
-    <div class="container">
+  </div>
+  <div class="container">
+    <div class="row">
       <div class="row">
-        <div class="row">
+  <?php
+$photos = $bdd->selectAllLoups();
+foreach ($photos as $photo) {
+// récupération de l'url de la photo et du texte
+    $lien = $photo->getCheminPhoto();
+    $lien = substr($lien, -32);
+    echo '
+        <form action="profil_chien.php" method="post">      
           <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="" data-image="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-              data-target="#image-gallery">
-              <img class="img-thumbnail" src="images/loup_calin.jpeg"
+            
+              <input type="hidden" name="idLoup" value="' . $photo->getId() . '"></input>
+              <input type="image" class="img-thumbnail" src="' . $lien . '"
                 alt="Another alt text">
             </a>
-          </div>
-          <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="" data-image="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-              data-target="#image-gallery">
-              <img class="img-thumbnail" src="images/homme-loup.jpeg"
-                alt="Another alt text">
-            </a>
-          </div>
+          </div> 
+        </form>               
+          ';
+}
+echo "</div>";
+?>
 
-          <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="" data-image="https://images.pexels.com/photos/305070/pexels-photo-305070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-              data-target="#image-gallery">
-              <img class="img-thumbnail" src="images/meute.jpeg"
-                alt="Another alt text">
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Test1" data-image="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-              data-target="#image-gallery">
-              <img class="img-thumbnail" src="images/loup_dodo.jpeg"
-                alt="Another alt text">
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice" data-image="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-              data-target="#image-gallery">
-              <img class="img-thumbnail" src="images/hulule_full.jpeg"
-                alt="Another alt text">
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice" data-image="https://images.pexels.com/photos/305070/pexels-photo-305070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-              data-target="#image-gallery">
-              <img class="img-thumbnail" src="images/meute.jpeg"
-                alt="Another alt text">
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice" data-image="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-              data-target="#image-gallery">
-              <img class="img-thumbnail" src="images/loup7.jpeg"
-                alt="Another alt text">
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice" data-image="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-              data-target="#image-gallery">
-              <img class="img-thumbnail" src="images/loup1.jpeg"
-                alt="Another alt text">
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice" data-image="https://images.pexels.com/photos/305070/pexels-photo-305070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-              data-target="#image-gallery">
-              <img class="img-thumbnail" src="images/loup2.jpeg"
-                alt="Another alt text">
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice" data-image="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-              data-target="#image-gallery">
-              <img class="img-thumbnail" src="images/loup3.jpeg"
-                alt="Another alt text">
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice" data-image="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-              data-target="#image-gallery">
-              <img class="img-thumbnail" src="images/loup4.jpeg"
-                alt="Another alt text">
-            </a>
-          </div>
-        </div>
-        <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-          aria-hidden="true">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title" id="image-gallery-title"></h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <img id="image-gallery-image" class="img-responsive col-md-12" src="">
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary float-left" id="show-previous-image"><i class="fa fa-arrow-left"></i>
-                </button>
-                <button type="button" id="show-next-image" class="btn btn-secondary float-right"><i class="fa fa-arrow-right"></i>
-                </button>
-              </div>
-            </div>
-          </div>
+
+
         </div>
       </div>
     </div>
@@ -208,7 +132,7 @@ $bdd= new Connexion;
           <a class="nav-link" href="accueil.php">ACCUEIL <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="profil_utilisateur.php<?php if(isset($_SESSION['id'])) { echo '?id='.$_SESSION['id'];} ?>">PROFIL</a>
+          <a class="nav-link" href="profil_utilisateur.php<?php if (isset($_SESSION['id'])) {echo '?id=' . $_SESSION['id'];}?>">PROFIL</a>
         </li>
       </ul>
       <!--INPUT SEARCH -->
@@ -217,8 +141,8 @@ $bdd= new Connexion;
         <button class="btn btn-outline-success my-2 my-sm-0 " href="recherche.php" type="submit">Recherche</button>
       </form>
       <!--// FIN SEARCH-->
-      <?php if(isset($_SESSION['id'])) { echo '
-      <p>Bonjour '.$bdd->searchPseudoById($_SESSION["id"]).'<p>
+      <?php if (isset($_SESSION['id'])) {echo '
+      <p>Bonjour ' . $bdd->searchPseudoById($_SESSION["id"]) . '<p>
     <li class="nav-item">
           <a class="nav-link btn btn-danger text-white hulule" type="button" href="deconnexion.php">Déconnexion</a>
     </li>
