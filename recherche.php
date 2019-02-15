@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'connexion.php';
+$bdd=new Connexion;
 ?>
 <!doctype html>
 <html lang="en">
@@ -22,20 +23,7 @@ require 'connexion.php';
 
 <body>
 
-   <!-- <?php
-        // recupere coonnexion.php
-        require "connexion.php";
 
-        // Je cree ma connexion
-        $connexion = new Connexion();
-
-        $pattern = "";
-        if($_GET["recherche"] != null){
-            $pattern = $_GET["recherche"];
-        }
-        $listePersonne = $connexion->getSelectPersonneNomPrenomLike( $pattern);
-    ?>-->
-  
 
 
   ?>

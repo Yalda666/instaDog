@@ -131,11 +131,30 @@ if (isset($_SESSION['id']) and $requser['id'] == $_SESSION['id']) {
         <a href="inscription_chien.php"> <button type="button" class="btn btn-primary btn-lg btn-block">
             <h1>Agrandir la meute</h1>
           </button></a>
-
-      <!-- Wrap the rest of the page in another container to center all the content. -->
-      <div class="container marketing">
+          <?php
+          $loups=$bdd->selectLoupsById($_GET["id"]);
+          echo "<div class="container marketing">";
+          echo "<div class="row">";
+// Début du parcours du tableau d'ids retourné par la fonction search_personne
+          foreach($loups as $loup){
+// récupération de l'url de la photo, du nom et du prénom
+          $lien=$i["cheminPhoto"];
+          $nom=$i["Nom"];
+          $prenom=$i["Surnom"];
+          echo '
+                    <form action="profil.php" method="post">
+                    <td class="tdhome">
+                        <div class="divInvisib">
+                            <input type="hidden" name="id" value="'.$i["Id"].'"></input>
+                            <input type="image" src='.$lien.' class="imgmerdique"></input>
+                        </div>
+                        <p class="np_home" name="id" value="'.$i["Id"].'">'.$nom.' '.$prenom.'</p>
+                    </td>
+                    </form>
+          ';
+          }
+          ?>
         <!-- Three columns of text below the carousel -->
-        <div class="row">
           <div class="col-lg-4">
             <img class="rounded-circle" src="images/meute.jpeg"
               alt="Generic placeholder image" width="140" height="140">

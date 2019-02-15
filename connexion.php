@@ -211,16 +211,16 @@ class Connexion
         }
     }
 
-// Fonction selectLoupsById qui sélectionne l'utilisateur dans la base de données qui a l'identifiant passé en paramètre et retourne l'utilisateur
+// Fonction selectLoupsById qui sélectionne les loups dans la base de données qui ont l'identifiant user passé en paramètre et retourne l'utilisateur
 
-    public function selectLoupsById($id)
+    public function selectLoupsById($idUtilisateur)
     {
         try {
             $requete_prepare = $this->connexion->prepare(
-                'SELECT * FROM Animal WHERE id = :id'
+                'SELECT * FROM Animal WHERE idUtilisateur = :id'
             );
             $requete_prepare->execute(array("id" => $id));
-            $resultat = $requete_prepare->fetch();
+            $resultat = $requete_prepare->fetchAll();
             return $resultat;
         } catch (Exception $e) {
             echo 'Erreur : ' . $e->getMessage() . '<br />';
