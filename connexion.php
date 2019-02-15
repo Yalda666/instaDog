@@ -1,8 +1,9 @@
 <?php
-require 'Animal.php';
+//require 'Animal.php';
 require 'Article.php';
 require 'Profil.php';
 require 'Utilisateur.php';
+require ("AnimalRecherche.php");//la partie qu'on a ajouté avec jose 
 
 // Début de la classe Connexion
 
@@ -133,6 +134,17 @@ class Connexion
         }
     }
 
+
+    public function selectAnimalByPatern($patern){ //la partie (partie recherche ) qu'on a fait avec jose 
+
+        $requete_prepare = $this->connexion->prepare("select * from Animal where surnom like :patern or nomElevage like :patern or race like :patern");
+        
+        $requete_prepare->execute(array("patern" => '%'.$patern.'%'));
+
+        $resultat = $requete_prepare->fetchAll(PDO::FETCH_CLASS , "AnimalRecherche");
+
+        return $resultat;
+    }
 // Fonction insertArticle qui insère un article dans la base de données
 
     public function insertArticle($idAnimal, $texte, $cheminPhoto, $datePublication)
@@ -179,18 +191,11 @@ class Connexion
 
     public function selectAllLoups()
     {
-        try {
-            $requete_prepare = $this->connexion->prepare(
-                'SELECT * FROM Animal'
-            );
+            $requete_prepare = $this->connexion->prepare('SELECT * FROM Animal');
             $requete_prepare->execute();
-            $resultat = $requete_prepare->fetchAll();
+            $resultat = $requete_prepare->fetchAll(PDO::FETCH_CLASS, "AnimalRecherche");
             return $resultat;
-        } catch (Exception $e) {
-            echo 'Erreur : ' . $e->getMessage() . '<br />';
-            echo 'N° : ' . $e->getCode();
-            return false;
-        }
+        
     }
 
 // Fonction selectAllUtilisateurs qui sélectionne la liste des utilisateurs dans la base de données

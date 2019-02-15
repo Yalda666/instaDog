@@ -2,6 +2,9 @@
 session_start();
 require 'connexion.php';
 $bdd=new Connexion;
+
+
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -26,7 +29,7 @@ $bdd=new Connexion;
 
 
 
-  ?>
+ 
   <!-- ////////////  MENU DE NAVUGATION RESPONSIVE  /////////-->
   <nav class="navbar navbar-expand-lg navbar-light bg-warning col-sm-6 col-md-4 col-lg-6 col-xl-12">
     <a class="navbar-brand container-logo" href="accueil.php"></a>
@@ -129,8 +132,8 @@ $bdd=new Connexion;
 
     <div class="container-search texte_centre">
         <h1>Recherche de loups</h1>
-        <form action="home.php" method="post">
-        <input type=text id=recherche name=recherche placeholder="Veuillez taper votre recherche de profils ici" autofocus>
+        <form action="recherche.php" method="post">
+        <input type=text id=recherche name="recherche" placeholder="Veuillez taper votre recherche de profils ici" autofocus>
         <br>
         <input id="submit_chrch" type="submit" value="Rechercher" style=font-size:150%;border-radius:45%;height:3em;>
         </form>
@@ -138,7 +141,53 @@ $bdd=new Connexion;
 <div class="container">
 	<div class="row">
 		<div class="row">
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+
+        <?php
+          if(isset($_POST["recherche"])){
+
+            $resultat = $bdd->selectAnimalByPatern($_POST["recherche"]);
+
+              foreach($resultat as $animal){
+
+                  echo '<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                          <p>Surnom: '.$animal->getSurnom().'</p>
+                          <p>NomElevage: '.$animal->getNomElevage().'</p>
+                          <p>Race: '.$animal->getRace().'</p>
+                          <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title=""
+                            data-image="'.$animal->getCheminPhoto().'"
+                            data-target="#image-gallery">
+                              <img class="img-thumbnail"
+                                  src="'.$animal->getCheminPhoto().'"
+                                  alt="Another alt text">
+                          </a>
+                       </div>';
+
+              }
+          
+        }else {
+
+
+          $resultat = $bdd->selectAllLoups();
+
+                foreach($resultat as $animal){
+
+                  echo '<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                          <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title=""
+                            data-image="'.$animal->getCheminPhoto().'"
+                            data-target="#image-gallery">
+                              <img class="img-thumbnail"
+                                  src="'.$animal->getCheminPhoto().'"
+                                  alt="Another alt text">
+                          </a>
+                      </div>';
+
+              }
+
+
+        }
+        ?>
+            
+            <!-- <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                 <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title=""
                    data-image="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
                    data-target="#image-gallery">
@@ -267,7 +316,7 @@ $bdd=new Connexion;
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 	</div>
 </div>
   </main><!-- ////////////  FIN  SECTION DE NOTRE CONTENT MAIN  /////////-->

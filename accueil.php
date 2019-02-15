@@ -85,14 +85,14 @@ $bdd= new Connexion;
           <div class="col-lg-3 col-md-4 col-xs-6 thumb">
             <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="" data-image="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
               data-target="#image-gallery">
-              <img class="img-thumbnail" src="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+              <img class="img-thumbnail" src="images/loup_calin.jpeg"
                 alt="Another alt text">
             </a>
           </div>
           <div class="col-lg-3 col-md-4 col-xs-6 thumb">
             <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="" data-image="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
               data-target="#image-gallery">
-              <img class="img-thumbnail" src="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+              <img class="img-thumbnail" src="images/homme-loup.jpeg"
                 alt="Another alt text">
             </a>
           </div>
@@ -100,63 +100,63 @@ $bdd= new Connexion;
           <div class="col-lg-3 col-md-4 col-xs-6 thumb">
             <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="" data-image="https://images.pexels.com/photos/305070/pexels-photo-305070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
               data-target="#image-gallery">
-              <img class="img-thumbnail" src="https://images.pexels.com/photos/305070/pexels-photo-305070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+              <img class="img-thumbnail" src="images/meute.jpeg"
                 alt="Another alt text">
             </a>
           </div>
           <div class="col-lg-3 col-md-4 col-xs-6 thumb">
             <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Test1" data-image="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
               data-target="#image-gallery">
-              <img class="img-thumbnail" src="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+              <img class="img-thumbnail" src="images/loup_dodo.jpeg"
                 alt="Another alt text">
             </a>
           </div>
           <div class="col-lg-3 col-md-4 col-xs-6 thumb">
             <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice" data-image="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
               data-target="#image-gallery">
-              <img class="img-thumbnail" src="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+              <img class="img-thumbnail" src="images/hulule_full.jpeg"
                 alt="Another alt text">
             </a>
           </div>
           <div class="col-lg-3 col-md-4 col-xs-6 thumb">
             <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice" data-image="https://images.pexels.com/photos/305070/pexels-photo-305070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
               data-target="#image-gallery">
-              <img class="img-thumbnail" src="https://images.pexels.com/photos/305070/pexels-photo-305070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+              <img class="img-thumbnail" src="images/meute.jpeg"
                 alt="Another alt text">
             </a>
           </div>
           <div class="col-lg-3 col-md-4 col-xs-6 thumb">
             <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice" data-image="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
               data-target="#image-gallery">
-              <img class="img-thumbnail" src="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+              <img class="img-thumbnail" src="images/loup7.jpeg"
                 alt="Another alt text">
             </a>
           </div>
           <div class="col-lg-3 col-md-4 col-xs-6 thumb">
             <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice" data-image="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
               data-target="#image-gallery">
-              <img class="img-thumbnail" src="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+              <img class="img-thumbnail" src="images/loup1.jpeg"
                 alt="Another alt text">
             </a>
           </div>
           <div class="col-lg-3 col-md-4 col-xs-6 thumb">
             <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice" data-image="https://images.pexels.com/photos/305070/pexels-photo-305070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
               data-target="#image-gallery">
-              <img class="img-thumbnail" src="https://images.pexels.com/photos/305070/pexels-photo-305070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+              <img class="img-thumbnail" src="images/loup2.jpeg"
                 alt="Another alt text">
             </a>
           </div>
           <div class="col-lg-3 col-md-4 col-xs-6 thumb">
             <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice" data-image="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
               data-target="#image-gallery">
-              <img class="img-thumbnail" src="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+              <img class="img-thumbnail" src="images/loup3.jpeg"
                 alt="Another alt text">
             </a>
           </div>
           <div class="col-lg-3 col-md-4 col-xs-6 thumb">
             <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice" data-image="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
               data-target="#image-gallery">
-              <img class="img-thumbnail" src="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+              <img class="img-thumbnail" src="images/loup4.jpeg"
                 alt="Another alt text">
             </a>
           </div>

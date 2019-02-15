@@ -1,7 +1,19 @@
 <?php
 require 'connexion.php';
 
-$appliBD = new Connexion;
+$appliBD = new Connexion();
+$result = $appliBD->selectAnimalByPatern("o");
+
+echo "<pre>";
+
+
+    foreach($result as $Animal){
+        echo $Animal->getCheminPhoto(),"<br>";
+    }
+
+echo "</pre>";
+
+
 // $appliBD->insertUtilisateur("bob","B03","b0b@boo.com");
 // $appliBD->insertAnimal("1", "Wolf", "Wolfie", "/home/cf/projets/instaWolf/images/loup_cours.jpeg", "Woulf", "2012-12-21", "male", "loup gris");
 
