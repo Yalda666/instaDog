@@ -72,7 +72,20 @@ $bdd = new Connexion;
     <!-- ////////////   SECTION DE NOTRE CONTENT MAIN  /////////-->
     <main>
         <!-- BANNIER PROFIL UTILISATEUR  -->
-
+        <?php
+if (isset($_GET['id'])) {
+    $temps = 3600;
+    setcookie("idArticle", $_GET['id'], time() + $temps);
+    $article = $bdd->selectArticleById($_GET['id']);
+} elseif (isset($_POST["idArticle"])) {
+    $temps = 3600;
+    setcookie("idArticle", $_POST['idArticle'], time() + $temps);
+    $article = $bdd->selectArticleById($_POST['idArticle']);
+} else {
+    $idArticle = $_COOKIE["idArticle"];
+    $article = $bdd->selectArticleById($idArticle);
+}
+?>
   <!-- ////////////  BANNIER IMAGE   /////////-->
   <div class="container-fluid">
         <div class="row">
@@ -108,22 +121,13 @@ $bdd = new Connexion;
            <!--  DERNIERS ARTICLES -->
         </h3>
         <?php
-if (isset($_GET['id'])) {
-    $temps = 3600;
-    setcookie("idArticle", $_GET['id'], time() + $temps);
-    $article = $bdd->selectArticleById($_GET['id']);
-}
-if ($_POST["idArticle"]) {
-    $temps = 3600;
-    setcookie("idArticle", $_POST['idArticle'], time() + $temps);
-    $article = $bdd->selectArticleById($_POST['idArticle']);
-}
 
 $idAnimal = $article["idAnimal"];
 $idUtilisateur = $_SESSION["id"];
-$texte = $article["texte"];
+$texteArticle = $article["texte"];
 $cheminPhoto = $article["cheminPhoto"];
 $cheminPhoto = substr($cheminPhoto, -32);
+
 
 $datePublication = $article["datePublication"];
 $date = substr($datePublication, 0, 10);
@@ -134,7 +138,7 @@ echo '<div class="col-md-6 container-article">';
 echo '<div class="card">';
 echo '<img class="card-img-top" src=' . $cheminPhoto . ' alt="image article">';
 echo '<div class="card-body">';
-echo '<p class="card-text">' . $texte . '</p>';
+echo '<p class="card-text">' . $texteArticle . '</p>';
 echo '</div>';
 echo '</div>';
 echo '<p> Publié le ' . $date . ' à ' . $heure . '</p>';
@@ -143,6 +147,10 @@ echo '</div>';
 
 echo '<hr>';
 
+if (isset($_POST["texte"])) {
+    $texteCommentaire = $_POST["texte"];
+    $bdd->insertCommentaire($idUtilisateur, $idAnimal, $texteCommentaire, date('Y-m-d h-i-s'));
+}
 ?>
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
             integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -180,7 +188,7 @@ echo '<hr>';
                                 <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
                                     <div class="form-group">
                                         <label class="sr-only" for="message">post</label>
-                                        <textarea class="form-control" id="message" rows="3" placeholder="Qu'en pensez-vous?"></textarea>
+                                        <textarea class="form-control" name="texte" id="message" rows="3" placeholder="Qu'en pensez-vous?" value=""></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -192,58 +200,48 @@ echo '<hr>';
                         </div>
                     </div>
                     </form>
-                    <!-- Post /////-->
 
 
-
+                    <?php
+$commentaires = $bdd->selectCommentairesById($idUtilisateur,$idAnimal);
+// var_dump($commentaires);
+echo "<div class='row'>";
+foreach ($commentaires as $commentaire) {
+// Récupération du texte
+    $pseudo = $bdd->searchPseudoById($_SESSION["id"]);
+    $texteC = $commentaire["texte"];
+    $datePub = $commentaire["datePublication"];
+    echo '
+    <div class="card gedf-card">
+    <div class="card-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="ml-2">
+                    <div class="h5 m-0">@'.$pseudo.'</div>
+                    <div class="h7 text-muted">'.$pseudo.'</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>'.$bdd->TimeToJourJ($datePub).'</div>
+        <p class="card-text">
+            '.$texteC.'
+        </p>
+    </div>
+    <div class="card-footer">
+        <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
+        <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+        <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+    </div>
+</div>
+</div>
+';
+}
+?>
 
                     <!--- \\\\\\\Post-->
-                    <div class="card gedf-card">
-                        <div class="card-header">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="mr-2">
-                                        <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
-                                    </div>
-                                    <div class="ml-2">
-                                        <div class="h5 m-0">@LeeCross</div>
-                                        <div class="h7 text-muted">Miracles Lee Cross</div>
-                                    </div>
-                                </div>
-                            </div>
 
-                        </div>
-                        <div class="card-body">
-                            <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> 10 min ago</div>
-                            <a class="card-link" href="#">
-                                <h5 class="card-title"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit
-                                    consectetur
-                                    deserunt illo esse distinctio.</h5>
-                            </a>
-
-                            <p class="card-text">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam omnis nihil, aliquam
-                                est, voluptates officiis iure soluta
-                                alias vel odit, placeat reiciendis ut libero! Quas aliquid natus cumque quae
-                                repellendus. Lorem
-                                ipsum dolor sit amet consectetur adipisicing elit. Ipsa, excepturi. Doloremque,
-                                reprehenderit!
-                                Quos in maiores, soluta doloremque molestiae reiciendis libero expedita assumenda fuga
-                                quae.
-                                Consectetur id molestias itaque facere? Hic!
-                            </p>
-
-                        </div>
-                        <div class="card-footer">
-                            <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-                            <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-                            <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
-                        </div>
-                    </div>
-                    <!-- Post /////-->
-
-
-                </div>
                 <div class="col-md-3">
                  <!--   colonne de guache vide -->
                 </div>
