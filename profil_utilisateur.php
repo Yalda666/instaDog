@@ -58,56 +58,7 @@ if (isset($_GET['id']) and $_GET['id'] > 0) {
             avec nous!</a>
         </li>
 
-        <div class="modal" id="myModal">
-          <div class="modal-dialog">
-            <div class="modal-content">
-
-              <!-- Modal Header -->
-              <div class="modal-header deja_loup">
-                <h4 class="modal-title">Déjà loup?</h4>
-                <button type="button" class="close" data-dismiss="modal">×</button>
-              </div>
-
-              <!-- Modal body -->
-              <div class="modal-body">
-                <form>
-                  <label class="sr-only" for="usrname">Pseudo</label>
-                  <p>Pseudo:</p>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
-                    </div>
-                    <input type="text" class="form-control"  name="recherche"  placeholder="Votre surnom" aria-label="Username"
-                      aria-describedby="basic-addon1">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Adresse email</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                      placeholder="Entrer adresse email">
-                    <small id="emailHelp" class="form-text text-muted">Nous ne la partagerons avec personne...</small>
-                  </div>
-
-
-                  <label class="sr-only" for="Password">Mot de passe:</label>
-                  <p>Mot de passe:</p>
-                  <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon2"><i class="fa fa-key"></i></span>
-                    </div>
-                    <input id="Password" type="password" class="form-control" placeholder="Déposez votre empreinte de loup"
-                      aria-label="Mot de passe" aria-describedby="basic-addon2">
-                  </div>
-                </form>
-              </div>
-              <!-- Modal footer -->
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Rejoindre la meute</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Pas maintenant</button>
-              </div>
-
-            </div>
-          </div>
+        
       </ul>
       <!--INPUT SEARCH -->
       <form class="form-inline container-search" method="GET" action="recherche.html">
@@ -174,15 +125,13 @@ if (isset($_SESSION['id']) and $requser['id'] == $_SESSION['id']) {
     exit;
 }
 ?>
-  <!-- ////////////  FIN ANNIER IMAGE   /////////-->
+  <!-- ////////////  FIN BANNIERE IMAGE   /////////-->
     <main role="main">
 
         <a href="inscription_chien.php"> <button type="button" class="btn btn-primary btn-lg btn-block">
-            <h1>AGRANDIR LA MEUTE</h1>
+            <h1>Agrandir la meute</h1>
           </button></a>
 
-      <!-- Marketing messaging and featurettes
-              ================================================== -->
       <!-- Wrap the rest of the page in another container to center all the content. -->
       <div class="container marketing">
         <!-- Three columns of text below the carousel -->
@@ -191,28 +140,19 @@ if (isset($_SESSION['id']) and $requser['id'] == $_SESSION['id']) {
             <img class="rounded-circle" src="images/meute.jpeg"
               alt="Generic placeholder image" width="140" height="140">
             <h2>Lire Article</h2>
-            <p>Donec sed odio dui. sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies
-                vehicula ut id elitEtiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies
-                vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo
-              cursus magna.</p>
+
             <p><a class="btn btn-secondary" href="#" role="button">Voir article »</a></p>
           </div><!-- /.col-lg-4 -->
           <div class="col-lg-4">
             <img class="rounded-circle" src="images/loup_dodo.jpeg"
               alt="Generic placeholder image" width="140" height="140">
             <h2>Lire Article</h2>
-            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras
-              mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-              condimentum nibh.</p>
             <p><a class="btn btn-secondary" href="#" role="button">Voir article »</a></p>
           </div><!-- /.col-lg-4 -->
           <div class="col-lg-4">
             <img class="rounded-circle" src="images/meute.jpeg"
               alt="Generic placeholder image" width="140" height="140">
             <h2>Lire Article</h2>
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula
-              porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-              fermentum massa justo sit amet risus.</p>
             <p><a class="btn btn-secondary" href="#" role="button">Voir article »</a></p>
           </div><!-- /.col-lg-4 -->
         </div>
@@ -224,7 +164,7 @@ if (isset($_SESSION['id']) and $requser['id'] == $_SESSION['id']) {
     <!-- FOOTER -->
     <footer class="container">
       <p class="float-right"><a href="#">Back to top</a></p>
-      <p>© 2017-2018 Company, Inc.<!--  · <a href="#">Privacy</a> · <a href="#">Terms</a> --></p>
+      <p>© 2019 InstaWolf, Inc.<!--  · <a href="#">Privacy</a> · <a href="#">Terms</a> --></p>
     </footer>
     <nav class="navbar navbar-expand-lg navbar-light bg-warning col-sm-6 col-md-4 col-lg-6 col-xl-12">
       <a class="navbar-brand container-logo" href="accueil.php"></a>

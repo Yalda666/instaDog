@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'connexion.php';
+$bdd = new Connexion;
 ?>
 <!doctype html>
 <html lang="en">
@@ -18,7 +19,7 @@ require 'connexion.php';
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/article.css">
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-  <title>Page creer article</title>
+  <title>Créer article</title>
 </head>
 
 <body>
@@ -40,7 +41,7 @@ require 'connexion.php';
           <a class="nav-link" href="accueil.php">ACCUEIL <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="profil_utilisateur.php<?php if(isset($_SESSION['id'])) { echo '?id='.$_SESSION['id'];} ?>">PROFIL</a>
+          <a class="nav-link" href="profil_utilisateur.php<?php if (isset($_SESSION['id'])) {echo '?id=' . $_SESSION['id'];}?>">PROFIL</a>
         </li>
         <li class="nav-item deja_loup">
           <a class="nav-link btn btn-primary text-white" type="button" href="deja_loup.php">Déjà
@@ -51,58 +52,7 @@ require 'connexion.php';
             avec nous!</a>
         </li>
 
-        <div class="modal" id="myModal">
-          <div class="modal-dialog">
-            <div class="modal-content">
-
-              <!-- Modal Header -->
-              <div class="modal-header deja_loup">
-                <h4 class="modal-title">Déjà loup?</h4>
-                <button type="button" class="close" data-dismiss="modal">×</button>
-              </div>
-
-              <!-- Modal body -->
-              <div class="modal-body">
-                <form>
-                  <label class="sr-only" for="usrname">Pseudo</label>
-                  <p>Pseudo:</p>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Votre surnom" aria-label="Username"
-                      aria-describedby="basic-addon1">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Adresse email</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                      placeholder="Entrez votre adresse email">
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                      else.</small>
-                  </div>
-
-
-                  <label class="sr-only" for="Password">Mot de passe:</label>
-                  <p>Mot de passe:</p>
-                  <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon2"><i class="fa fa-key"></i></span>
-                    </div>
-                    <input id="Password" type="password" class="form-control"
-                      placeholder="Déposez votre empreinte de loup" aria-label="Mot de passe"
-                      aria-describedby="basic-addon2">
-                  </div>
-                </form>
-              </div>
-              <!-- Modal footer -->
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Rejoindre la meute</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Pas maintenant</button>
-              </div>
-
-            </div>
-          </div>
+        
       </ul>
       <!--INPUT SEARCH -->
       <form class="form-inline container-search" method="GET" action="recherche.html">
@@ -111,8 +61,8 @@ require 'connexion.php';
         <button class="btn btn-outline-success my-2 my-sm-0 " href="recherche.html" type="submit">Recherche</button>
       </form>
       <!--// FIN SEARCH-->
-      <?php if(isset($_SESSION['id'])) { echo '
-      <p>Bonjour '.$bdd->searchPseudoById($_SESSION["id"]).'<p>
+      <?php if (isset($_SESSION['id'])) {echo '
+      <p>Bonjour ' . $bdd->searchPseudoById($_SESSION["id"]) . '<p>
     <li class="nav-item">
           <a class="nav-link btn btn-danger text-white hulule" type="button" href="deconnexion.php">Déconnexion</a>
     </li>
@@ -122,7 +72,45 @@ require 'connexion.php';
 
   <!-- ////////////   SECTION DE NOTRE CONTENT MAIN  /////////-->
   <main>
-
+  <?php
+if (isset($_POST['forminscription'])) {
+    $pseudo = htmlspecialchars($_POST['pseudo']);
+    $mail = htmlspecialchars($_POST['email']);
+    $mdp = sha1($_POST['mdp']);
+    $mdp2 = sha1($_POST['mdp2']);
+    if (!empty($_POST['pseudo']) and !empty($_POST['email']) and !empty($_POST['mdp']) and !empty($_POST['mdp2'])) {
+        $pseudolength = strlen($pseudo);
+        if ($pseudolength <= 255) {
+            $testPseudo = $bdd->searchPersonneIdByNom($pseudo);
+            var_dump($testPseudo);
+            if ($testPseudo == 0) {
+                if (filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+                    $reqmail = $bdd->selectUtilisateurByMail($mail);
+                    $mailexist = $reqmail->rowCount();
+                    if ($mailexist == 0) {
+                        if ($bdd->comparePassword($mdp, $mdp2)) {
+                            $bdd->insertUtilisateur($pseudo, $mdp, $mail);
+                            $erreur = "Votre compte a bien été créé ! <a href=\"deja_loup.php\">Me connecter</a>";
+                        } else {
+                            $erreur = "Vos mots de passes ne correspondent pas !";
+                        }
+                    } else {
+                        $erreur = "Adresse mail déjà utilisée !";
+                    }
+                } else {
+                    $erreur = "Votre adresse mail n'est pas valide !";
+                }
+            } else {
+                $erreur = "Votre pseudo est déjà utilisé !";
+            }
+        } else {
+            $erreur = "Votre pseudo ne doit pas dépasser 255 caractères !";
+        }
+    } else {
+        $erreur = "Tous les champs doivent être complétés !";
+    }
+}
+?>
     <!-- ////////////  BANNIER IMAGE   /////////-->
     <div class="container-fluid">
       <div class="row">
@@ -135,8 +123,8 @@ require 'connexion.php';
                   <h5 class="card-title">Sexe :</h5>
                   <h5 class="card-title">Race :</h5>
                   <h5 class="card-title">Elevage :</h5> -->
-                <h5 class="card-title">Postez votre premier article sur intaDog</h5>
-                <p class="card-text">Il me semble que l’univers nous a donné trois choses pour rendre la vie
+                <h5 class="card-title">Postez votre article sur intaWolf</h5>
+                <p class="card-text">Il semble que l’univers nous a donné trois choses pour rendre la vie
                   supportable: l’espoir, les blagues et les loups.
                   Mais le plus grand de ces cadeaux c’est les LOUPS.</p>
               </div>
@@ -153,7 +141,7 @@ require 'connexion.php';
     <!-- ////////////  FIN ANNIER IMAGE   /////////-->
 
     <button type="button" class="btn btn-primary btn-lg btn-block">
-      <h1>ECRIVEZ VOTRE ARTICLE</h1>
+      <h1>Ecrivez votre article</h1>
     </button>
 
     <div class="text-article">
@@ -173,7 +161,7 @@ require 'connexion.php';
       </div>
 
       <h6 class="pull-right">Maximum 320 caractères</h6>
-      <button class="btn btn-info registre-article" type="submit">Engegistre Message.....</button>
+      <button class="btn btn-info registre-article" type="submit">Enregistrer l'article</button>
       </form>
     </div>
     </div>
@@ -203,7 +191,7 @@ require 'connexion.php';
           <a class="nav-link" href="accueil.php">ACCUEIL <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="profil_utilisateur.php<?php if(isset($_SESSION['id'])) { echo '?id='.$_SESSION['id'];} ?>">PROFIL</a>
+          <a class="nav-link" href="profil_utilisateur.php<?php if (isset($_SESSION['id'])) {echo '?id=' . $_SESSION['id'];}?>">PROFIL</a>
         </li>
       </ul>
       <!--INPUT SEARCH -->
@@ -213,8 +201,8 @@ require 'connexion.php';
         <button class="btn btn-outline-success my-2 my-sm-0 " href="recherche.html" type="submit">Recherche</button>
       </form>
       <!--// FIN SEARCH-->
-      <?php if(isset($_SESSION['id'])) { echo '
-      <p>Bonjour '.$bdd->searchPseudoById($_SESSION["id"]).'<p>
+      <?php if (isset($_SESSION['id'])) {echo '
+      <p>Bonjour ' . $bdd->searchPseudoById($_SESSION["id"]) . '<p>
     <li class="nav-item">
           <a class="nav-link btn btn-danger text-white hulule" type="button" href="deconnexion.php">Déconnexion</a>
     </li>

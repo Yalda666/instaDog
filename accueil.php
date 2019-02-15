@@ -26,7 +26,7 @@ $bdd= new Connexion;
   <!-- ////////////  MENU DE NAVUGATION RESPONSIVE  /////////-->
   <nav class="navbar navbar-expand-lg navbar-light bg-warning col-sm-6 col-md-4 col-lg-6 col-xl-12">
     <a class="navbar-brand container-logo" href="accueil.php"></a>
-    <img class="logo" src="images/logo_final.png" alt="Tete de loup" width="10%"></img></a>
+    <img class="logo" src="images/logo_final.png" alt="Tete de loup" width="10%">
     <a class="navbar-brand" href="accueil.php">InstaWolf</a>
 
     </div>

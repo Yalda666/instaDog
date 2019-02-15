@@ -51,56 +51,7 @@ require 'connexion.php';
             avec nous!</a>
         </li>
 
-        <div class="modal" id="myModal">
-          <div class="modal-dialog">
-            <div class="modal-content">
-
-              <!-- Modal Header -->
-              <div class="modal-header deja_loup">
-                <h4 class="modal-title">Déjà loup?</h4>
-                <button type="button" class="close" data-dismiss="modal">×</button>
-              </div>
-
-              <!-- Modal body -->
-              <div class="modal-body">
-                <form>
-                  <label class="sr-only" for="usrname">Pseudo</label>
-                  <p>Pseudo:</p>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
-                    </div>
-                    <input type="text" class="form-control"  name="recherche"  placeholder="Votre surnom" aria-label="Username"
-                      aria-describedby="basic-addon1">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Adresse email</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                      placeholder="Entrer adresse email">
-                    <small id="emailHelp" class="form-text text-muted">Nous ne la partagerons avec personne...</small>
-                  </div>
-
-
-                  <label class="sr-only" for="Password">Mot de passe:</label>
-                  <p>Mot de passe:</p>
-                  <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon2"><i class="fa fa-key"></i></span>
-                    </div>
-                    <input id="Password" type="password" class="form-control" placeholder="Déposez votre empreinte de loup"
-                      aria-label="Mot de passe" aria-describedby="basic-addon2">
-                  </div>
-                </form>
-              </div>
-              <!-- Modal footer -->
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Rejoindre la meute</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Pas maintenant</button>
-              </div>
-
-            </div>
-          </div>
+        
       </ul>
       <!--INPUT SEARCH -->
       <form class="form-inline container-search" method="GET" action="recherche.html">
@@ -154,7 +105,7 @@ require 'connexion.php';
     <!-- ////////////  FIN ANNIER IMAGE   /////////-->
       <!-- SECTION 1 ARTICLE > -->
         
-      <a href="article.html"> <button type="button" class="btn btn-primary btn-lg btn-block">
+      <a href="article.php"> <button type="button" class="btn btn-primary btn-lg btn-block">
           <h1>ECRIRE UN ARTICLE</h1>
         </button></a>
   
@@ -230,7 +181,7 @@ require 'connexion.php';
     <!-- ////////////   SECTION DE NOTRE MENU FOOTER MENU  /////////-->
     <footer class="container">
         <p class="float-right"><a href="#">Back to top</a></p>
-        <p>© 2017-2018 Company, Inc.<!--  · <a href="#">Privacy</a> · <a href="#">Terms</a> --></p>
+        <p>© 2019 InstaWolf, Inc.<!--  · <a href="#">Privacy</a> · <a href="#">Terms</a> --></p>
       </footer>
     <nav class="navbar navbar-expand-lg navbar-light bg-warning col-sm-6 col-md-4 col-lg-6 col-xl-12">
       <a class="navbar-brand container-logo" href="accueil.php"></a>
