@@ -55,10 +55,10 @@ $bdd = new Connexion;
 
       </ul>
       <!--INPUT SEARCH -->
-      <form class="form-inline container-search" method="GET" action="recherche.html">
+      <form class="form-inline container-search" method="GET" action="recherche.php">
         <input class="form-control mr-sm-2  input-search" name="recherche" type="search" placeholder="Recherche"
           aria-label="Recherche">
-        <button class="btn btn-outline-success my-2 my-sm-0 " href="recherche.html" type="submit">Recherche</button>
+        <button class="btn btn-outline-success my-2 my-sm-0 " href="recherche.php" type="submit">Recherche</button>
       </form>
       <!--// FIN SEARCH-->
       <?php if (isset($_SESSION['id'])) {echo '
@@ -201,10 +201,10 @@ if (isset($erreur)) {
         </li>
       </ul>
       <!--INPUT SEARCH -->
-      <form class="form-inline container-search" method="GET" action="recherche.html">
+      <form class="form-inline container-search" method="GET" action="recherche.php">
         <input class="form-control mr-sm-2  input-search" name="recherche" type="search" placeholder="Recherche"
           aria-label="Recherche">
-        <button class="btn btn-outline-success my-2 my-sm-0 " href="recherche.html" type="submit">Recherche</button>
+        <button class="btn btn-outline-success my-2 my-sm-0 " href="recherche.php" type="submit">Recherche</button>
       </form>
       <!--// FIN SEARCH-->
       <?php if (isset($_SESSION['id'])) {echo '
