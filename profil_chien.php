@@ -101,7 +101,7 @@ if (isset($_POST['idLoup'])) {
                 <h5 class="card-title">Race :<?php echo $race; ?></h5>
                 <h5 class="card-title">Née le :<?php echo $bdd->inverseDate($dateNaissance); ?></h5>
                 <h4 class="card-text">Un nouveau loup ne remplace jamais
-                  un vieux loup,il ne fait qu’agrandir le coeur.</h4>
+                  un vieux loup, il ne fait qu’agrandir le coeur.</h4>
 
                <!--    <span><a class="modif-donnees-utlisateur" href="modifier_donnes.html"><button>MODIFIER LES DONNES</button></a></span> -->
               </div>
@@ -110,7 +110,7 @@ if (isset($_POST['idLoup'])) {
           </div>
         </div>
         <div class="col-xs-12 col-md-6">
-          <img src="<?php echo $cheminPhoto; ?>" width="75%">
+          <img src="<?php echo $cheminPhoto; ?>" width="100%">
 
             <!-- 	<h2>Create your snippet's HTML, CSS and Javascript in the editor tabs</h2> -->
           </div>
@@ -127,74 +127,33 @@ if (isset($_POST['idLoup'])) {
         </button>
         </form>
         </div>
-
-      <h3 class="mt-3 pb-3 mb-4 font-italic border-bottom">
-
-      </h3>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="card">
-            <img class="card-img-top" src="//placeimg.com/280/180/tech" alt="Card image cap">
-
-            <div class="card-body">
-              <h5 class="card-title border-bottom pb-3"><!-- Card title <a href="#" class="float-right d-inline-flex share"><i
-                    class="fas fa-share-alt text-primary"></i> --></a></h5>
-              <p class="card-text">Soe quick example text to build on the card title and make up the bulk of the card's
-                content.e quick example text to build on the card title and make up the bulk of the card's content.me
-                quick example text to build on the card title and make up the bulk of the card's content.</p>
-
-              <a href="commentaire.html" class="btn btn-sm btn-info float-right">Voir article<i class="fas fa-angle-double-right"></i></a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <img class="card-img-top" src="//placeimg.com/280/180/tech" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title border-bottom pb-3"><!-- Card title <a href="#" class="float-right btn btn-sm btn-info d-inline-flex share"><i
-                    class="fas fa-share-alt"></i> --></a></h5>
-              <p class="card-text">Soe quick example text to build on the card title and make up the bulk of the card's
-                content.e quick example text to build on the card title and make up the bulk of the card's content.me
-                quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="commentaire.html" class="btn btn-sm btn-info float-right">Voir article<i class="fas fa-angle-double-right"></i></a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card bg-light">
-            <img class="card-img-top" src="//placeimg.com/280/180/tech" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title border-bottom pb-3"><!-- Card title <a href="#" class="float-right btn btn-sm btn-info d-inline-flex share"><i
-                    class="fas fa-share-alt"></i> --></a></h5>
-              <p class="card-text">Soe quick example text to build on the card title and make up the bulk of the card's
-                content.e quick example text to build on the card title and make up the bulk of the card's content.me
-                quick example text to build on the card title and make up the bulk of the card's content.</p>
-
-              <a href="commentaire.html" class="btn btn-sm btn-info float-right">Voir article<i class="fas fa-angle-double-right"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <hr>
-      <!-- ///////////////////////////////////////////////////////////// -->
-         <!-- PAGINATION OPTIONEL -->
-         <nav aria-label="Page navigation example">
-          <ul class="pagination justify-content-end">
-              <li class="page-item disabled">
-                  <a class="page-link" href="#" tabindex="-1">Avant</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                  <a class="page-link" href="#">Suivant</a>
-              </li>
-          </ul>
-      </nav>
-      <!-- BUTTON RAJOUTE PLUS DE COMMENTAIRES DE LA LIST -->
-      <button type="button" class="btn btn-primary btn-lg btn-block">
-          <h1>VOIR PLUS DE LOUPS</h1>
-      </button>
+        <?php
+$articles = $bdd->selectArticlesById($_POST["idLoup"]);
+echo "<div class='row'>";
+foreach ($articles as $article) {
+// récupération de l'url de la photo et du texte
+    $lien = $article["cheminPhoto"];
+    $lien = substr($lien, -32);
+    $texte = $article["texte"];
+    echo '
+                    <div class="col-md-4">                
+                      <div class="card">
+                      <form action="commentaire.php" method="post">
+                          <div class="divInvisib col-lg-4">
+                              <input type="hidden" name="idArticle" value="' . $article["id"] . '"></input>
+                              <input type="image" src=' . $lien . ' class="card-img-top" alt="' . $texte . '" width="140" height="140"></input>
+                          </div>
+                          <div class="card-body">
+                            <p class="card-text">'.$texte.'</p>
+                          </div>
+                      </form>
+                    </div>
+                  </div>
+          ';
+}
+echo "</div>";
+?>
+      
     </main><!-- ////////////  FIN  SECTION DE NOTRE CONTENT MAIN  /////////-->
 
     <!-- ////////////   SECTION DE NOTRE MENU FOOTER MENU  /////////-->

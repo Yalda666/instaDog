@@ -5,8 +5,9 @@ $appliBD = new Connexion;
 // $appliBD->insertUtilisateur("bob","B03","b0b@boo.com");
 // $appliBD->insertAnimal("1", "Wolf", "Wolfie", "/home/cf/projets/instaWolf/images/loup_cours.jpeg", "Woulf", "2012-12-21", "male", "loup gris");
 
-$appliBD->insertArticle("2","bobby coure dans les champs","/home/cf/projets/instaWolf/images/loup_calin.jpeg",date('Y-m-d h-i-s'));
-
+// $appliBD->insertArticle("2","bobby coure dans les champs","/home/cf/projets/instaWolf/images/loup_calin.jpeg",date('Y-m-d h-i-s'));
+$res=$appliBD->selectArticlesById("2");
+var_dump($res);
 // $appliBD->insertCommentaire("2","1","bobby coure dans les champs",date('Y-m-d h-i-s'));
 // $appliBD->updatePseudo("Mightwolfette","3");
 // $res=$appliBD->comparePassword("%Lfuck1234%","%Lfuck1234%");
