@@ -219,7 +219,7 @@ class Connexion
             $requete_prepare = $this->connexion->prepare(
                 'SELECT * FROM Animal WHERE idUtilisateur = :id'
             );
-            $requete_prepare->execute(array("id" => $id));
+            $requete_prepare->execute(array("id" => $idUtilisateur));
             $resultat = $requete_prepare->fetchAll();
             return $resultat;
         } catch (Exception $e) {
@@ -228,6 +228,24 @@ class Connexion
             return false;
         }
     }
+
+// Fonction selectLoupById qui sélectionne le loup dans la base de données qui a l'identifiant passé en paramètre et retourne le loup
+
+public function selectLoupById($id)
+{
+    try {
+        $requete_prepare = $this->connexion->prepare(
+            'SELECT * FROM Animal WHERE id = :id'
+        );
+        $requete_prepare->execute(array("id" => $id));
+        $resultat = $requete_prepare->fetch();
+        return $resultat;
+    } catch (Exception $e) {
+        echo 'Erreur : ' . $e->getMessage() . '<br />';
+        echo 'N° : ' . $e->getCode();
+        return false;
+    }
+}
 
 // Fonction selectUtilisateurById qui sélectionne l'utilisateur dans la base de données qui a l'identifiant passé en paramètre et retourne l'utilisateur
 
@@ -265,6 +283,24 @@ class Connexion
         }
     }
 
+// Fonction selectArticleById qui sélectionne les articles dans la base de données qui ont l'identifiant de l'article passé en paramètre
+
+public function selectArticleById($id)
+{
+    try {
+        $requete_prepare = $this->connexion->prepare(
+            'SELECT * FROM Article WHERE id = :id'
+        );
+        $requete_prepare->execute(array("id" => $id));
+        $resultat = $requete_prepare->fetch();
+        return $resultat;
+    } catch (Exception $e) {
+        echo 'Erreur : ' . $e->getMessage() . '<br />';
+        echo 'N° : ' . $e->getCode();
+        return false;
+    }
+}
+
 // Fonction selectArticlesById qui sélectionne les articles dans la base de données qui ont l'identifiant du loup passé en paramètre et retourne tous ses articles
 
     public function selectArticlesById($id)
@@ -282,6 +318,25 @@ class Connexion
             return false;
         }
     }
+
+// Fonction selectArticleByText qui sélectionne les articles dans la base de données qui ont le texte de l'article et rend l'id
+
+public function selectArticleByText($texte)
+{
+    try {
+        $requete_prepare = $this->connexion->prepare(
+            'SELECT * FROM Article WHERE texte = :texte'
+        );
+        $requete_prepare->execute(array("texte" => $texte));
+        $resultat = $requete_prepare->fetch();
+        return $resultat["id"];
+    } catch (Exception $e) {
+        echo 'Erreur : ' . $e->getMessage() . '<br />';
+        echo 'N° : ' . $e->getCode();
+        return false;
+    }
+}
+
 
 // Fonction selectCommentairesById qui sélectionne les commentaires dans la base de données qui ont l'identifiant de l'article passé en paramètre et retourne tous ses commentaires
 

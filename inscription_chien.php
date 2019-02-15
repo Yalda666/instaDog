@@ -1,5 +1,7 @@
 <?php
 session_start();
+require 'connexion.php';
+$bdd = new Connexion;
 ?>
 <!doctype html>
 <html lang="en">
@@ -72,9 +74,8 @@ session_start();
   <main>
 
   <?php
-require 'connexion.php';
-$bdd = new Connexion;
 
+$bdd = new Connexion;
 if (isset($_POST['forminscription'])) {
     $idUtilisateur = $_SESSION['id'];
     $nom = htmlspecialchars($_POST['nom']);
@@ -114,19 +115,8 @@ if (isset($_POST['forminscription'])) {
           <img src="images/logo_final.png" alt="logo instawolf" />
           <h3>Rejoint la meute</h3>
           <p>Partage la vie de ta meute avec notre meute mondiale </p>
-          <!-- <input type="submit" name="" value="Huuuuuu?" /><br /> -->
         </div>
         <div class="col-md-9 register-right">
-          <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-            <!--   <li class="nav-item">
-              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-                aria-selected="true">Employee</a>
-            </li> -->
-            <li class="nav-item">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-                aria-selected="false">Instawolf</a>
-            </li>
-          </ul>
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
               <h3 class="register-heading">Agrandir la meute</h3>

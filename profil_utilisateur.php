@@ -58,7 +58,7 @@ if (isset($_GET['id']) and $_GET['id'] > 0) {
             avec nous!</a>
         </li>
 
-        
+
       </ul>
       <!--INPUT SEARCH -->
       <form class="form-inline container-search" method="GET" action="recherche.html">
@@ -66,8 +66,8 @@ if (isset($_GET['id']) and $_GET['id'] > 0) {
         <button class="btn btn-outline-success my-2 my-sm-0 " href="recherche.html" type="submit">Recherche</button>
       </form>
       <!--// FIN SEARCH-->
-      <?php if(isset($_SESSION['id'])) { echo '
-      <p>Bonjour '.$bdd->searchPseudoById($_SESSION["id"]).'<p>
+      <?php if (isset($_SESSION['id'])) {echo '
+      <p>Bonjour ' . $bdd->searchPseudoById($_SESSION["id"]) . '<p>
     <li class="nav-item">
           <a class="nav-link btn btn-danger text-white hulule" type="button" href="deconnexion.php">Déconnexion</a>
     </li>
@@ -132,50 +132,31 @@ if (isset($_SESSION['id']) and $requser['id'] == $_SESSION['id']) {
             <h1>Agrandir la meute</h1>
           </button></a>
           <?php
-          $loups=$bdd->selectLoupsById($_GET["id"]);
-          echo "<div class="container marketing">";
-          echo "<div class="row">";
+$loups = $bdd->selectLoupsById($_GET["id"]);
+echo "<div class='container marketing'>";
+echo "<div class='row'>";
 // Début du parcours du tableau d'ids retourné par la fonction search_personne
-          foreach($loups as $loup){
+foreach ($loups as $loup) {
 // récupération de l'url de la photo, du nom et du prénom
-          $lien=$i["cheminPhoto"];
-          $nom=$i["Nom"];
-          $prenom=$i["Surnom"];
-          echo '
-                    <form action="profil.php" method="post">
-                    <td class="tdhome">
-                        <div class="divInvisib">
-                            <input type="hidden" name="id" value="'.$i["Id"].'"></input>
-                            <input type="image" src='.$lien.' class="imgmerdique"></input>
+    $lien = $loup["cheminPhoto"];
+    $lien = substr($lien, -32);
+    $nom = $loup["nom"];
+    $surnom = $loup["surnom"];
+    echo '
+                    <form action="profil_chien.php" method="post">
+                        <div class="divInvisib col-lg-4">
+                            <input type="hidden" name="idLoup" value="' . $loup["id"] . '"></input>
+                            <input type="image" src=' . $lien . ' class="rounded-circle" alt="' . $nom . '" width="140" height="140"></input>
                         </div>
-                        <p class="np_home" name="id" value="'.$i["Id"].'">'.$nom.' '.$prenom.'</p>
+                        <p class="rounded-circle">' . $nom . '-> "' . $surnom . '"</p>
                     </td>
                     </form>
           ';
-          }
-          ?>
-        <!-- Three columns of text below the carousel -->
-          <div class="col-lg-4">
-            <img class="rounded-circle" src="images/meute.jpeg"
-              alt="Generic placeholder image" width="140" height="140">
-            <h2>Lire Article</h2>
+}
+echo "</div>";
+echo "</div>";
+?>
 
-            <p><a class="btn btn-secondary" href="#" role="button">Voir article »</a></p>
-          </div><!-- /.col-lg-4 -->
-          <div class="col-lg-4">
-            <img class="rounded-circle" src="images/loup_dodo.jpeg"
-              alt="Generic placeholder image" width="140" height="140">
-            <h2>Lire Article</h2>
-            <p><a class="btn btn-secondary" href="#" role="button">Voir article »</a></p>
-          </div><!-- /.col-lg-4 -->
-          <div class="col-lg-4">
-            <img class="rounded-circle" src="images/meute.jpeg"
-              alt="Generic placeholder image" width="140" height="140">
-            <h2>Lire Article</h2>
-            <p><a class="btn btn-secondary" href="#" role="button">Voir article »</a></p>
-          </div><!-- /.col-lg-4 -->
-        </div>
-      </div><!-- /.container -->
 
     </main>
 
@@ -218,8 +199,8 @@ if (isset($_SESSION['id']) and $requser['id'] == $_SESSION['id']) {
           <button class="btn btn-outline-success my-2 my-sm-0 " href="recherche.html" type="submit">Recherche</button>
         </form>
         <!--// FIN SEARCH-->
-        <?php if(isset($_SESSION['id'])) { echo '
-      <p>Bonjour '.$bdd->searchPseudoById($_SESSION["id"]).'<p>
+        <?php if (isset($_SESSION['id'])) {echo '
+      <p>Bonjour ' . $bdd->searchPseudoById($_SESSION["id"]) . '<p>
     <li class="nav-item">
           <a class="nav-link btn btn-danger text-white hulule" type="button" href="deconnexion.php">Déconnexion</a>
     </li>

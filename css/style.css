@@ -93,7 +93,13 @@
 /* PAGE PROFIL_UTILISATEUR*/
 /* ////////////////////  MAIN //////////////////*/
 
-
+/* Ma super div qui me sert à cacher le style des div que je veux pas voir mais qui sont utile par leur présence ⇓⇓⇓ */
+.divInvisib{
+    border-style: none;
+    -webkit-box-shadow: none; 
+    box-shadow: none;
+    background-color: transparent;
+}
 
 
 

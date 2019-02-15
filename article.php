@@ -52,7 +52,7 @@ $bdd = new Connexion;
             avec nous!</a>
         </li>
 
-        
+
       </ul>
       <!--INPUT SEARCH -->
       <form class="form-inline container-search" method="GET" action="recherche.html">
@@ -73,38 +73,42 @@ $bdd = new Connexion;
   <!-- ////////////   SECTION DE NOTRE CONTENT MAIN  /////////-->
   <main>
   <?php
+if (isset($_GET['idLoup'])) {
+    $temps = 3600;
+    setcookie("idLoup", $_GET['idLoup'], time() + $temps);
+}
 if (isset($_POST['forminscription'])) {
-    $pseudo = htmlspecialchars($_POST['pseudo']);
-    $mail = htmlspecialchars($_POST['email']);
-    $mdp = sha1($_POST['mdp']);
-    $mdp2 = sha1($_POST['mdp2']);
-    if (!empty($_POST['pseudo']) and !empty($_POST['email']) and !empty($_POST['mdp']) and !empty($_POST['mdp2'])) {
-        $pseudolength = strlen($pseudo);
-        if ($pseudolength <= 255) {
-            $testPseudo = $bdd->searchPersonneIdByNom($pseudo);
-            var_dump($testPseudo);
-            if ($testPseudo == 0) {
-                if (filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-                    $reqmail = $bdd->selectUtilisateurByMail($mail);
-                    $mailexist = $reqmail->rowCount();
-                    if ($mailexist == 0) {
-                        if ($bdd->comparePassword($mdp, $mdp2)) {
-                            $bdd->insertUtilisateur($pseudo, $mdp, $mail);
-                            $erreur = "Votre compte a bien été créé ! <a href=\"deja_loup.php\">Me connecter</a>";
-                        } else {
-                            $erreur = "Vos mots de passes ne correspondent pas !";
-                        }
-                    } else {
-                        $erreur = "Adresse mail déjà utilisée !";
-                    }
-                } else {
-                    $erreur = "Votre adresse mail n'est pas valide !";
-                }
-            } else {
-                $erreur = "Votre pseudo est déjà utilisé !";
-            }
+    // var_dump($_POST);
+    // var_dump($_GET);
+    $idAnimal = $_COOKIE['idLoup'];
+    $suffixe = date("YmdHis");
+    $newMessage = htmlspecialchars($_POST['new_message']);
+    $uploadedFileName = $_FILES["photo-promenade"]["name"];
+    $uploadedFile = new SplFileInfo($uploadedFileName);
+    $fileExtension = $uploadedFile->getExtension();
+    $destinationFolder = $_SERVER['DOCUMENT_ROOT'] . "/instaWolf/Photos/";
+    $destinationName = "photo-" . $suffixe . "." . $fileExtension;
+    // var_dump($idAnimal);
+    // var_dump($newMessage);
+    // var_dump($destinationFolder . $destinationName);
+    // var_dump(date('Y-m-d h-i-s'));
+
+
+    echo $_FILES["photo-promenade"]["error"];
+
+    if (move_uploaded_file($_FILES["photo-promenade"]["tmp_name"], $destinationFolder . $destinationName)) {
+        echo "<br/> fichier enregistré avec succes";
+    }
+
+    if (!empty($_POST['new_message'])) {
+        $messageLength = strlen($newMessage);
+        if ($messageLength <= 320) {
+            $bdd->insertArticle($idAnimal, $newMessage, $destinationFolder.$destinationName, date('Y-m-d h-i-s'));
+            $id=$bdd->selectArticleByText($newMessage);
+            $erreur = "Votre article a bien été créé !";
+            header("Location: commentaire.php?id=" . $id);
         } else {
-            $erreur = "Votre pseudo ne doit pas dépasser 255 caractères !";
+            $erreur = "Votre texte est trop long !";
         }
     } else {
         $erreur = "Tous les champs doivent être complétés !";
@@ -119,11 +123,7 @@ if (isset($_POST['forminscription'])) {
             <!--  <h2>Create your snippet's HTML, CSS and Javascript in the editor tabs</h2> -->
             <div class="card-img-overlay">
               <div class="donnees-perso">
-                <!--  <h5 class="card-title">Nom :</h5>
-                  <h5 class="card-title">Sexe :</h5>
-                  <h5 class="card-title">Race :</h5>
-                  <h5 class="card-title">Elevage :</h5> -->
-                <h5 class="card-title">Postez votre article sur intaWolf</h5>
+                <h5 class="card-title">Postez votre article sur InstaWolf</h5>
                 <p class="card-text">Il semble que l’univers nous a donné trois choses pour rendre la vie
                   supportable: l’espoir, les blagues et les loups.
                   Mais le plus grand de ces cadeaux c’est les LOUPS.</p>
@@ -150,19 +150,25 @@ if (isset($_POST['forminscription'])) {
 
         </div>
 
-        <form class="textarea" accept-charset="UTF-8" action="" method="POST">
+        <form class="textarea" accept-charset="UTF-8" action="article.php" method="POST" enctype="multipart/form-data">
 
           <textarea class="span4" id="new_message" name="new_message" placeholder="Ecrivez ici votre article"
             rows="5"></textarea>
           <div id="container-upload-article">
-            <p><input type="file" name="file" onchange="change(this)" id="file"></p>
-            <p><img id="image" src="" alt="image en train de charger"></p>
+            <input type="hidden" name="MAX_FILE_SIZE" value="300000000" />
+            <p><input type="file" name="photo-promenade" onchange="change(this)" id="form-file"></p>
+            <p><img id="image" src="" alt="Votre image"></p>
           </div>
       </div>
 
       <h6 class="pull-right">Maximum 320 caractères</h6>
-      <button class="btn btn-info registre-article" type="submit">Enregistrer l'article</button>
+      <button class="btn btn-info registre-article" name="forminscription" type="submit">Enregistrer l'article</button>
       </form>
+      <?php
+if (isset($erreur)) {
+    echo '<font color="red">' . $erreur . "</font>";
+}
+?>
     </div>
     </div>
     </div>

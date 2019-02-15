@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'connexion.php';
+$bdd=new Connexion;
 ?>
 <!doctype html>
 <html lang="en">
@@ -80,13 +81,8 @@ require 'connexion.php';
               <!--  <h2>Create your snippet's HTML, CSS and Javascript in the editor tabs</h2> -->
               <div class="card-img-overlay">
                 <div class="donnees-perso">
-                  <!-- <h3 class="card-title">Nom :</h3> -->
-                <!--   <h5 class="card-title">Sexe :</h5>
-                  <h5 class="card-title">Race :</h5>
-                  <h5 class="card-title">Elevage :</h5>-->
-                  <h5 class="card-title">Lisez toue les commantaires de MEUTE des LOUPS </h5>
-                  <h5 class="card-text">Un nouveau loup ne remplace jamais
-                    un vieux loup,il ne fait qu’agrandirle coeur.</h5>
+                  <h5 class="card-title">Lisez tous les commentaires de meute des loups </h5>
+                  <h5 class="card-text">Un nouveau loup ne remplace jamais un vieux loup, il ne fait qu’agrandir le coeur.</h5>
                  
                  <!--    <span><a class="modif-donnees-utlisateur" href="modifier_donnes.html"><button>MODIFIER LES DONNES</button></a></span> -->
                 </div>
@@ -111,33 +107,27 @@ require 'connexion.php';
         <h3 class="mt-3 pb-3 mb-4 font-italic border-bottom">
            <!--  DERNIERS ARTICLES -->
         </h3>
-        <div class="row ">
-            <div class="col-md-6 container-article">
-                <div class="card">
-                    <img class="card-img-top" src="//placeimg.com/280/180/tech" alt="Card image cap">
+        <?php
+        if (isset($_GET['id'])){
+            $article=$bdd->selectArticleById($_GET['id']);
+            $texte=$article["texte"];
+            $cheminPhoto=$article["cheminPhoto"];
+            $cheminPhoto = substr($cheminPhoto, -32);
+            $datePublication=$article["datePublication"];
+        echo '<div class="row ">';
+        echo   '<div class="col-md-6 container-article">';
+        echo        '<div class="card">';
+        echo            '<img class="card-img-top" src='.$cheminPhoto.' alt="image article">';
+        echo            '<div class="card-body">';
+        echo                '<p class="card-text">'.$texte.'</p>';
+        echo            '</div>';
+        echo        '</div>';
+        echo    '</div>';
+        echo '</div>';
 
-                    <div class="card-body">
-                        <h5 class="card-title border-bottom pb-3"><!--Card title  <a href="#" class="float-right d-inline-flex share"><i
-                                    class="fas fa-share-alt text-primary"></i></a> --></h5>
-                        <p class="card-text">Soe quick example text to build on the card title and make up the bulk of
-                            the card's
-                            content.e quick example text to build on the card title and make up the bulk of the card's
-                            content.me
-                            quick example text to build on the card title and make up the bulk of the card's content.
-                            Soe quick example text to build on the card title and make up the bulk of the card's
-                            content.e quick example text to build on the card title and make up the bulk of the card's
-                            content.me
-                            quick example text to build on the card title and make up the bulk of the card's content</p>
-
-                        <a href="#" class="btn btn-sm btn-info float-right">Voir Commanteire<!-- <i class="fas fa-angle-double-right"></i> --></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <hr>
-
-
+        echo '<hr>';
+        }
+?>
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
             integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
@@ -165,10 +155,6 @@ require 'connexion.php';
                                     <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab"
                                         aria-controls="posts" aria-selected="true">Make
                                         a publication</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images"
-                                        aria-selected="false" href="#images">Images</a>
                                 </li>
                             </ul>
                         </div>
