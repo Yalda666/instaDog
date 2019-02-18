@@ -152,16 +152,17 @@ $bdd=new Connexion;
             $resultat = $bdd->selectAnimalByPatern($_POST["recherche"]);
 
               foreach($resultat as $animal){
-
+                $lien = $animal->getCheminPhoto();
+                $lien = substr($lien, -32);
                   echo '<div class="col-lg-3 col-md-4 col-xs-6 thumb">
                           <p>Surnom: '.$animal->getSurnom().'</p>
                           <p>NomElevage: '.$animal->getNomElevage().'</p>
                           <p>Race: '.$animal->getRace().'</p>
                           <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title=""
-                            data-image="'.$animal->getCheminPhoto().'"
+                            data-image="'.$lien.'"
                             data-target="#image-gallery">
                               <img class="img-thumbnail"
-                                  src="'.$animal->getCheminPhoto().'"
+                                  src="'.$lien.'"
                                   alt="Another alt text">
                           </a>
                        </div>';
