@@ -147,7 +147,7 @@ echo '</div>';
 
 echo '<hr>';
 
-if (isset($_POST["texte"])) {
+if (isset($_POST["texte"]) && isset($_SESSION["id"]) ) {
     $texteCommentaire = $_POST["texte"];
     $bdd->insertCommentaire($idUtilisateur, $idAnimal, $texteCommentaire, date('Y-m-d h-i-s'));
 }

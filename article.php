@@ -2,6 +2,7 @@
 session_start();
 require 'connexion.php';
 $bdd = new Connexion;
+error_reporting(0);
 ?>
 <!doctype html>
 <html lang="en">
