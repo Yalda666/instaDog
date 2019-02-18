@@ -94,7 +94,7 @@ foreach ($photos as $photo) {
             
               <input type="hidden" name="idLoup" value="' . $photo->getId() . '"></input>
               <input type="image" class="img-thumbnail" src="' . $lien . '"
-                alt="Another alt text">
+                alt="Another alt text" width="600px">
             </a>
           </div> 
         </form>               
