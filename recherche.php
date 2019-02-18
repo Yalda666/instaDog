@@ -135,8 +135,12 @@ $bdd=new Connexion;
         <form action="recherche.php" method="post">
         <input type=text id=recherche name="recherche" placeholder="Veuillez taper votre recherche de profils ici" autofocus>
         <br>
+        <br>
+
         <input id="submit_chrch" type="submit" value="Rechercher" style=font-size:150%;border-radius:45%;height:3em;>
         </form>
+
+        
     </div>
 <div class="container">
 	<div class="row">
